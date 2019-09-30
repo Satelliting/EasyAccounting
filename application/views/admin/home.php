@@ -3,12 +3,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 		<div class="container">
 			<div class="row">
-				<div class="input-group">
+				<div class="input-group" style="padding-bottom: 10px">
 					<input id="filter" type="text" class="form-control" placeholder="Type here to filter...">
 				</div>
 			</div>
 
 			<div class="row">
+				<br /><br /><br />
 				<table class="table table-striped table-bordered table-hover">
 					<thead class="thead-dark">
 						<tr class="text-center">
@@ -53,7 +54,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<td>'.$user["userFirstName"]." ".$user["userLastName"].'</td>
 							<td>'.$userRole.'</td>
 							<td>'.$userStatus.'</td>
-							<td><a class="btn btn-info" href="'.site_url("admin/change/".$user["userID"]).'">Edit User</a></td>
+							<td><a class="btn btn-info" href="'.site_url("admin/edit/".$user["userID"]).'">Edit User</a></td>
 						</tr>
 		';
 	}

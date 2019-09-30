@@ -2,6 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 	$config = array(
+		# Registration Form Validation Rules
 		'registration' => array(
 			array(
 				'field'  => 'userFirstName',
@@ -43,8 +44,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				'label'  => 'Password',
 				'rules'  => 'required|min_length[8]|callback_password_check',
 				'errors' => array(
-					'required'                => 'You must provide a %s for your account.',
-					'min_length'              => 'You have too few characters for your %s.',
+					'required'       => 'You must provide a %s for your account.',
+					'min_length'     => 'You have too few characters for your %s.',
 					'password_check' => 'You do not have the correct amount of letters, numbers, or special characters in your password.'
 				),
 			),
@@ -56,6 +57,87 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				'errors' => array(
 					'required'              => 'You must provide a %s for your account.',
 					'matches[userPassword]' => 'Your %s did not match.'
+				),
+			),
+		),
+
+
+		# Update Account Form Validation Rules
+		'update' => array(
+			array(
+				'field'  => 'userFirstName',
+				'label'  => 'First Name',
+				'rules'  => 'trim|required|min_length[1]|max_length[25]',
+				'errors' => array(
+					'required'   => 'You must provide a %s for your account.',
+					'min_length' => 'You have too few characters for your %s.',
+					'max_length' => 'You have too many characters for your %s.',
+				),
+			),
+
+			array(
+				'field'  => 'userLastName',
+				'label'  => 'Last Name',
+				'rules'  => 'trim|required|min_length[1]|max_length[25]',
+				'errors' => array(
+					'required'   => 'You must provide a %s for your account.',
+					'min_length' => 'You have too few characters for your %s.',
+					'max_length' => 'You have too many characters for your %s.',
+				),
+			),
+
+			array(
+				'field'  => 'userEmail',
+				'label'  => 'Email',
+				'rules'  => 'trim|required|min_length[3]|max_length[255]|valid_email',
+				'errors' => array(
+					'required'    => 'You must provide a %s for your account.',
+					'min_length'  => 'You have too few characters for your %s.',
+					'max_length'  => 'You have too many characters for your %s.',
+					'valid_email' => 'The %s provided was not valid.'
+				),
+			),
+
+			array(
+				'field'  => 'userPassword',
+				'label'  => 'Password',
+				'rules'  => 'min_length[8]|callback_password_check',
+				'errors' => array(
+					'min_length'     => 'You have too few characters for your %s.',
+					'password_check' => 'You do not have the correct amount of letters, numbers, or special characters in your password.'
+				),
+			),
+
+			array(
+				'field'  => 'userPasswordConfirm',
+				'label'  => 'Password Confirmation',
+				'rules'  => 'matches[userPassword]',
+				'errors' => array(
+					'matches[userPassword]' => 'Your %s did not match.'
+				),
+			),
+
+			array(
+				'field'  => 'userRole',
+				'label'  => 'Role',
+				'rules'  => 'trim|required|min_length[1]|max_length[1]|in_list[0,10,20]',
+				'errors' => array(
+					'required'    => 'You must provide a %s for your account.',
+					'min_length'  => 'You have too few characters for your %s.',
+					'max_length'  => 'You have too many characters for your %s.',
+					'in_list'     => 'The %s provided was not valid.'
+				),
+			),
+
+			array(
+				'field'  => 'userActive',
+				'label'  => 'Status',
+				'rules'  => 'trim|required|min_length[1]|max_length[1]|in_list[0,1]',
+				'errors' => array(
+					'required'    => 'You must provide a %s for your account.',
+					'min_length'  => 'You have too few characters for your %s.',
+					'max_length'  => 'You have too many characters for your %s.',
+					'in_list'     => 'The %s provided was not unique.'
 				),
 			),
 		)
