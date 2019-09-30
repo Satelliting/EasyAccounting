@@ -1,20 +1,21 @@
 <?php
-  defined('BASEPATH') OR exit('No direct script access allowed');
-  class Accounts extends CI_Controller{
-    public function __construct()
-    {
-      parent::__construct();
-      this->load->model();
-    }
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+	class Accounts extends CI_Controller{
 
 
+		# Default Constructor Function
+		public function __construct(){
+			parent::__construct();
+		}
 
 
-    # User Index Function
+		# Default Index Function
 		public function index(){
-			$data['accountdata'] = $this->session->accountdata();
+
+			$data['accountData'] = $this->session->userdata('accountInfo');
 			$this->load->template('accounts/home', $data);
 		}
 
 
-  }
+	}
