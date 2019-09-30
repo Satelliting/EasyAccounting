@@ -11,7 +11,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		}
 
 
-		# User Index Function
+		# Admin Index Function
 		public function index(){
 			$userRole = $this->session->userdata('userRole');
 			if ($userRole != 20){

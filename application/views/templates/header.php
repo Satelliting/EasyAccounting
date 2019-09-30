@@ -16,7 +16,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<body>
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 			<div class="container-fluid">
-				<a class="navbar-brand" href="<?=site_url();?>">Easy Accounting</a>
+				<a class="navbar-brand" href="<?=site_url();?>">
+					<img src="<?=base_url('/assets/img/logo.png');?>" height="20" />
+				</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navBarLeft" aria-controls="navBarLeft" aria-expanded="false" aria-label="Toggle Navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>

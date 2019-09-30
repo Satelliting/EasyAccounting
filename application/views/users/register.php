@@ -14,6 +14,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		';
 	}
 ?>
+			<div class="row" style="padding-bottom: 20px;">
+				<img src="<?=base_url('/assets/img/logo.png');?>" class="mx-auto" />
+			</div>
 
 			<div class="card">
 				<div class="card-header">
