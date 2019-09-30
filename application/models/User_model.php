@@ -30,4 +30,50 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		}
 
 
+
+		# Edit User Info Model
+		public function userEdit($userInfo, $admin = false){
+			if ($admin == true){
+				$this->db->where('userID', $userInfo['userID']);
+				$this->db->update('users', $userInfo);
+
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+
+
+
+		# Verify User ID Model
+		public function userVerifyID($userID){
+			$getSQL = "SELECT * FROM users WHERE userid='{$userID}'";
+			$queryDB = $this->db->query($getSQL);
+			$userInfo = $queryDB->result();
+
+			if (empty($userInfo)){
+				return false;
+			}
+
+			return true;
+		}
+
+
+
+		# Verify User Password Model
+		public function userVerifyPassword($userPassword){
+			$userPassword = md5($userPassword);
+			$getSQL = "SELECT * FROM users WHERE userPassword='{$userPassword}'";
+			$queryDB = $this->db->query($getSQL);
+			$userInfo = $queryDB->result();
+
+			if (empty($userInfo)){
+				return false;
+			}
+
+			return true;
+		}
+
+
 	}
