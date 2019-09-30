@@ -13,6 +13,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 		# Admin Index Function
 		public function index(){
+			$userID = $this->session->userdata('userID');
+			if (!$userID){
+				redirect('users/login');
+			}
+
 			$userRole = $this->session->userdata('userRole');
 			if ($userRole != 20){
 				$this->session->set_flashdata('danger', 'You do not have permission to view this.');

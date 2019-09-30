@@ -12,9 +12,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 		# Account Index Function
 		public function index(){
+			$userID = $this->session->userdata('userID');
+			if (!$userID){
+				redirect('users/login');
+			}
+
 			$data['userData'] = $this->session->userdata();
 			$data['title']    = 'Accounts | List of Accounts';
-			$data['userList'] = $this->account_model->getAccounts();
+			$data['accountList'] = $this->account_model->getAccounts();
 			$this->load->template('accounts/home', $data);
 		}
 
