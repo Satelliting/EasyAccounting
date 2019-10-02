@@ -21,6 +21,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		}
 
 
+		# Create User from Admin Model
+		public function createUser($userInfo){
+			$newPassword = $this->admin_model->createPassword();
+			$userInfo['userPassword'] = md5($newPassword);
+
+			if ($this->db->insert('users', $userInfo)){
+				return true;
+			}
+			return false;
+		}
+
+
+		# Create Random Password for New User Model
+		public function createPassword(){
+			$newPassword = strtoupper(chr(rand(65, 90)) . chr(rand(65, 90)) . rand(100, 999)) . "?";
+			return $newPassword;
+		}
+
 
 		# Change Edited User's Info Model
 		public function changeUserInfo($userInfo){
@@ -31,7 +49,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$userChange = $this->user_model->userEdit($userInfo, true);
 			return $userChange;
 		}
-
 
 
 		# Delete User Model

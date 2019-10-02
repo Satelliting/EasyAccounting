@@ -7,6 +7,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		# Default Constructor Function
 		public function __construct(){
 			parent::__construct();
+
+			$userID = $this->session->userdata('userID');
+			if ($userID){
+				redirect('profile');
+			}
 		}
 
 
@@ -20,11 +25,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		# Register User Function
 		public function register(){
 			$data['title'] = "User Registration";
-
-			$userID = $this->session->userdata('userID');
-			if ($userID){
-				redirect('users/profile');
-			}
 
 			$registerInfo = array(
 				'userFirstName'        => $this->input->post('userFirstName'),
@@ -55,11 +55,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		# User Login Function
 		public function login(){
 			$data['title'] = "User Login";
-
-			$userID = $this->session->userdata('userID');
-			if ($userID){
-				redirect('users/profile');
-			}
 
 			$email    = $this->input->post('userEmail');
 			$password = md5($this->input->post('userPassword'));
@@ -118,20 +113,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				$this->session->sess_destroy();
 				redirect('users/login');
 			}
-		}
-
-
-		# User Profile Function
-		public function profile(){
-			$data['title'] = 'User Profile';
-
-			$userID = $this->session->userdata('userID');
-			if (!$userID){
-				redirect('users/login');
-			}
-			$data['userData'] = $this->session->userdata();
-
-			$this->load->template('users/profile', $data);
 		}
 
 

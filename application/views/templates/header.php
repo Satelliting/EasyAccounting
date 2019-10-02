@@ -29,8 +29,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<a class="nav-item nav-link" href="<?=site_url('logs/');?>">Logs</a>
 <?php
 	if ($userID){
-		echo '						<a class="nav-item nav-link" href="'.site_url('users/profile').'">Profile</a>';
-		echo '						<a class="nav-item nav-link" href="'.site_url('users/logout').'">Logout</a>';
+		echo '						<a class="nav-item nav-link" href="'.site_url('profile').'">Profile</a>';
+		echo '						<a class="nav-item nav-link" href="'.site_url('home/logout').'">Logout</a>';
 	}
 	else {
 		echo '						<a class="nav-item nav-link" href="'.site_url('users/login').'">Login</a>';

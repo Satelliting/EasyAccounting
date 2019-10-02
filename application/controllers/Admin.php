@@ -8,16 +8,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		public function __construct(){
 			parent::__construct();
 			$this->load->model('admin_model');
+
+			$userID = $this->session->userdata('userID');
+			if (!$userID){
+				redirect('users/login');
+			}
 		}
 
 
 		# Admin Index Function
 		public function index(){
-			$userID = $this->session->userdata('userID');
-			if (!$userID){
-				redirect('users/login');
-			}
-
 			$userRole = $this->session->userdata('userRole');
 			if ($userRole != 20){
 				$this->session->set_flashdata('danger', 'You do not have permission to view this.');
@@ -31,20 +31,45 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			}
 		}
 
+
+		# Create User Info Function
+		public function create(){
+			$data['title'] = "Admin | Create User";
+			$data['userData'] = $this->session->userdata();
+
+			if (!empty($this->input->post())){
+				$createCheck = $this->admin_model->createUser($_POST);
+				if ($createCheck){
+					$this->session->set_flashdata('success', 'You have successfully created a user. Login details have been emailed to the associated email address.');
+					redirect('admin');
+				}
+				else {
+					$this->session->set_flashdata('danger', 'Something internally happened. Please try again.');
+					$this->load->template('admin/create', $data);
+				}
+			}
+			else {
+				$this->load->template('admin/create', $data);
+			}
+		}
+
+
 		# Edit User Info Function
 		public function edit($userID){
+			$data['userData'] = $this->session->userdata();
+			$data['title']    = "Admin | Edit User: #{$userID}";
+
 			$getSQL = "SELECT * FROM users WHERE userID = '{$userID}'";
 			$queryDB = $this->db->query($getSQL);
 			$userCheck = $queryDB->result();
 
+			# User Selected Does Not Exist
 			if (empty($userCheck)) {
 				$this->session->set_flashdata('danger', 'The user you attempted to edit does not exist.');
 				redirect('admin');
 			}
 
-			$data['userData'] = $this->session->userdata();
 			$data['userEditData'] = (array) $userCheck[0];
-			$data['title']    = "Admin | Edit User: #{$userID}";
 			$data['userList'] = $this->admin_model->getUsers($userID);
 
 			# Default Edit View
@@ -52,7 +77,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				$this->load->template('admin/edit', $data);
 			}
 			# Delete User Form Submitted
-			elseif ($_POST['delete'] == 'Y'){
+			elseif (array_key_exists('delete', $_POST) && $_POST['delete'] == 'Y'){
 				$deletedUserID = $data['userEditData']['userID'];
 				$deleteCheck = $this->admin_model->deleteUser($deletedUserID);
 				if ($deleteCheck){
@@ -76,45 +101,53 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 				if ($_POST['userPassword'] == '' || !array_key_exists('userPassword', $_POST)){
 					unset($_POST['userPassword']);
-					unset($_POST['userPasswordConfirm']);
 				}
 				else {
 					$_POST['userPassword']        = md5($_POST['userPassword']);
 					$_POST['userPasswordConfirm'] = md5($_POST['userPasswordConfirm']);
 				}
 
-				# Form Validation For Editing User Information from Admin Panel (WIP)
-				#$updateValidation = $this->form_validation->run('update');
-				#if ($updateValidation){
-				#	$userChange = $this->admin_model->changeUserInfo($_POST);
-#
-				#	if (!$userChange){
-				#		$this->session->set_flashdata('danger', 'Something strange happened. Please try again.');
-				#		redirect('admin');
-				#	}
-				#	else {
-				#		$this->session->set_flashdata('success', 'You have successfully updated User: #'.$userID);
-				#		redirect('admin');
-				#	}
-				#}
-				#else {
-				#	$this->load->template('admin/edit', $data);
-				#}
-
-				$userChange = $this->admin_model->changeUserInfo($_POST);
-
-				if (!$userChange){
-					$this->session->set_flashdata('danger', 'Something strange happened. Please try again.');
-					redirect('admin');
+				if ($_POST['userPassword'] != $_POST['userPasswordConfirm']){
+					$this->session->set_flashdata('danger', 'The passwords did not match.');
+					$this->load->template('admin/edit', $data);
 				}
 				else {
-					$logInfo = array(
-						'userID' => $data['userData']['userID'],
-						'logInfo' => 'User edited User: #'.$data['userEditData']['userID'].' details; Previous Details: '.json_encode($data['userEditData']).', Updated Details: '.json_encode($_POST),
-					);
-					$this->log_model->userCreate($logInfo);
-					$this->session->set_flashdata('success', 'You have successfully updated User: #'.$userID);
-					redirect('admin');
+					# This needs to be unset AFTER confirmation check to make sure they match
+					unset($_POST['userPasswordConfirm']);
+
+					# Form Validation For Editing User Information from Admin Panel (WIP)
+					#$updateValidation = $this->form_validation->run('update');
+					#if ($updateValidation){
+					#	$userChange = $this->admin_model->changeUserInfo($_POST);
+					#
+					#	if (!$userChange){
+					#		$this->session->set_flashdata('danger', 'Something strange happened. Please try again.');
+					#		redirect('admin');
+					#	}
+					#	else {
+					#		$this->session->set_flashdata('success', 'You have successfully updated User: #'.$userID);
+					#		redirect('admin');
+					#	}
+					#}
+					#else {
+					#	$this->load->template('admin/edit', $data);
+					#}
+
+					$userChange = $this->admin_model->changeUserInfo($_POST);
+
+					if (!$userChange){
+						$this->session->set_flashdata('danger', 'Something strange happened. Please try again.');
+						redirect('admin');
+					}
+					else {
+						$logInfo = array(
+							'userID' => $data['userData']['userID'],
+							'logInfo' => 'User edited User: #'.$data['userEditData']['userID'].' details; Previous Details: '.json_encode($data['userEditData']).', Updated Details: '.json_encode($_POST),
+						);
+						$this->log_model->userCreate($logInfo);
+						$this->session->set_flashdata('success', 'You have successfully updated User: #'.$userID);
+						redirect('admin');
+					}
 				}
 			}
 		}

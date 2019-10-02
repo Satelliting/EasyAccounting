@@ -24,4 +24,23 @@ class Home extends CI_Controller {
 	}
 
 
+	# Logout Function
+	public function logout(){
+		$userID = $this->session->userdata('userID');
+		if (!$userID){
+			redirect('users/login');
+		}
+		else{
+			$logInfo = array(
+				'userID' => $userID,
+				'logInfo' => 'User logged out.',
+			);
+			$this->log_model->userCreate($logInfo);
+
+			$this->session->sess_destroy();
+			redirect('users/login');
+		}
+	}
+
+
 }

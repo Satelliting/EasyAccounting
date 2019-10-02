@@ -2,18 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 		<div class="container">
-<?php
-	if (validation_errors() != ""){
-		echo '
-			<div class="alert alert-danger alert-dismissible fade show print-error-msg" role="alert">
-				'.validation_errors().'
-				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-		';
-	}
-?>
+<?=validation_errors();?>
 			<div class="card">
 				<div class="card-header">
 					<h2>Edit User Info: <strong><?=$userEditData['userFirstName'];?> <?=$userEditData['userLastName'];?></strong> #<em><?=$userEditData['userID'];?></em></h2>
