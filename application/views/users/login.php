@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 		<div class="container">
-			<?php echo validation_errors(); ?>
+<?=validation_errors();?>
 			<div class="row" style="padding-bottom: 20px;">
 				<img src="<?=base_url('/assets/img/logo.png');?>" class="mx-auto" />
 			</div>
@@ -12,7 +12,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<h2>User Login</h2>
 				</div>
 				<div class="card-body">
-					<?php echo form_open(base_url('users/login')); ?>
+					<?=form_open(current_url());?>
 						<fieldset>
 							<div class="form-group">
 								<input class="form-control" placeholder="Email" name="userEmail" type="email" required autofocus />

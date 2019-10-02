@@ -17,7 +17,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								<input class="form-control" placeholder="Last Name" name="userLastName" type="text" required value="<?=$userEditData['userLastName'];?>" data-toggle="tooltip" data-placement="left" title="User Last Name" />
 							</div>
 							<div class="form-group">
-								<input class="form-control" placeholder="Email" name="userEmail" type="email" required autofocus value="<?=$userEditData['userEmail'];?>" data-toggle="tooltip" data-placement="left" title="User Email" />
+								<input class="form-control" placeholder="Email" name="userEmail" type="email" required value="<?=$userEditData['userEmail'];?>" data-toggle="tooltip" data-placement="left" title="User Email" />
 							</div>
 							<div class="form-group">
 								<select class="form-control" name="userRole" data-toggle="tooltip" data-placement="left" title="User Role">

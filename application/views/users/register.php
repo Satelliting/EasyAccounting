@@ -2,18 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 		<div class="container">
-<?php
-	if (validation_errors() != ""){
-		echo '
-			<div class="alert alert-danger alert-dismissible fade show print-error-msg" role="alert">
-				'.validation_errors().'
-				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-		';
-	}
-?>
+<?=validation_errors();?>
 			<div class="row" style="padding-bottom: 20px;">
 				<img src="<?=base_url('/assets/img/logo.png');?>" class="mx-auto" />
 			</div>
@@ -23,7 +12,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<h2>User Registration</h2>
 				</div>
 				<div class="card-body">
-					<?php echo form_open(base_url('users/register')); ?>
+					<?=form_open(current_url()); ?>
 						<fieldset>
 							<div class="form-group">
 								<input class="form-control" placeholder="First Name" name="userFirstName" type="text" required autofocus />
@@ -32,7 +21,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								<input class="form-control" placeholder="Last Name" name="userLastName" type="text" required />
 							</div>
 							<div class="form-group">
-								<input class="form-control" placeholder="Email" name="userEmail" type="email" required autofocus />
+								<input class="form-control" placeholder="Email" name="userEmail" type="email" required />
 							</div>
 							<div class="form-group">
 								<input class="form-control" placeholder="Password" name="userPassword" type="password" required />
