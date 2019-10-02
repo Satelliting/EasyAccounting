@@ -41,7 +41,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			}
 			# Need to add form validation
 			$this->db->where('userID', $userInfo['userID']);
-			var_dump($this->db->update('users', $userInfo));
+			$this->db->update('users', $userInfo);
 
 			return true;
 		}

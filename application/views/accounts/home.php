@@ -68,5 +68,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 					</tbody>
 				</table>
+				<br /><br />
+				<a class="btn btn-success btn-block" href="<?=site_url("accounts/create");?>">Create Account</a>
 			</div>
 		</div>

@@ -15,4 +15,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		}
 
 
+		# Create Event Log Function
+		public function eventCreate($logInfo){
+			if($this->db->insert('logs_events', $logInfo)){
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+
+
 	}

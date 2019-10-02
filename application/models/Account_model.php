@@ -21,20 +21,38 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		}
 
 
-		# Change Edited Account's Info Model (WIP)
-		#public function changeAccountInfo($accountInfo){
-		#	$accountCheck = $this->account_model->accountVerifyID($accountInfo['accountID']);
-		#	if (!$accountCheck){
-		#		return false;
-		#	}
-		#	$accountChange = $this->account_model->accountEdit($accountInfo, true);
-		#	return $accountChange;
-		#}
+		# Create Account Model
+		public function createAccount($accountInfo){
+			switch ($accountInfo['accountSide']) {
+				case 'L':
+					$accountInfo['accountDebit']  = $accountInfo['accountBalance'];
+					$accountInfo['accountCredit'] = 0;
+					break;
+
+				default:
+					$accountInfo['accountDebit']  = 0;
+					$accountInfo['accountCredit'] = $accountInfo['accountBalance'];
+					break;
+			}
+			if ($this->db->insert('accounts', $accountInfo)){
+				return true;
+			}
+			return false;
+		}
+
+
+		# Change Edited Account's Info Model
+		public function accountEdit($accountInfo){
+			$this->db->where('accountID', $accountInfo['accountID']);
+			$this->db->update('accounts', $accountInfo);
+
+			return true;
+		}
 
 
 
 		# Delete Account Model
-		public function deleteAccount($accountID){
+		public function accountDelete($accountID){
 			$dbCheck = $this->db->delete('accounts', array('accountID' => $accountID));
 			if($dbCheck){
 				return true;

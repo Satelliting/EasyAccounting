@@ -25,6 +25,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		}
 
 
+		# Create Account Info Function
+		public function create(){
+			$data['title'] = "Accounts | Create Account";
+			$data['userData'] = $this->session->userdata();
+
+			if (!empty($this->input->post())){
+				var_dump($_POST);
+				$createCheck = $this->account_model->createAccount($_POST);
+				if ($createCheck){
+					$this->session->set_flashdata('success', 'You have successfully created an account.');
+					redirect('accounts');
+				}
+				else {
+					$this->session->set_flashdata('danger', 'Something internally happened. Please try again.');
+					$this->load->template('accounts/create', $data);
+				}
+			}
+			else {
+				$this->load->template('accounts/create', $data);
+			}
+		}
+
+
 		# Account Edit Function
 		public function edit($accountID){
 			$getSQL = "SELECT * FROM accounts WHERE accountID = '{$accountID}'";
@@ -43,6 +66,46 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			# Default Edit View
 			if (empty($_POST)){
 				$this->load->template('accounts/edit', $data);
+			}
+			# Delete Account Form Submitted
+			elseif (array_key_exists('delete', $_POST) && $_POST['delete'] == 'Y'){
+				$deletedAccountID = $data['accountData']['accountID'];
+				$deleteCheck = $this->account_model->accountDelete($deletedAccountID);
+				if ($deleteCheck){
+					$logInfo = array(
+						'userID'        => $data['userData']['userID'],
+						'logBeforeInfo' => json_encode($data['accountData']),
+						'logAfterInfo'  => '',
+					);
+					$this->log_model->eventCreate($logInfo);
+
+					$this->session->set_flashdata('success', 'You have successfully delete the account: #'.$deletedAccountID.'.');
+					redirect('accounts');
+				}
+				else {
+					$this->session->set_flashdata('danger', 'Internal error. Please try again.');
+					$this->load->template('admin/edit', $data);
+				}
+			}
+			# Edit Account Form Submitted
+			else{
+				$_POST['accountID'] = $data['accountData']['accountID'];
+
+				$accountChange = $this->account_model->accountEdit($_POST);
+				if (!$accountChange){
+					$this->session->set_flashdata('danger', 'Something strange happened. Please try again.');
+					redirect('accounts');
+				}
+				else {
+					$logInfo = array(
+						'userID'        => $data['userData']['userID'],
+						'logBeforeInfo' => json_encode($data['accountData']),
+						'logAfterInfo'  => json_encode($_POST),
+					);
+					$this->log_model->eventCreate($logInfo);
+					$this->session->set_flashdata('success', 'You have successfully updated Account: #'.$data['accountData']['accountID']);
+					redirect('accounts');
+				}
 			}
 		}
 
