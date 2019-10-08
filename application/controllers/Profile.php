@@ -57,11 +57,14 @@ class Profile extends CI_Controller {
 					$this->load->template('profile/edit', $data);
 				}
 				else {
+					unset($data['userData']['__ci_last_regenerate']);
 					$logInfo = array(
 						'userID' => $data['userData']['userID'],
-						'logInfo' => 'User edited their details; Previous Details: '.json_encode($data['userData']).', Updated Details: '.json_encode($_POST),
+						'logType' => 'users',
+						'logBefore' => json_encode($data['userData']),
+						'logAfter'  => json_encode($_POST),
 					);
-					$this->log_model->userCreate($logInfo);
+					$this->log_model->create($logInfo);
 
 					$this->session->set_userdata(array(
 						'userFirstName' => $_POST['userFirstName'],

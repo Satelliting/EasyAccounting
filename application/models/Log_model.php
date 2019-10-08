@@ -4,9 +4,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	class Log_model extends CI_model{
 
 
-		# Create User Log Function
-		public function userCreate($logInfo){
-			if($this->db->insert('logs_users', $logInfo)){
+		# Create Log Function
+		public function create($logInfo){
+			if($this->db->insert('logs', $logInfo)){
 				return true;
 			}
 			else {
@@ -15,14 +15,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		}
 
 
-		# Create Event Log Function
-		public function eventCreate($logInfo){
-			if($this->db->insert('logs_events', $logInfo)){
-				return true;
+		# Get Logs Info Model
+		public function get($logType = 'users'){
+			$logInfo = NULL;
+
+			switch ($logType) {
+				case 'users':
+					$getSQL = "SELECT * FROM logs WHERE logType='users' ORDER BY logID DESC";
+					break;
+				case 'accounts':
+					$getSQL = "SELECT * FROM logs WHERE logType='accounts' ORDER BY logID DESC";
+					break;
+				case 'admin':
+					$getSQL = "SELECT * FROM logs WHERE logType='admin' ORDER BY logID DESC";
+					break;
 			}
-			else {
-				return false;
-			}
+
+			$queryDB = $this->db->query($getSQL);
+
+			$logInfo = $queryDB->result();
+			return $logInfo;
 		}
 
 

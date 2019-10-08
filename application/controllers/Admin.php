@@ -81,11 +81,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				$deletedUserID = $data['userEditData']['userID'];
 				$deleteCheck = $this->admin_model->deleteUser($deletedUserID);
 				if ($deleteCheck){
-					$logInfo = array(
-						'userID' => $data['userData']['userID'],
-						'logInfo' => 'User deleted User: #'.$deletedUserID,
-					);
-					$this->log_model->userCreate($logInfo);
 
 					$this->session->set_flashdata('success', 'You have successfully delete the user: #'.$deletedUserID.'.');
 					redirect('admin');
@@ -141,10 +136,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					}
 					else {
 						$logInfo = array(
-							'userID' => $data['userData']['userID'],
-							'logInfo' => 'User edited User: #'.$data['userEditData']['userID'].' details; Previous Details: '.json_encode($data['userEditData']).', Updated Details: '.json_encode($_POST),
+							'userID'    => $data['userData']['userID'],
+							'logType'   => 'admin',
+							'logBefore' => json_encode($data['userEditData']),
+							'logAfter'  => json_encode($_POST),
 						);
-						$this->log_model->userCreate($logInfo);
+						$this->log_model->create($logInfo);
 						$this->session->set_flashdata('success', 'You have successfully updated User: #'.$userID);
 						redirect('admin');
 					}

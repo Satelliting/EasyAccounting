@@ -79,13 +79,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						'userRole'      => $userInfo['userRole']
 					));
 
-
-					$logInfo = array(
-						'userID' => $userInfo['userID'],
-						'logInfo' => 'User logged in.',
-					);
-					$this->log_model->userCreate($logInfo);
-
 					$this->session->set_flashdata('success', 'You have successfully logged in.');
 					redirect();
 				}

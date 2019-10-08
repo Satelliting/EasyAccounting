@@ -9,7 +9,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			</div>
 
 			<div class="row">
-				<br /><br /><br />
 				<table class="table table-striped table-bordered table-hover">
 					<thead class="thead-dark">
 						<tr class="text-center">

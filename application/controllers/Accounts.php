@@ -17,7 +17,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 		# Account Index Function
 		public function index(){
-
 			$data['userData'] = $this->session->userdata();
 			$data['title']    = 'Accounts | List of Accounts';
 			$data['accountList'] = $this->account_model->getAccounts();
@@ -72,13 +71,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				$deletedAccountID = $data['accountData']['accountID'];
 				$deleteCheck = $this->account_model->accountDelete($deletedAccountID);
 				if ($deleteCheck){
-					$logInfo = array(
-						'userID'        => $data['userData']['userID'],
-						'logBeforeInfo' => json_encode($data['accountData']),
-						'logAfterInfo'  => '',
-					);
-					$this->log_model->eventCreate($logInfo);
-
 					$this->session->set_flashdata('success', 'You have successfully delete the account: #'.$deletedAccountID.'.');
 					redirect('accounts');
 				}
@@ -98,11 +90,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				}
 				else {
 					$logInfo = array(
-						'userID'        => $data['userData']['userID'],
-						'logBeforeInfo' => json_encode($data['accountData']),
-						'logAfterInfo'  => json_encode($_POST),
+						'userID'    => $data['userData']['userID'],
+						'logType'   => 'accounts',
+						'logBefore' => json_encode($data['accountData']),
+						'logAfter'  => json_encode($_POST),
 					);
-					$this->log_model->eventCreate($logInfo);
+					$this->log_model->create($logInfo);
 					$this->session->set_flashdata('success', 'You have successfully updated Account: #'.$data['accountData']['accountID']);
 					redirect('accounts');
 				}
