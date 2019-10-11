@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 30, 2019 at 07:55 PM
+-- Generation Time: Oct 11, 2019 at 08:03 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.4
 
@@ -55,86 +55,42 @@ INSERT INTO `accounts` (`accountID`, `userID`, `accountName`, `accountDescriptio
 -- --------------------------------------------------------
 
 --
--- Table structure for table `logs_categories`
+-- Table structure for table `logs`
 --
 
-CREATE TABLE `logs_categories` (
-  `categoryID` bigint(20) NOT NULL,
-  `categoryName` varchar(25) NOT NULL,
-  `categoryDescription` text NOT NULL,
-  `categoryCreationDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `logs_events`
---
-
-CREATE TABLE `logs_events` (
+CREATE TABLE `logs` (
   `logID` bigint(20) NOT NULL,
   `userID` bigint(20) NOT NULL,
-  `logCategoryID` int(11) NOT NULL,
-  `logBeforeInfo` text NOT NULL,
-  `logAfterInfo` text NOT NULL,
-  `logCreationDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `logs_users`
---
-
-CREATE TABLE `logs_users` (
-  `logID` bigint(20) NOT NULL,
-  `userID` bigint(20) NOT NULL,
-  `logInfo` text NOT NULL,
-  `logCreationDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `logType` varchar(25) NOT NULL,
+  `logBefore` text NOT NULL,
+  `logAfter` text NOT NULL,
+  `logDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `logs_users`
+-- Dumping data for table `logs`
 --
 
-INSERT INTO `logs_users` (`logID`, `userID`, `logInfo`, `logCreationDate`) VALUES
-(1, 1000001, 'User logged in.', '2019-09-19 21:48:31'),
-(2, 1000001, 'User logged out.', '2019-09-19 21:50:15'),
-(3, 1000003, 'User logged in.', '2019-09-19 21:50:26'),
-(4, 1000003, 'User logged out.', '2019-09-19 21:50:27'),
-(5, 1000002, 'User logged in.', '2019-09-19 21:50:32'),
-(6, 1000002, 'User logged out.', '2019-09-19 21:50:33'),
-(7, 1000001, 'User logged in.', '2019-09-19 21:50:49'),
-(8, 1000001, 'User logged out.', '2019-09-19 21:51:29'),
-(9, 1000003, 'User logged in.', '2019-09-19 21:51:33'),
-(10, 1000003, 'User logged out.', '2019-09-19 21:57:30'),
-(11, 1000001, 'User logged in.', '2019-09-19 21:57:36'),
-(12, 1000001, 'User logged out.', '2019-09-19 21:58:37'),
-(13, 1000003, 'User logged in.', '2019-09-19 21:58:42'),
-(14, 1000003, 'User logged out.', '2019-09-19 23:17:52'),
-(15, 1000001, 'User logged in.', '2019-09-19 23:18:11'),
-(16, 1000001, 'User logged out.', '2019-09-19 23:18:51'),
-(17, 1000003, 'User logged in.', '2019-09-19 23:18:54'),
-(18, 1000001, 'User logged in.', '2019-09-25 16:05:33'),
-(19, 1000001, 'User logged out.', '2019-09-25 16:05:45'),
-(20, 1000001, 'User logged in.', '2019-09-25 16:05:48'),
-(21, 1000001, 'User logged out.', '2019-09-25 16:05:55'),
-(22, 1000001, 'User logged in.', '2019-09-28 05:33:54'),
-(23, 1000001, 'User logged out.', '2019-09-28 05:34:01'),
-(24, 1000003, 'User logged in.', '2019-09-28 05:34:05'),
-(25, 1000003, 'User logged in.', '2019-09-30 00:30:07'),
-(26, 1000003, 'User edited User: # details; Previous Details: Array, Updated Details: Array', '2019-09-30 00:53:05'),
-(27, 1000003, 'User edited User: #1000001 details; Previous Details: 1, Updated Details: 1', '2019-09-30 00:54:18'),
-(28, 1000003, 'User edited User: #1000001 details; Previous Details: , Updated Details: ', '2019-09-30 00:54:44'),
-(29, 1000003, 'User edited User: #1000001 details; Previous Details: {\"userID\":\"1000001\",\"userEmail\":\"accountant@test.com\",\"userFirstName\":\"Accountant\",\"userLastName\":\"Person\",\"userPassword\":\"519524d3e2c7de2020f4cca2ae373b5b\",\"userPasswordAttempts\":\"0\",\"userPrevPassword\":null,\"userPasswordDate\":\"2019-09-19 13:18:18\",\"userCreationDate\":\"2019-09-19 13:18:18\",\"userRole\":\"0\",\"userActive\":\"1\",\"userActiveDate\":null}, Updated Details: {\"userFirstName\":\"Accountant\",\"userLastName\":\"Person\",\"userEmail\":\"accountant@test.com\",\"userRole\":\"0\",\"userActive\":\"1\",\"userID\":\"1000001\"}', '2019-09-30 00:55:32'),
-(30, 1000003, 'User edited User: #1000003 details; Previous Details: {\"userID\":\"1000003\",\"userEmail\":\"administrator@test.com\",\"userFirstName\":\"Administrator\",\"userLastName\":\"Person\",\"userPassword\":\"985de320ae9dc7cb28692edd5b3afa72\",\"userPasswordAttempts\":\"0\",\"userPrevPassword\":null,\"userPasswordDate\":\"2019-09-19 16:27:39\",\"userCreationDate\":\"2019-09-19 16:27:39\",\"userRole\":\"20\",\"userActive\":\"1\",\"userActiveDate\":null}, Updated Details: {\"userFirstName\":\"Administrator\",\"userLastName\":\"Admin_Person\",\"userEmail\":\"administrator@test.com\",\"userRole\":\"20\",\"userActive\":\"1\",\"userID\":\"1000003\"}', '2019-09-30 01:42:30'),
-(31, 1000003, 'User edited User: #1000001 details; Previous Details: {\"userID\":\"1000001\",\"userEmail\":\"accountant@test.com\",\"userFirstName\":\"Accountant\",\"userLastName\":\"Person\",\"userPassword\":\"519524d3e2c7de2020f4cca2ae373b5b\",\"userPasswordAttempts\":\"0\",\"userPrevPassword\":null,\"userPasswordDate\":\"2019-09-19 13:18:18\",\"userCreationDate\":\"2019-09-19 13:18:18\",\"userRole\":\"0\",\"userActive\":\"1\",\"userActiveDate\":null}, Updated Details: {\"userFirstName\":\"Accountant\",\"userLastName\":\"Person\",\"userEmail\":\"accountant@test.com\",\"userRole\":\"0\",\"userActive\":\"1\",\"userID\":\"1000001\"}', '2019-09-30 01:42:37'),
-(32, 1000003, 'User logged out.', '2019-09-30 01:42:38'),
-(33, 1000003, 'User logged in.', '2019-09-30 01:42:42'),
-(34, 1000003, 'User logged in.', '2019-09-30 17:08:39'),
-(35, 1000003, 'User logged out.', '2019-09-30 17:29:57'),
-(36, 1000003, 'User logged in.', '2019-09-30 17:45:17'),
-(37, 1000003, 'User edited User: #1000001 details; Previous Details: {\"userID\":\"1000001\",\"userEmail\":\"accountant@test.com\",\"userFirstName\":\"Accountant\",\"userLastName\":\"Person\",\"userPassword\":\"519524d3e2c7de2020f4cca2ae373b5b\",\"userPasswordAttempts\":\"0\",\"userPrevPassword\":null,\"userPasswordDate\":\"2019-09-19 13:18:18\",\"userCreationDate\":\"2019-09-19 13:18:18\",\"userRole\":\"0\",\"userActive\":\"1\",\"userActiveDate\":null}, Updated Details: {\"userFirstName\":\"Accountant\",\"userLastName\":\"Person\",\"userEmail\":\"accountant@test.com\",\"userRole\":\"0\",\"userActive\":\"1\",\"userID\":\"1000001\"}', '2019-09-30 17:53:55');
+INSERT INTO `logs` (`logID`, `userID`, `logType`, `logBefore`, `logAfter`, `logDate`) VALUES
+(10000001, 1000003, 'users', '{\"userID\":\"1000003\",\"userName\":\"APerson0919\",\"userFirstName\":\"Admin\",\"userLastName\":\"Person\",\"userEmail\":\"administrator@test.com\",\"userRole\":\"20\"}', '{\"userFirstName\":\"Admin\",\"userLastName\":\"Person\",\"userEmail\":\"administrator@test.com\",\"userID\":\"1000003\"}', '2019-10-08 20:58:43'),
+(10000002, 1000003, 'admin', '{\"userID\":\"1000001\",\"userEmail\":\"accountant@test.com\",\"userFirstName\":\"Accountant\",\"userLastName\":\"Person\",\"userPassword\":\"519524d3e2c7de2020f4cca2ae373b5b\",\"userPasswordAttempts\":\"0\",\"userPrevPassword\":null,\"userPasswordDate\":\"2019-09-19 13:18:18\",\"userCreationDate\":\"2019-09-19 13:18:18\",\"userRole\":\"0\",\"userActive\":\"1\",\"userActiveDate\":null}', '{\"userFirstName\":\"Accountant\",\"userLastName\":\"Person\",\"userEmail\":\"accountant@test.com\",\"userRole\":\"0\",\"userActive\":\"1\",\"userID\":\"1000001\"}', '2019-10-08 21:03:02'),
+(10000003, 1000003, 'admin', '{\"userID\":\"1000001\",\"userEmail\":\"accountant@test.com\",\"userFirstName\":\"Accountant\",\"userLastName\":\"Person\",\"userPassword\":\"519524d3e2c7de2020f4cca2ae373b5b\",\"userPasswordAttempts\":\"0\",\"userPrevPassword\":null,\"userPasswordDate\":\"2019-09-19 13:18:18\",\"userCreationDate\":\"2019-09-19 13:18:18\",\"userRole\":\"0\",\"userActive\":\"1\",\"userActiveDate\":null}', '{\"userFirstName\":\"Accountants\",\"userLastName\":\"Person\",\"userEmail\":\"accountant@test.com\",\"userRole\":\"0\",\"userActive\":\"1\",\"userID\":\"1000001\"}', '2019-10-08 21:16:02'),
+(10000004, 1000003, 'admin', '{\"userID\":\"1000001\",\"userEmail\":\"accountant@test.com\",\"userFirstName\":\"Accountants\",\"userLastName\":\"Person\",\"userPassword\":\"519524d3e2c7de2020f4cca2ae373b5b\",\"userPasswordAttempts\":\"0\",\"userPrevPassword\":null,\"userPasswordDate\":\"2019-09-19 13:18:18\",\"userCreationDate\":\"2019-09-19 13:18:18\",\"userRole\":\"0\",\"userActive\":\"1\",\"userActiveDate\":null}', '{\"userFirstName\":\"Accountant\",\"userLastName\":\"Person\",\"userEmail\":\"accountant@test.com\",\"userRole\":\"0\",\"userActive\":\"1\",\"userID\":\"1000001\"}', '2019-10-08 21:16:05'),
+(10000005, 1000003, 'users', '{\"userID\":\"1000003\",\"userName\":\"APerson0919\",\"userFirstName\":\"Admin\",\"userLastName\":\"Person\",\"userEmail\":\"administrator@test.com\",\"userRole\":\"20\"}', '{\"userFirstName\":\"Admins\",\"userLastName\":\"Person\",\"userEmail\":\"administrator@test.com\",\"userID\":\"1000003\"}', '2019-10-08 21:16:14'),
+(10000006, 1000003, 'users', '{\"userID\":\"1000003\",\"userName\":\"APerson0919\",\"userFirstName\":\"Admins\",\"userLastName\":\"Person\",\"userEmail\":\"administrator@test.com\",\"userRole\":\"20\"}', '{\"userFirstName\":\"Admin\",\"userLastName\":\"Person\",\"userEmail\":\"administrator@test.com\",\"userID\":\"1000003\"}', '2019-10-08 21:16:16'),
+(10000007, 1000003, 'admin', '{\"userID\":\"1000002\",\"userEmail\":\"manager@test.com\",\"userFirstName\":\"Manager\",\"userLastName\":\"Person\",\"userPassword\":\"5980ba484aeddde546d5e79eb893dc58\",\"userPasswordAttempts\":\"0\",\"userPrevPassword\":null,\"userPasswordDate\":\"2019-09-19 14:15:02\",\"userCreationDate\":\"2019-09-19 14:15:02\",\"userRole\":\"10\",\"userActive\":\"1\",\"userActiveDate\":null}', '{\"userFirstName\":\"Managers\",\"userLastName\":\"Person\",\"userEmail\":\"manager@test.com\",\"userRole\":\"10\",\"userActive\":\"1\",\"userID\":\"1000002\"}', '2019-10-08 21:56:01'),
+(10000008, 1000003, 'admin', '{\"userID\":\"1000002\",\"userEmail\":\"manager@test.com\",\"userFirstName\":\"Managers\",\"userLastName\":\"Person\",\"userPassword\":\"5980ba484aeddde546d5e79eb893dc58\",\"userPasswordAttempts\":\"0\",\"userPrevPassword\":null,\"userPasswordDate\":\"2019-09-19 14:15:02\",\"userCreationDate\":\"2019-09-19 14:15:02\",\"userRole\":\"10\",\"userActive\":\"1\",\"userActiveDate\":null}', '{\"userFirstName\":\"Manager\",\"userLastName\":\"Person\",\"userEmail\":\"manager@test.com\",\"userRole\":\"10\",\"userActive\":\"1\",\"userID\":\"1000002\"}', '2019-10-08 21:56:04'),
+(10000009, 1000003, 'admin', '{\"userID\":\"1000002\",\"userEmail\":\"manager@test.com\",\"userFirstName\":\"Manager\",\"userLastName\":\"Person\",\"userPassword\":\"5980ba484aeddde546d5e79eb893dc58\",\"userPasswordAttempts\":\"0\",\"userPrevPassword\":null,\"userPasswordDate\":\"2019-09-19 14:15:02\",\"userCreationDate\":\"2019-09-19 14:15:02\",\"userRole\":\"10\",\"userActive\":\"1\",\"userActiveDate\":null}', '{\"userFirstName\":\"Manager\",\"userLastName\":\"Person\",\"userEmail\":\"manager@test.com\",\"userRole\":\"0\",\"userActive\":\"1\",\"userID\":\"1000002\"}', '2019-10-08 21:56:35'),
+(10000010, 1000003, 'admin', '{\"userID\":\"1000002\",\"userEmail\":\"manager@test.com\",\"userFirstName\":\"Manager\",\"userLastName\":\"Person\",\"userPassword\":\"5980ba484aeddde546d5e79eb893dc58\",\"userPasswordAttempts\":\"0\",\"userPrevPassword\":null,\"userPasswordDate\":\"2019-09-19 14:15:02\",\"userCreationDate\":\"2019-09-19 14:15:02\",\"userRole\":\"0\",\"userActive\":\"1\",\"userActiveDate\":null}', '{\"userFirstName\":\"Manager\",\"userLastName\":\"Person\",\"userEmail\":\"manager@test.com\",\"userRole\":\"20\",\"userActive\":\"1\",\"userID\":\"1000002\"}', '2019-10-08 21:56:38'),
+(10000011, 1000003, 'admin', '{\"userID\":\"1000002\",\"userEmail\":\"manager@test.com\",\"userFirstName\":\"Manager\",\"userLastName\":\"Person\",\"userPassword\":\"5980ba484aeddde546d5e79eb893dc58\",\"userPasswordAttempts\":\"0\",\"userPrevPassword\":null,\"userPasswordDate\":\"2019-09-19 14:15:02\",\"userCreationDate\":\"2019-09-19 14:15:02\",\"userRole\":\"20\",\"userActive\":\"1\",\"userActiveDate\":null}', '{\"userFirstName\":\"Manager\",\"userLastName\":\"Person\",\"userEmail\":\"manager@test.com\",\"userRole\":\"10\",\"userActive\":\"1\",\"userID\":\"1000002\"}', '2019-10-08 21:56:41'),
+(10000012, 1000003, 'admin', '{\"userID\":\"1000001\",\"userEmail\":\"accountant@test.com\",\"userFirstName\":\"Accountant\",\"userLastName\":\"Person\",\"userPassword\":\"519524d3e2c7de2020f4cca2ae373b5b\",\"userPasswordAttempts\":\"0\",\"userPrevPassword\":null,\"userPasswordDate\":\"2019-09-19 13:18:18\",\"userCreationDate\":\"2019-09-19 13:18:18\",\"userRole\":\"0\",\"userActive\":\"1\",\"userActiveDate\":null}', '{\"userFirstName\":\"Accountants\",\"userLastName\":\"Persons\",\"userEmail\":\"accountant@test.com\",\"userRole\":\"10\",\"userActive\":\"0\",\"userID\":\"1000001\"}', '2019-10-08 22:00:57'),
+(10000013, 1000003, 'admin', '{\"userID\":\"1000001\",\"userEmail\":\"accountant@test.com\",\"userFirstName\":\"Accountants\",\"userLastName\":\"Persons\",\"userPassword\":\"519524d3e2c7de2020f4cca2ae373b5b\",\"userPasswordAttempts\":\"0\",\"userPrevPassword\":null,\"userPasswordDate\":\"2019-09-19 13:18:18\",\"userCreationDate\":\"2019-09-19 13:18:18\",\"userRole\":\"10\",\"userActive\":\"0\",\"userActiveDate\":null}', '{\"userFirstName\":\"Accountant\",\"userLastName\":\"Person\",\"userEmail\":\"accountants@test.com\",\"userRole\":\"0\",\"userActive\":\"1\",\"userID\":\"1000001\"}', '2019-10-08 22:01:09'),
+(10000014, 1000003, 'admin', '{\"userID\":\"1000001\",\"userEmail\":\"accountants@test.com\",\"userFirstName\":\"Accountant\",\"userLastName\":\"Person\",\"userPassword\":\"519524d3e2c7de2020f4cca2ae373b5b\",\"userPasswordAttempts\":\"0\",\"userPrevPassword\":null,\"userPasswordDate\":\"2019-09-19 13:18:18\",\"userCreationDate\":\"2019-09-19 13:18:18\",\"userRole\":\"0\",\"userActive\":\"1\",\"userActiveDate\":null}', '{\"userFirstName\":\"Accountant\",\"userLastName\":\"Person\",\"userEmail\":\"accountant@test.com\",\"userRole\":\"0\",\"userActive\":\"1\",\"userID\":\"1000001\"}', '2019-10-08 22:01:13'),
+(10000015, 1000003, 'admin', '{\"userID\":\"1000001\",\"userEmail\":\"accountant@test.com\",\"userFirstName\":\"Accountant\",\"userLastName\":\"Person\",\"userPassword\":\"519524d3e2c7de2020f4cca2ae373b5b\",\"userPasswordAttempts\":\"0\",\"userPrevPassword\":null,\"userPasswordDate\":\"2019-09-19 13:18:18\",\"userCreationDate\":\"2019-09-19 13:18:18\",\"userRole\":\"0\",\"userActive\":\"1\",\"userActiveDate\":null}', '{\"userFirstName\":\"Accountant\",\"userLastName\":\"Person\",\"userEmail\":\"accountant@test.com\",\"userRole\":\"0\",\"userActive\":\"1\",\"userPassword\":\"9839bdd0ed4842dab367036fa233d871\",\"userID\":\"1000001\"}', '2019-10-08 22:01:22'),
+(10000016, 1000003, 'admin', '{\"userID\":\"1000001\",\"userEmail\":\"accountant@test.com\",\"userFirstName\":\"Accountant\",\"userLastName\":\"Person\",\"userPassword\":\"9839bdd0ed4842dab367036fa233d871\",\"userPasswordAttempts\":\"0\",\"userPrevPassword\":null,\"userPasswordDate\":\"2019-09-19 13:18:18\",\"userCreationDate\":\"2019-09-19 13:18:18\",\"userRole\":\"0\",\"userActive\":\"1\",\"userActiveDate\":null}', '{\"userFirstName\":\"Accountant\",\"userLastName\":\"Person\",\"userEmail\":\"accountant@test.com\",\"userRole\":\"0\",\"userActive\":\"1\",\"userPassword\":\"c2391dedefcd683e3c5e5c50f5ef9615\",\"userID\":\"1000001\"}', '2019-10-08 22:01:33'),
+(10000017, 1000003, 'accounts', '{\"accountID\":\"101\",\"userID\":\"1000003\",\"accountName\":\"Cash\",\"accountDescription\":\"This is the cash account.\",\"accountCategory\":\"Assets\",\"accountCategorySub\":\"Cash Related Accounts\",\"accountSide\":\"L\",\"accountBalance\":\"0\",\"accountDebit\":\"0\",\"accountCredit\":\"0\",\"accountOrder\":\"1\",\"accountStatement\":\"BS\",\"accountCreationDate\":\"2019-09-30 12:43:37\"}', '{\"accountName\":\"Cashs\",\"accountDescription\":\"This is the cash account.s\",\"accountCategory\":\"Liabilities\",\"accountCategorySub\":\"Cash Related Accounts\",\"accountSide\":\"R\",\"accountStatement\":\"IS\",\"accountID\":\"101\"}', '2019-10-08 22:06:30'),
+(10000018, 1000003, 'accounts', '{\"accountID\":\"101\",\"userID\":\"1000003\",\"accountName\":\"Cashs\",\"accountDescription\":\"This is the cash account.s\",\"accountCategory\":\"Liabilities\",\"accountCategorySub\":\"Cash Related Accounts\",\"accountSide\":\"R\",\"accountBalance\":\"0\",\"accountDebit\":\"0\",\"accountCredit\":\"0\",\"accountOrder\":\"1\",\"accountStatement\":\"IS\",\"accountCreationDate\":\"2019-09-30 12:43:37\"}', '{\"accountName\":\"Cashs\",\"accountDescription\":\"This is the cash account.s\",\"accountCategory\":\"Assets\",\"accountSide\":\"L\",\"accountStatement\":\"BS\",\"accountID\":\"101\"}', '2019-10-08 22:06:45'),
+(10000019, 1000003, 'accounts', '{\"accountID\":\"101\",\"userID\":\"1000003\",\"accountName\":\"Cashs\",\"accountDescription\":\"This is the cash account.s\",\"accountCategory\":\"Assets\",\"accountCategorySub\":\"Cash Related Accounts\",\"accountSide\":\"L\",\"accountBalance\":\"0\",\"accountDebit\":\"0\",\"accountCredit\":\"0\",\"accountOrder\":\"1\",\"accountStatement\":\"BS\",\"accountCreationDate\":\"2019-09-30 12:43:37\"}', '{\"accountName\":\"Cash\",\"accountDescription\":\"This is the cash account.\",\"accountID\":\"101\"}', '2019-10-08 22:11:47');
 
 -- --------------------------------------------------------
 
@@ -162,9 +118,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`userID`, `userEmail`, `userFirstName`, `userLastName`, `userPassword`, `userPasswordAttempts`, `userPrevPassword`, `userPasswordDate`, `userCreationDate`, `userRole`, `userActive`, `userActiveDate`) VALUES
-(1000001, 'accountant@test.com', 'Accountant', 'Person', '519524d3e2c7de2020f4cca2ae373b5b', 0, NULL, '2019-09-19 17:18:18', '2019-09-19 17:18:18', 0, 1, NULL),
+(1000001, 'accountant@test.com', 'Accountant', 'Person', 'c2391dedefcd683e3c5e5c50f5ef9615', 0, NULL, '2019-09-19 17:18:18', '2019-09-19 17:18:18', 0, 1, NULL),
 (1000002, 'manager@test.com', 'Manager', 'Person', '5980ba484aeddde546d5e79eb893dc58', 0, NULL, '2019-09-19 18:15:02', '2019-09-19 18:15:02', 10, 1, NULL),
-(1000003, 'administrator@test.com', 'Administrator', 'Admin_Person', '985de320ae9dc7cb28692edd5b3afa72', 0, NULL, '2019-09-19 20:27:39', '2019-09-19 20:27:39', 20, 1, NULL);
+(1000003, 'administrator@test.com', 'Admin', 'Person', '985de320ae9dc7cb28692edd5b3afa72', 0, NULL, '2019-09-19 20:27:39', '2019-09-19 20:27:39', 20, 1, NULL);
 
 --
 -- Indexes for dumped tables
@@ -177,21 +133,9 @@ ALTER TABLE `accounts`
   ADD PRIMARY KEY (`accountID`);
 
 --
--- Indexes for table `logs_categories`
+-- Indexes for table `logs`
 --
-ALTER TABLE `logs_categories`
-  ADD PRIMARY KEY (`categoryID`);
-
---
--- Indexes for table `logs_events`
---
-ALTER TABLE `logs_events`
-  ADD PRIMARY KEY (`logID`);
-
---
--- Indexes for table `logs_users`
---
-ALTER TABLE `logs_users`
+ALTER TABLE `logs`
   ADD PRIMARY KEY (`logID`);
 
 --
@@ -206,28 +150,10 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT for table `accounts`
+-- AUTO_INCREMENT for table `logs`
 --
-ALTER TABLE `accounts`
-  MODIFY `accountID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
-
---
--- AUTO_INCREMENT for table `logs_categories`
---
-ALTER TABLE `logs_categories`
-  MODIFY `categoryID` bigint(20) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `logs_events`
---
-ALTER TABLE `logs_events`
-  MODIFY `logID` bigint(20) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `logs_users`
---
-ALTER TABLE `logs_users`
-  MODIFY `logID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+ALTER TABLE `logs`
+  MODIFY `logID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10000020;
 
 --
 -- AUTO_INCREMENT for table `users`
