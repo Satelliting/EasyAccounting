@@ -14,9 +14,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								<input class="form-control" placeholder="Account Name" name="accountName" type="text" required autofocus value="<?=$accountData['accountName'];?>" data-toggle="tooltip" data-placement="left" title="Account Name" />
 							</div>
 							<div class="form-group">
-								<input class="form-control" placeholder="Account Description" name="accountDescription" type="text" required value="<?=$accountData['accountDescription'];?>" data-toggle="tooltip" data-placement="left" title="Account Description" />
-							</div>
-							<div class="form-group">
 								<select class="form-control" name="accountCategory" data-toggle="tooltip" data-placement="left" title="Account Category">
 <?php
 	switch ($accountData['accountCategory']) {
@@ -32,6 +29,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 									<option>Assets</option>
 									<option>Liabilities</option>
+									<option>Owner's Equity</option>
+									<option>Revenues</option>
+									<option>Operating Expenses</option>
 								</select>
 							</div>
 							<div class="form-group">
@@ -45,10 +45,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			break;
 	}
 ?>
+
 									<option>Cash Related Accounts</option>
-									<option>Assets</option>
-									<option>Assets</option>
-									<option>Assets</option>
+									<option>Recievables</option>
+									<option>Inventories</option>
+									<option>Prepaid Items</option>
+									<option>Land</option>
+									<option>Buildings</option>
+									<option>Equipment</option>
+									<option>Short-term Payables</option>
+									<option>Owner's Equity</option>
+									<option>Operating Revenues</option>
+									<option>Other Revenues</option>
+									<option>Cost of Goods Sold</option>
+									<option>Selling Expenses</option>
+									<option>General and Administrative Expenses</option>
 								</select>
 							</div>
 							<div class="form-group">
@@ -76,7 +87,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		case 'BS':
 			echo "<option value='BS' selected disabled>Balance Statement</option>";
 			break;
-			case 'Liabilities':
+			case 'IS':
 				echo "<option value='IS' selected disabled>Income Statement</option>";
 				break;
 		default:

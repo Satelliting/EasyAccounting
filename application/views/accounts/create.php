@@ -17,23 +17,33 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								<input class="form-control" placeholder="Account Name" name="accountName" type="text" required />
 							</div>
 							<div class="form-group">
-								<input class="form-control" placeholder="Account Description" name="accountDescription" type="text" required />
-							</div>
-							<div class="form-group">
 								<input class="form-control" placeholder="Account Starting Balance" name="accountBalance" type="number" min="0" step="1" required />
 							</div>
 							<div class="form-group">
 								<select class="form-control" name="accountCategory">
 									<option>Assets</option>
 									<option>Liabilities</option>
+									<option>Owner's Equity</option>
+									<option>Revenues</option>
+									<option>Operating Expenses</option>
 								</select>
 							</div>
 							<div class="form-group">
 								<select class="form-control" name="accountCategorySub">
 									<option>Cash Related Accounts</option>
-									<option>Assets</option>
-									<option>Assets</option>
-									<option>Assets</option>
+									<option>Recievables</option>
+									<option>Inventories</option>
+									<option>Prepaid Items</option>
+									<option>Land</option>
+									<option>Buildings</option>
+									<option>Equipment</option>
+									<option>Short-term Payables</option>
+									<option>Owner's Equity</option>
+									<option>Operating Revenues</option>
+									<option>Other Revenues</option>
+									<option>Cost of Goods Sold</option>
+									<option>Selling Expenses</option>
+									<option>General and Administrative Expenses</option>
 								</select>
 							</div>
 							<div class="form-group">

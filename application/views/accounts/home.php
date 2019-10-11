@@ -3,6 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 		<div class="container">
 			<div class="row">
+				<h1>List of Accounts</h1>
 				<div class="input-group" style="padding-bottom: 10px">
 					<input id="filter" type="text" class="form-control" placeholder="Type here to filter...">
 				</div>
@@ -14,7 +15,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<tr class="text-center">
 							<th>Account ID</th>
 							<th>Name</th>
-							<th>Description</th>
 							<th>Category</th>
 							<th>Sub-Category</th>
 							<th>Normal Side</th>
@@ -52,7 +52,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<tr class="text-center">
 							<td>#'.$account["accountID"].'</td>
 							<td>'.$account["accountName"].'</td>
-							<td>'.$account["accountDescription"].'</td>
 							<td>'.$account["accountCategory"].'</td>
 							<td>'.$account["accountCategorySub"].'</td>
 							<td>'.$accountSide.'</td>

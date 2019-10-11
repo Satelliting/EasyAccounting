@@ -30,7 +30,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$data['userData'] = $this->session->userdata();
 
 			if (!empty($this->input->post())){
-				var_dump($_POST);
 				$createCheck = $this->account_model->createAccount($_POST);
 				if ($createCheck){
 					$this->session->set_flashdata('success', 'You have successfully created an account.');

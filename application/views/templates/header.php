@@ -27,6 +27,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<a class="nav-item nav-link" href="<?=site_url('admin/');?>">Users</a>
 						<a class="nav-item nav-link" href="<?=site_url('accounts/');?>">Accounts</a>
 						<a class="nav-item nav-link" href="<?=site_url('logs/');?>">Logs</a>
+						<a class="nav-item nav-link" href="<?=site_url('entries/');?>">Entries</a>
+						<a class="nav-item nav-link" href="<?=site_url('ledgers/');?>">Ledgers</a>
 <?php
 	if ($userID){
 		echo '						<a class="nav-item nav-link" href="'.site_url('profile').'">Profile</a>';
