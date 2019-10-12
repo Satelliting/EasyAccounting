@@ -25,13 +25,67 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		}
 
 
+		# Entry Approve Function
+		public function approve($entryID){
+			$data['userData'] = $this->session->userdata();
+			$entryInfo = (array) $this->entry_model->getEntries($entryID)[0];
+
+			if ($data['userData']['userRole'] < 10){
+				$this->session->set_flashdata('danger', 'You do not have this permission.');
+				redirect('entries');
+			}
+
+
+			if ($entryInfo['entryStatus'] == 0 && $entryInfo['entryStatusComment'] == NULL){
+				$this->entry_model->approveEntry($entryID);
+
+				$this->session->set_flashdata('success', 'You have successfully approved Entry: #'.$entryID.'.');
+				redirect('entries');
+			}
+			elseif ($entryInfo['entryStatus'] == 0 && $entryInfo['entryStatusComment'] != NULL) {
+				$this->session->set_flashdata('danger', 'This account has already been rejected.');
+				redirect('entries');
+			}
+			else {
+				$this->session->set_flashdata('danger', 'This account has already been approved.');
+				redirect('entries');
+			}
+		}
+
+		# Entry Reject Function
+		public function reject($entryID){
+			$data['userData'] = $this->session->userdata();
+			$entryInfo = (array) $this->entry_model->getEntries($entryID)[0];
+
+			if ($data['userData']['userRole'] < 10){
+				$this->session->set_flashdata('danger', 'You do not have this permission.');
+				redirect('entries');
+			}
+
+
+			if ($entryInfo['entryStatus'] == 0 && $entryInfo['entryStatusComment'] == NULL){
+				$this->entry_model->rejectEntry($entryID);
+
+				$this->session->set_flashdata('success', 'You have successfully rejected Entry: #'.$entryID.'.');
+				redirect('entries');
+			}
+			elseif ($entryInfo['entryStatus'] == 0 && $entryInfo['entryStatusComment'] != NULL) {
+				$this->session->set_flashdata('danger', 'This account has already been rejected.');
+				redirect('entries');
+			}
+			else {
+				$this->session->set_flashdata('danger', 'This account has already been approved.');
+				redirect('entries');
+			}
+		}
+
+
 		# Create User Info Function
 		public function create(){
 			$data['title'] = "Entries | Create Entry";
 			$data['userData'] = $this->session->userdata();
 
-			$data['accountsPositiveList'] = $this->entry_model->getAccounts("L");
-			$data['accountsNegativeList'] = $this->entry_model->getAccounts("R");
+			$data['accountsList'] = $this->entry_model->getAccounts();
 
 			if (!empty($this->input->post())){
 				#Temporary until we insert ledgers

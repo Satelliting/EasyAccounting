@@ -9,10 +9,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$entryInfo = NULL;
 
 			if ($entryID == NULL){
-				$getSQL = "SELECT * FROM ledgers";
+				$getSQL = "SELECT * FROM entries";
 			}
 			else {
-				$getSQL = "SELECT * FROM ledgers WHERE entryID='{$entryID}'";
+				$getSQL = "SELECT * FROM entries WHERE entryID='{$entryID}'";
 			}
 
 			$queryDB = $this->db->query($getSQL);
@@ -30,8 +30,30 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		}
 
 
-		# Get Entry(s) Info Model
-		public function getAccounts($accountType = "L"){
+		# Approve Entry Model
+		public function approveEntry($entryID){
+			$entryInfo = array('entryStatus' => 1);
+
+			$this->db->where('entryID', $entryID);
+			$this->db->update('entries', $entryInfo);
+
+			return true;
+		}
+
+
+		# Reject Entry Model
+		public function rejectEntry($entryID){
+			$entryInfo = array('entryStatusComment' => 'Default rejection.');
+
+			$this->db->where('entryID', $entryID);
+			$this->db->update('entries', $entryInfo);
+
+			return true;
+		}
+
+
+		# Get Accounts(s) Info Model
+		public function getAccounts($accountType = NULL){
 			$accountsInfo = NULL;
 
 			switch ($accountType) {
@@ -41,11 +63,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				case "R":
 					$getSQL = "SELECT * FROM accounts WHERE accountSide='R'";
 					break;
+				default:
+					$getSQL = "SELECT * FROM accounts";
+					break;
 			}
 
 			$queryDB = $this->db->query($getSQL);
 			$accountsInfo = $queryDB->result();
 			return $accountsInfo;
+		}
+
+
+		# Get Account Name Model
+		public function getAccount($accountID){
+			$getSQL = "SELECT * FROM accounts WHERE accountID='{$accountID}'";
+			$queryDB = $this->db->query($getSQL);
+			$accountInfo = (array) $queryDB->result()[0];
+			return $accountInfo;
 		}
 
 
