@@ -201,7 +201,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<td>#'.$logBeforeInfo["accountID"].'</td>
 						<td class="text-left">
 							<strong>Account Name:</strong> '.$logBeforeInfo['accountName'].'<br />
-							<strong>Account Description:</strong> '.$logBeforeInfo['accountDescription'].'<br />
 							<strong>Account Category:</strong> '.$logBeforeInfo['accountCategory'].'<br />
 							<strong>Account Sub-Category:</strong> '.$logBeforeInfo['accountCategorySub'].'<br />
 							<strong>Account Side:</strong> ';
@@ -229,13 +228,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				}
 				else {
 					echo '<strong>Account Name:</strong> '.$logBeforeInfo['accountName'].'<br />';
-				}
-				# Account Description Change Check
-				if (array_key_exists('accountDescription', $logAfterInfo) && $logBeforeInfo['accountDescription'] != $logAfterInfo['accountDescription']){
-					echo '<span class="text-danger"><strong>Account Description:</strong> '.$logAfterInfo['accountDescription'].'</span><br />';
-				}
-				else {
-					echo '<strong>Account Description:</strong> '.$logBeforeInfo['accountDescription'].'<br />';
 				}
 				# Account Category Change Check
 				if (array_key_exists('accountCategory', $logAfterInfo) && $logBeforeInfo['accountCategory'] != $logAfterInfo['accountCategory']){
@@ -274,7 +266,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				}
 				# Account Statement Change Check
 				if (array_key_exists('accountStatement', $logAfterInfo) && $logBeforeInfo['accountStatement'] != $logAfterInfo['accountStatement']){
-					echo '<span class="text-danger"><strong>Account Side:</strong> ';
+					echo '<span class="text-danger"><strong>Account Statement:</strong> ';
 					if ($logAfterInfo['accountStatement'] == 'BS'){
 						echo 'Balance Statement';
 					}
@@ -284,7 +276,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					echo '</span><br />';
 				}
 				else {
-					echo '<strong>Account Side:</strong> ';
+					echo '<strong>Account Statement:</strong> ';
 					if ($logBeforeInfo['accountStatement'] = 'BS'){
 						echo 'Balance Statement';
 					}

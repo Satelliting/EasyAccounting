@@ -32,7 +32,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<td class="text-right">'.$this->entry_model->getAccount($entry['entryCreditAccount'])['accountName'].'<br /><strong>$'.number_format($entry['entryCreditBalance'], 2).'</strong></td>
 						<td>';
 		if ($entry['entryStatus'] == 0 && $entry['entryStatusComment'] == NULL){
-			echo 'Not Approved';
+			echo 'Pending';
 
 			if ($userData['userRole'] >= 10){
 				echo "

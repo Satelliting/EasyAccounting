@@ -18,7 +18,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<th>User Full Name</th>
 							<th>User Role</th>
 							<th>User Status</th>
+<?php
+	$userRole = $this->session->userdata('userRole');
+	if ($userRole == 20){
+		echo '
 							<th></th>
+		';
+	}
+?>
 						</tr>
 					</thead>
 					<tbody class="searchable">
@@ -50,18 +57,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		echo '
 						<tr class="text-center">
 							<td>#'.$user["userID"].'</td>
-							<td>'.$user["userEmail"].'</td>
+							<td><a href="'.site_url("admin/email/".$user["userID"]).'">'.$user["userEmail"].'</a></td>
 							<td>'.$user["userFirstName"]." ".$user["userLastName"].'</td>
 							<td>'.$userRole.'</td>
-							<td>'.$userStatus.'</td>
+							<td>'.$userStatus.'</td>';
+
+		if ($userRole == 20){
+			echo '
 							<td><a class="btn btn-info" href="'.site_url("admin/edit/".$user["userID"]).'">Edit User</a></td>
 						</tr>
-		';
+			';
+		}
 	}
 ?>
 					</tbody>
 				</table>
 				<br /><br />
-				<a class="btn btn-success btn-block" href="<?=site_url("admin/create");?>">Create User</a>
+<?php
+	if ($userRole == 20){
+		echo '
+				<a class="btn btn-success btn-block" href="'.site_url("admin/create").'">Create User</a>
+		';
+	}
+?>
 			</div>
 		</div>

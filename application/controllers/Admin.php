@@ -18,17 +18,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 		# Admin Index Function
 		public function index(){
-			$userRole = $this->session->userdata('userRole');
-			if ($userRole != 20){
-				$this->session->set_flashdata('danger', 'You do not have permission to view this.');
-				redirect('users');
-			}
-			else {
-				$data['userData'] = $this->session->userdata();
-				$data['title']    = 'Admin | List of Users';
-				$data['userList'] = $this->admin_model->getUsers();
-				$this->load->template('admin/home', $data);
-			}
+			$data['userData'] = $this->session->userdata();
+			$data['title']    = 'Admin | List of Users';
+			$data['userList'] = $this->admin_model->getUsers();
+			$this->load->template('admin/home', $data);
 		}
 
 
@@ -36,6 +29,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		public function create(){
 			$data['title'] = "Admin | Create User";
 			$data['userData'] = $this->session->userdata();
+
+			$userRole = $this->session->userdata('userRole');
+			if ($userRole != 20){
+				$this->session->set_flashdata('danger', 'You do not have permission to view this.');
+				redirect('admin');
+			}
 
 			if (!empty($this->input->post())){
 				$createCheck = $this->admin_model->createUser($_POST);
@@ -58,6 +57,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		public function edit($userID){
 			$data['userData'] = $this->session->userdata();
 			$data['title']    = "Admin | Edit User: #{$userID}";
+
+			$userRole = $this->session->userdata('userRole');
+			if ($userRole != 20){
+				$this->session->set_flashdata('danger', 'You do not have permission to view this.');
+				redirect('admin');
+			}
 
 			$getSQL = "SELECT * FROM users WHERE userID = '{$userID}'";
 			$queryDB = $this->db->query($getSQL);
@@ -147,6 +152,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					}
 				}
 			}
+		}
+
+
+		# Admin Email Function
+		public function email($userID){
+			$data['userData'] = $this->session->userdata();
+			$data['title']    = 'Admin | Email User: #'.$userID;
+			$data['emailInfo'] = (array) $this->admin_model->getUsers($userID)[0];
+
+			if (!empty($_POST)){
+				if (mail($data['emailInfo']['userEmail'], $_POST['emailSubject'], wordwrap($_POST['emailBody'], 70), "From: ".$data['userData']['userEmail'])){
+					$this->session->set_flashdata('success', 'You have successfully sent an email to User: #'.$userID);
+					redirect('admin');
+				}
+				else {
+					$this->session->set_flashdata('danger', 'Something has happened internally. Please try again.');
+				}
+			}
+
+			$this->load->template('admin/email', $data);
 		}
 
 
