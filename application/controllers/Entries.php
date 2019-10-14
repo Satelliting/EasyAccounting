@@ -18,8 +18,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 		# Account Index Function
 		public function index(){
-			$data['userData'] = $this->session->userdata();
-			$data['title']    = 'Entries | List of Entries';
+			$data['userData']  = $this->session->userdata();
+			$data['title']     = 'Entries | List of Entries';
 			$data['entryList'] = $this->entry_model->getEntries();
 			$this->load->template('entries/home', $data);
 		}
@@ -28,7 +28,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		# Entry Approve Function
 		public function approve($entryID){
 			$data['userData'] = $this->session->userdata();
-			$entryInfo = (array) $this->entry_model->getEntries($entryID)[0];
+			$entryInfo        = (array) $this->entry_model->getEntries($entryID)[0];
 
 			if ($data['userData']['userRole'] < 10){
 				$this->session->set_flashdata('danger', 'You do not have this permission.');
@@ -80,18 +80,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		}
 
 
-		# Create User Info Function
+		# Create Entry Function
 		public function create(){
-			$data['title'] = "Entries | Create Entry";
+			$data['title']    = "Entries | Create Entry";
 			$data['userData'] = $this->session->userdata();
 
 			$data['accountsList'] = $this->entry_model->getAccounts();
+			$currentLedger        = $this->entry_model->getLedger();
 
 			if (!empty($this->input->post())){
-				#Temporary until we insert ledgers
-				$_POST['ledgerID'] = 0;
-				$_POST['userID']   = $data['userData']['userID'];
+				$currentLedger = $this->entry_model->getLedger();
 
+				if (empty($currentLedger)){
+					$currentLedger     = $this->entry_model->createLedger(array('userID' => $data['userData']['userID']));
+					$_POST['ledgerID'] = $currentLedger;
+				}
+				else {
+					$currentLedger     = (array) $currentLedger[0];
+					$_POST['ledgerID'] = $currentLedger['ledgerID'];
+				}
+
+				$_POST['userID'] = $data['userData']['userID'];
 
 				$createCheck = $this->entry_model->createEntry($_POST);
 				if ($createCheck){

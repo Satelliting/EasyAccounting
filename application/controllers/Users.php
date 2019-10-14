@@ -27,10 +27,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$data['title'] = "User Registration";
 
 			$registerInfo = array(
-				'userFirstName'        => $this->input->post('userFirstName'),
-				'userLastName'         => $this->input->post('userLastName'),
-				'userEmail'            => $this->input->post('userEmail'),
-				'userPassword'         => md5($this->input->post('userPassword')),
+				'userFirstName' => $this->input->post('userFirstName'),
+				'userLastName'  => $this->input->post('userLastName'),
+				'userEmail'     => $this->input->post('userEmail'),
+				'userPassword'  => md5($this->input->post('userPassword')),
 			);
 
 			$registerValidation = $this->form_validation->run('registration');
@@ -98,7 +98,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			}
 			else{
 				$logInfo = array(
-					'userID' => $userID,
+					'userID'  => $userID,
 					'logInfo' => 'User logged out.',
 				);
 				$this->log_model->userCreate($logInfo);

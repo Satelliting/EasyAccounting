@@ -15,7 +15,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				$getSQL = "SELECT * FROM users WHERE userid='{$userID}'";
 			}
 
-			$queryDB = $this->db->query($getSQL);
+			$queryDB  = $this->db->query($getSQL);
 			$userInfo = $queryDB->result();
 			return $userInfo;
 		}
@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 		# Create User from Admin Model
 		public function createUser($userInfo){
-			$newPassword = $this->admin_model->createPassword();
+			$newPassword              = $this->admin_model->createPassword();
 			$userInfo['userPassword'] = md5($newPassword);
 
 			if ($this->db->insert('users', $userInfo)){

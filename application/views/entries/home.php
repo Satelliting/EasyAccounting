@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 		<div class="container">
 			<div class="row">
-				<h1>List of Users</h1>
+				<h1>List of Entries</h1>
 				<div class="input-group" style="padding-bottom: 10px">
 					<input id="filter" type="text" class="form-control" placeholder="Type here to filter...">
 				</div>
@@ -26,13 +26,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	foreach ($entryList as $entry){
 		$entry = (array) $entry;
 		echo '
-						<td>'.$entry['entryID'].'</td>
+					<tr>
+						<td>#'.$entry['entryID'].'</td>
 						<td>'.$entry['entryDescription'].'</td>
 						<td class="text-right">'.$this->entry_model->getAccount($entry['entryDebitAccount'])['accountName'].'<br /><strong>$'.number_format($entry['entryDebitBalance'], 2).'</strong></td>
 						<td class="text-right">'.$this->entry_model->getAccount($entry['entryCreditAccount'])['accountName'].'<br /><strong>$'.number_format($entry['entryCreditBalance'], 2).'</strong></td>
 						<td>';
 		if ($entry['entryStatus'] == 0 && $entry['entryStatusComment'] == NULL){
-			echo 'Pending';
+			echo '<span class="text-warning">Pending</span>';
 
 			if ($userData['userRole'] >= 10){
 				echo "
@@ -42,13 +43,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			}
 		}
 		elseif ($entry['entryStatus'] == 0 && $entry['entryStatusComment'] != NULL){
-			echo 'Rejected - '.$entry['entryStatusComment'];
+			echo '<span class="text-danger">Rejected - '.$entry['entryStatusComment'].'</span>';
 		}
 		else {
-			echo 'Approved';
+			echo '<span class="text-success">Approved</span>';
 		}
 						echo '</td>
 						<td>'.date('F d, Y | h:i A', strtotime($entry['entryCreateDate'])).'</td>
+					</tr>
 		';
 	}
 ?>

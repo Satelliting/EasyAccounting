@@ -17,8 +17,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 		# Account Index Function
 		public function index(){
-			$data['userData'] = $this->session->userdata();
-			$data['title']    = 'Accounts | List of Accounts';
+			$data['userData']    = $this->session->userdata();
+			$data['title']       = 'Accounts | List of Accounts';
 			$data['accountList'] = $this->account_model->getAccounts();
 			$this->load->template('accounts/home', $data);
 		}
@@ -26,7 +26,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 		# Create Account Info Function
 		public function create(){
-			$data['title'] = "Accounts | Create Account";
+			$data['title']    = "Accounts | Create Account";
 			$data['userData'] = $this->session->userdata();
 
 			if (!empty($this->input->post())){
@@ -48,8 +48,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 		# Account Edit Function
 		public function edit($accountID){
-			$getSQL = "SELECT * FROM accounts WHERE accountID = '{$accountID}'";
-			$queryDB = $this->db->query($getSQL);
+			$getSQL       = "SELECT * FROM accounts WHERE accountID = '{$accountID}'";
+			$queryDB      = $this->db->query($getSQL);
 			$accountCheck = $queryDB->result();
 
 			if (empty($accountCheck)) {
@@ -57,8 +57,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				redirect('accounts');
 			}
 
-			$data['userData'] = $this->session->userdata();
-			$data['title']    = 'Accounts | Edit Account';
+			$data['userData']    = $this->session->userdata();
+			$data['title']       = 'Accounts | Edit Account';
 			$data['accountData'] = (array) $this->account_model->getAccounts($accountID)[0];
 
 			# Default Edit View
@@ -68,7 +68,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			# Delete Account Form Submitted
 			elseif (array_key_exists('delete', $_POST) && $_POST['delete'] == 'Y'){
 				$deletedAccountID = $data['accountData']['accountID'];
-				$deleteCheck = $this->account_model->accountDelete($deletedAccountID);
+				$deleteCheck      = $this->account_model->accountDelete($deletedAccountID);
 				if ($deleteCheck){
 					$this->session->set_flashdata('success', 'You have successfully delete the account: #'.$deletedAccountID.'.');
 					redirect('accounts');

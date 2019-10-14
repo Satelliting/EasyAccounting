@@ -9,13 +9,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$entryInfo = NULL;
 
 			if ($entryID == NULL){
-				$getSQL = "SELECT * FROM entries";
+				$getSQL = "SELECT * FROM entries ORDER BY entryID DESC";
 			}
 			else {
 				$getSQL = "SELECT * FROM entries WHERE entryID='{$entryID}'";
 			}
 
-			$queryDB = $this->db->query($getSQL);
+			$queryDB   = $this->db->query($getSQL);
 			$entryInfo = $queryDB->result();
 			return $entryInfo;
 		}
@@ -68,7 +68,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					break;
 			}
 
-			$queryDB = $this->db->query($getSQL);
+			$queryDB      = $this->db->query($getSQL);
 			$accountsInfo = $queryDB->result();
 			return $accountsInfo;
 		}
@@ -76,10 +76,30 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 		# Get Account Name Model
 		public function getAccount($accountID){
-			$getSQL = "SELECT * FROM accounts WHERE accountID='{$accountID}'";
-			$queryDB = $this->db->query($getSQL);
+			$getSQL      = "SELECT * FROM accounts WHERE accountID='{$accountID}'";
+			$queryDB     = $this->db->query($getSQL);
 			$accountInfo = (array) $queryDB->result()[0];
 			return $accountInfo;
+		}
+
+
+		public function getLedger($ledgerID = NULL){
+			# New Entry
+			if ($ledgerID == NULL){
+				$getSQL     = "SELECT * FROM ledgers WHERE ledgerCloseDate IS NULL";
+				$queryDB    = $this->db->query($getSQL);
+				$ledgerInfo = $queryDB->result();
+
+				return $ledgerInfo;
+			}
+
+		}
+
+		public function createLedger($ledgerInfo){
+			if ($this->db->insert('ledgers', $ledgerInfo)){
+				return $this->db->insert_id();
+			}
+			return false;
 		}
 
 

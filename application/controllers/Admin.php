@@ -27,7 +27,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 		# Create User Info Function
 		public function create(){
-			$data['title'] = "Admin | Create User";
+			$data['title']    = "Admin | Create User";
 			$data['userData'] = $this->session->userdata();
 
 			$userRole = $this->session->userdata('userRole');
@@ -64,8 +64,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				redirect('admin');
 			}
 
-			$getSQL = "SELECT * FROM users WHERE userID = '{$userID}'";
-			$queryDB = $this->db->query($getSQL);
+			$getSQL    = "SELECT * FROM users WHERE userID = '{$userID}'";
+			$queryDB   = $this->db->query($getSQL);
 			$userCheck = $queryDB->result();
 
 			# User Selected Does Not Exist
@@ -75,7 +75,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			}
 
 			$data['userEditData'] = (array) $userCheck[0];
-			$data['userList'] = $this->admin_model->getUsers($userID);
+			$data['userList']     = $this->admin_model->getUsers($userID);
 
 			# Default Edit View
 			if (empty($_POST)){
@@ -84,7 +84,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			# Delete User Form Submitted
 			elseif (array_key_exists('delete', $_POST) && $_POST['delete'] == 'Y'){
 				$deletedUserID = $data['userEditData']['userID'];
-				$deleteCheck = $this->admin_model->deleteUser($deletedUserID);
+				$deleteCheck   = $this->admin_model->deleteUser($deletedUserID);
 				if ($deleteCheck){
 
 					$this->session->set_flashdata('success', 'You have successfully delete the user: #'.$deletedUserID.'.');
@@ -157,8 +157,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 		# Admin Email Function
 		public function email($userID){
-			$data['userData'] = $this->session->userdata();
-			$data['title']    = 'Admin | Email User: #'.$userID;
+			$data['userData']  = $this->session->userdata();
+			$data['title']     = 'Admin | Email User: #'.$userID;
 			$data['emailInfo'] = (array) $this->admin_model->getUsers($userID)[0];
 
 			if (!empty($_POST)){

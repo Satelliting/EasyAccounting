@@ -32,7 +32,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			}
 
 			$queryDB = $this->db->query($getSQL);
-
 			$logInfo = $queryDB->result();
 			return $logInfo;
 		}

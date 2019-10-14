@@ -9,13 +9,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$ledgerInfo = NULL;
 
 			if ($ledgerID == NULL){
-				$getSQL = "SELECT * FROM ledgers";
+				$getSQL = "SELECT * FROM ledgers ORDER BY ledgerID DESC";
 			}
 			else {
 				$getSQL = "SELECT * FROM ledgers WHERE ledgerID='{$ledgerID}'";
 			}
 
-			$queryDB = $this->db->query($getSQL);
+			$queryDB    = $this->db->query($getSQL);
 			$ledgerInfo = $queryDB->result();
 			return $ledgerInfo;
 		}

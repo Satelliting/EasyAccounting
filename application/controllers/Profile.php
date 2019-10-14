@@ -17,8 +17,7 @@ class Profile extends CI_Controller {
 
 	# Profile Index Function
 	public function index(){
-		$data['title'] = 'Profile | Home';
-
+		$data['title']    = 'Profile | Home';
 		$data['userData'] = $this->session->userdata();
 		$this->load->template('profile/home', $data);
 	}
@@ -26,7 +25,7 @@ class Profile extends CI_Controller {
 
 	# Edit Profile Function
 	public function edit(){
-		$data['title'] = 'Profile | Edit';
+		$data['title']    = 'Profile | Edit';
 		$data['userData'] = $this->session->userdata();
 
 		# Default Edit View
@@ -59,8 +58,8 @@ class Profile extends CI_Controller {
 				else {
 					unset($data['userData']['__ci_last_regenerate']);
 					$logInfo = array(
-						'userID' => $data['userData']['userID'],
-						'logType' => 'users',
+						'userID'    => $data['userData']['userID'],
+						'logType'   => 'users',
 						'logBefore' => json_encode($data['userData']),
 						'logAfter'  => json_encode($_POST),
 					);

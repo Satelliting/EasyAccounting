@@ -7,8 +7,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		# User Login Model
 		public function userLogin($email, $password){
 			$loginSQL = "SELECT * FROM users WHERE userEmail = ? AND userPassword = ?";
-			$queryDB = $this->db->query($loginSQL, array($email, $password));
-			$query = $queryDB->result();
+			$queryDB  = $this->db->query($loginSQL, array($email, $password));
+			$query    = $queryDB->result();
 
 			if (!empty($query)){
 				return $query;
@@ -50,8 +50,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 		# Verify User ID Model
 		public function userVerifyID($userID){
-			$getSQL = "SELECT * FROM users WHERE userid='{$userID}'";
-			$queryDB = $this->db->query($getSQL);
+			$getSQL   = "SELECT * FROM users WHERE userid='{$userID}'";
+			$queryDB  = $this->db->query($getSQL);
 			$userInfo = $queryDB->result();
 
 			if (empty($userInfo)){
@@ -66,8 +66,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		# Verify User Password Model
 		public function userVerifyPassword($userPassword){
 			$userPassword = md5($userPassword);
-			$getSQL = "SELECT * FROM users WHERE userPassword='{$userPassword}'";
-			$queryDB = $this->db->query($getSQL);
+			$getSQL   = "SELECT * FROM users WHERE userPassword='{$userPassword}'";
+			$queryDB  = $this->db->query($getSQL);
 			$userInfo = $queryDB->result();
 
 			if (empty($userInfo)){
