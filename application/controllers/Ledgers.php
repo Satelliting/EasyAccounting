@@ -28,8 +28,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		public function ledger($ledgerID){
 			$data['userData']   = $this->session->userdata();
 			$data['title']      = 'Ledgers | General Ledger #'.$ledgerID;
-			$data['ledgerID']   = $ledgerID;
-			$data['ledgerInfo'] = $this->ledger_model->getLedgers($ledgerID);			
+			$data['ledgerInfo'] = (array) $this->ledger_model->getLedgers($ledgerID)[0];
+			$data['accountList'] = $this->account_model->getAccounts();
 			$this->load->template('ledgers/ledger', $data);
 		}
 	}

@@ -32,8 +32,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 		# Approve Entry Model
 		public function approveEntry($entryID){
-			$entryInfo = array('entryStatus' => 1);
+			$entryInfo = (array) $this->getEntries($entryID)[0];
 
+			$accountInfo = array('accountDebit' => $entryInfo['entryDebitBalance']);
+			$this->db->where('accountID', $entryInfo['entryDebitAccount']);
+			$this->db->update('accounts', $accountInfo);
+
+			$accountInfo = array('accountCredit' => $entryInfo['entryCreditBalance']);
+			$this->db->where('accountID', $entryInfo['entryCreditAccount']);
+			$this->db->update('accounts', $accountInfo);
+
+			$entryInfo = array('entryStatus' => 1);
 			$this->db->where('entryID', $entryID);
 			$this->db->update('entries', $entryInfo);
 
