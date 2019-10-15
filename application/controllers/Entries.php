@@ -13,6 +13,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			if (!$userID){
 				redirect('users/login');
 			}
+
+			$userRole = $this->session->userdata('userRole');
+			if ($userRole == 20){
+				$this->session->set_flashdata('danger', 'You do not have permission to view this.');
+				redirect('admin');
+			}
 		}
 
 
@@ -37,7 +43,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 			if ($entryInfo['entryStatus'] == 0 && $entryInfo['entryStatusComment'] == NULL){
-				$this->entry_model->approveEntry($entryID);
+				$entryDebitAccounts = array();
+				$entryDebitBalances = 0;
+
+				$entryCreditAccounts = array();
+				$entryCreditBalances = 0;
+
+				foreach (json_decode($entryInfo['entryDebitAccount']) as $debitAccount){
+					array_push($entryDebitAccounts, array((string) $debitAccount => json_decode($entryInfo['entryDebitBalance'])[$entryDebitBalances]));
+					$entryDebitBalances += 1;
+				}
+
+				foreach (json_decode($entryInfo['entryCreditAccount']) as $creditAccount){
+					array_push($entryCreditAccounts, array((string) $creditAccount => json_decode($entryInfo['entryCreditBalance'])[$entryCreditBalances]));
+					$entryCreditBalances += 1;
+				}
+
+				$this->entry_model->approveEntry($entryID, $entryDebitAccounts, $entryCreditAccounts);
 
 				$this->session->set_flashdata('success', 'You have successfully approved Entry: #'.$entryID.'.');
 				redirect('entries');
@@ -84,22 +106,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		public function create(){
 			$data['title']    = "Entries | Create Entry";
 			$data['userData'] = $this->session->userdata();
-
 			$data['accountsList'] = $this->entry_model->getAccounts();
-			$currentLedger        = $this->entry_model->getLedger();
 
 			if (!empty($this->input->post())){
-				$currentLedger = $this->entry_model->getLedger();
-
-				if (empty($currentLedger)){
-					$currentLedger     = $this->entry_model->createLedger(array('userID' => $data['userData']['userID']));
-					$_POST['ledgerID'] = $currentLedger;
-				}
-				else {
-					$currentLedger     = (array) $currentLedger[0];
-					$_POST['ledgerID'] = $currentLedger['ledgerID'];
-				}
-
 				$_POST['userID'] = $data['userData']['userID'];
 
 				$createCheck = $this->entry_model->createEntry($_POST);

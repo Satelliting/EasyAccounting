@@ -25,13 +25,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <?php
 	foreach ($entryList as $entry){
 		$entry = (array) $entry;
+		$entry['entryDebitAccount'] = json_decode($entry['entryDebitAccount']);
+		$entry['entryDebitBalance'] = json_decode($entry['entryDebitBalance']);
+		$entry['entryCreditAccount'] = json_decode($entry['entryCreditAccount']);
+		$entry['entryCreditBalance'] = json_decode($entry['entryCreditBalance']);
 		echo '
 					<tr>
 						<td>#'.$entry['entryID'].'</td>
 						<td>'.$entry['entryDescription'].'</td>
-						<td class="text-right">'.$this->entry_model->getAccount($entry['entryDebitAccount'])['accountName'].'<br /><strong>$'.number_format($entry['entryDebitBalance'], 2).'</strong></td>
-						<td class="text-right">'.$this->entry_model->getAccount($entry['entryCreditAccount'])['accountName'].'<br /><strong>$'.number_format($entry['entryCreditBalance'], 2).'</strong></td>
-						<td>';
+						<td class="text-right">';
+		foreach ($entry['entryDebitAccount'] as $debitAccount){
+			$entryNumber = array_search($debitAccount, $entry['entryDebitAccount']);
+			echo '<a href="'.site_url().'ledgers/index/'.$this->entry_model->getAccount($debitAccount)['accountID'].'">'.$this->entry_model->getAccount($debitAccount)['accountName'].'</a><br /><strong>$'.number_format($entry['entryDebitBalance'][$entryNumber], 2).'</strong><br />';
+		}
+						echo '</td><td class="text-right">';
+		foreach ($entry['entryCreditAccount'] as $creditAccount){
+			$entryNumber = array_search($creditAccount, $entry['entryCreditAccount']);
+			echo '<a href="'.site_url().'ledgers/index/'.$this->entry_model->getAccount($creditAccount)['accountID'].'">'.$this->entry_model->getAccount($creditAccount)['accountName'].'</a><br /><strong>$'.number_format($entry['entryCreditBalance'][$entryNumber], 2).'</strong><br />';
+		}
+						echo '</td><td>';
 		if ($entry['entryStatus'] == 0 && $entry['entryStatusComment'] == NULL){
 			echo '<span class="text-warning">Pending</span>';
 

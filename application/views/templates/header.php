@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 	$userID = $this->session->userdata('userID');
+	$userRole = $this->session->userdata('userRole');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,23 +28,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<a class="nav-item nav-link" href="<?=site_url('admin/');?>">Users</a>
 						<a class="nav-item nav-link" href="<?=site_url('accounts/');?>">Accounts</a>
 						<a class="nav-item nav-link" href="<?=site_url('logs/');?>">Logs</a>
-						<a class="nav-item nav-link" href="<?=site_url('entries/');?>">Entries</a>
-						<a class="nav-item nav-link" href="<?=site_url('ledgers/');?>">Ledgers</a>
 <?php
+	if ($userRole != 20){
+		echo '
+						<a class="nav-item nav-link" href="'.site_url('entries/').'">Entries</a>
+						<a class="nav-item nav-link" href="'.site_url('ledgers/').'">Ledgers</a>
+		';
+	}
+
 	if ($userID){
-		echo '						<a class="nav-item nav-link" href="'.site_url('profile').'">Profile</a>';
-		echo '						<a class="nav-item nav-link" href="'.site_url('home/logout').'">Logout</a>';
+		echo '			<a class="nav-item nav-link" href="'.site_url('profile').'">Profile</a>';
+		echo '			<a class="nav-item nav-link" href="'.site_url('home/logout').'">Logout</a>';
 	}
 	else {
-		echo '						<a class="nav-item nav-link" href="'.site_url('users/login').'">Login</a>';
-		echo '						<a class="nav-item nav-link" href="'.site_url('users/register').'">Register</a>';
+		echo '			<a class="nav-item nav-link" href="'.site_url('users/login').'">Login</a>';
+		echo '			<a class="nav-item nav-link" href="'.site_url('users/register').'">Register</a>';
 	}
 ?>
 					</div>
 				<span class="navbar-text">
 <?php
 	if ($userID){
-		echo "					".$userData['userName'];
+		echo '<a href="'.$_SERVER['HTTP_REFERER'].'">Back</a> | ';
+		echo $userData['userName'];
 	}
 ?>
 				</span>

@@ -23,6 +23,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 		# Create Entry Model
 		public function createEntry($entryInfo){
+			$entryInfo['entryDebitAccount'] = json_encode($entryInfo['entryDebitAccount']);
+			$entryInfo['entryDebitBalance'] = json_encode($entryInfo['entryDebitBalance']);
+			$entryInfo['entryCreditAccount'] = json_encode($entryInfo['entryCreditAccount']);
+			$entryInfo['entryCreditBalance'] = json_encode($entryInfo['entryCreditBalance']);
 			if ($this->db->insert('entries', $entryInfo)){
 				return true;
 			}
@@ -31,16 +35,32 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 		# Approve Entry Model
-		public function approveEntry($entryID){
+		public function approveEntry($entryID, $debitAccounts, $creditAccounts){
 			$entryInfo = (array) $this->getEntries($entryID)[0];
 
-			$accountInfo = array('accountDebit' => $entryInfo['entryDebitBalance']);
-			$this->db->where('accountID', $entryInfo['entryDebitAccount']);
-			$this->db->update('accounts', $accountInfo);
+			foreach ($debitAccounts as $account){
+				$balance = $account[key($account)];
+				$account = key($account);
 
-			$accountInfo = array('accountCredit' => $entryInfo['entryCreditBalance']);
-			$this->db->where('accountID', $entryInfo['entryCreditAccount']);
-			$this->db->update('accounts', $accountInfo);
+				$accountDebitInfo    = (array) $this->account_model->getAccounts($account)[0];
+				$accountDebitBalance = $accountDebitInfo['accountDebit'];
+
+				$accountInfo = array('accountDebit' => ($balance + $accountDebitBalance));
+				$this->db->where('accountID', $account);
+				$this->db->update('accounts', $accountInfo);
+			}
+
+			foreach ($creditAccounts as $account){
+				$balance = $account[key($account)];
+				$account = key($account);
+
+				$accountCreditInfo    = (array) $this->account_model->getAccounts($account)[0];
+				$accountCreditBalance = $accountCreditInfo['accountCredit'];
+
+				$accountInfo = array('accountCredit' => ($balance+$accountCreditBalance));
+				$this->db->where('accountID', $account);
+				$this->db->update('accounts', $accountInfo);
+			}
 
 			$entryInfo = array('entryStatus' => 1);
 			$this->db->where('entryID', $entryID);

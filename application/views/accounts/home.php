@@ -19,10 +19,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<th>Sub-Category</th>
 							<th>Normal Side</th>
 							<th>Balance</th>
-							<th>Debits</th>
-							<th>Credits</th>
+							<th>Debit</th>
+							<th>Credit</th>
 							<th>Statement</th>
+<?php
+	if ($userData['userRole'] == 20){
+		echo '
 							<th></th>
+		';
+	}
+?>
 						</tr>
 					</thead>
 					<tbody class="searchable">
@@ -47,20 +53,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				$accountStatement = "Income Statement";
 				break;
 		}
-		setlocale(LC_MONETARY, 'en_US');
 		echo '
 						<tr class="text-center">
 							<td>#'.$account["accountID"].'</td>
 							<td>'.$account["accountName"].'</td>
 							<td>'.$account["accountCategory"].'</td>
 							<td>'.$account["accountCategorySub"].'</td>
-							<td>'.$accountSide.'</td>
-							<td>$'.number_format($account["accountBalance"], 2).'</td>
-							<td>$'.number_format($account["accountDebit"], 2).'</td>
-							<td>$'.number_format($account["accountCredit"], 2).'</td>
-							<td>'.$accountStatement.'</td>
-							<td><a class="btn btn-info" href="'.site_url("accounts/edit/".$account["accountID"]).'">Edit Account</a></td>
-						</tr>
+							<td class="text-left">'.$accountSide.'</td>
+							<td class="text-right">$'.number_format($account["accountBalance"], 2).'</td>
+							<td class="text-right">$'.number_format($account["accountDebit"], 2).'</td>
+							<td class="text-right">$'.number_format($account["accountCredit"], 2).'</td>
+							<td class="text-left">'.$accountStatement.'</td>';
+		if ($userData['userRole'] == 20){
+			echo '
+							<td><a class="btn btn-info" href="'.site_url("admin/edit/".$user["userID"]).'">Edit User</a></td>
+			';
+		}
+		echo '			</tr>
 		';
 	}
 ?>

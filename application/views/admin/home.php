@@ -19,8 +19,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<th>User Role</th>
 							<th>User Status</th>
 <?php
-	$userRole = $this->session->userdata('userRole');
-	if ($userRole == 20){
+	if ($userData['userRole'] == 20){
 		echo '
 							<th></th>
 		';
@@ -62,12 +61,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<td>'.$userRole.'</td>
 							<td>'.$userStatus.'</td>';
 
-		if ($userRole == 20){
+		if ($userData['userRole'] == 20){
 			echo '
 							<td><a class="btn btn-info" href="'.site_url("admin/edit/".$user["userID"]).'">Edit User</a></td>
-						</tr>
 			';
 		}
+		echo '			</tr>
+		';
 	}
 ?>
 					</tbody>
