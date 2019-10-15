@@ -28,7 +28,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$entryInfo['entryCreditAccount'] = json_encode($entryInfo['entryCreditAccount']);
 			$entryInfo['entryCreditBalance'] = json_encode($entryInfo['entryCreditBalance']);
 			if ($this->db->insert('entries', $entryInfo)){
-				return true;
+				return $this->db->insert_id();
 			}
 			return false;
 		}
@@ -71,8 +71,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 		# Reject Entry Model
-		public function rejectEntry($entryID){
-			$entryInfo = array('entryStatusComment' => 'Default rejection.');
+		public function rejectEntry($entryID, $rejectReason){
+			$entryInfo = array('entryStatusComment' => $rejectReason);
 
 			$this->db->where('entryID', $entryID);
 			$this->db->update('entries', $entryInfo);

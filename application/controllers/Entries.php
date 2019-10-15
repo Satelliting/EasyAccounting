@@ -23,10 +23,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 		# Account Index Function
-		public function index(){
+		public function index($entryID = NULL){
 			$data['userData']  = $this->session->userdata();
-			$data['title']     = 'Entries | List of Entries';
-			$data['entryList'] = $this->entry_model->getEntries();
+
+			if ($entryID != NULL){
+				$data['title']     = 'Entries | Entry: #'.$entryID;
+				$data['entryList'] = $this->entry_model->getEntries($entryID);
+			}
+			else {
+				$data['title']     = 'Entries | List of Entries';
+				$data['entryList'] = $this->entry_model->getEntries();
+			}
 			$this->load->template('entries/home', $data);
 		}
 
@@ -86,7 +93,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 			if ($entryInfo['entryStatus'] == 0 && $entryInfo['entryStatusComment'] == NULL){
-				$this->entry_model->rejectEntry($entryID);
+				$this->entry_model->rejectEntry($entryID, $_POST['rejectReason']);
 
 				$this->session->set_flashdata('success', 'You have successfully rejected Entry: #'.$entryID.'.');
 				redirect('entries');
@@ -101,7 +108,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			}
 		}
 
-
 		# Create Entry Function
 		public function create(){
 			$data['title']    = "Entries | Create Entry";
@@ -113,6 +119,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 				$createCheck = $this->entry_model->createEntry($_POST);
 				if ($createCheck){
+					$fileDirectory = "assets/files/entries/".$createCheck."/";
+					mkdir($fileDirectory);
+					move_uploaded_file($_FILES["entryFile"]["tmp_name"], $fileDirectory.$_FILES["entryFile"]["name"]);
+
 					$this->session->set_flashdata('success', 'You have successfully created an entry.');
 					redirect('entries');
 				}

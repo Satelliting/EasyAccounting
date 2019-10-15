@@ -8,8 +8,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<h2>Create an Entry</h2>
 				</div>
 				<div class="card-body">
-					<?=form_open(current_url());?>
-						<fieldset id="dynamic_field">
+					<?=form_open(current_url(), 'enctype="multipart/form-data"');?>
+						<fieldset>
 							<div class="form-group">
 								<input class="form-control" placeholder="Entry Description" name="entryDescription" type="text" required />
 							</div>
@@ -55,6 +55,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									<div class="col-2">
 										<button id="addCredit" class="btn btn-primary btn-block">Add Credit</button>
 									</div>
+								</div>
+								<div class="form-group" style="padding-top: 10px;">
+									<input type="file" class="form-control-file" id="entryFile" name="entryFile">
+									<small class="form-text text-muted">You need give a pdf, docx, png, jpeg, etc. for the reason for the creation of this entry.</small>
 								</div>
 							</div>
 							<input class="btn btn-lg btn-success btn-block" type="submit" value="Create Entry" />

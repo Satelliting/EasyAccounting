@@ -18,14 +18,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 			<div class="row">
 <?php
-
 	foreach ($accountList as $account){
 		$account = (array) $account;
 		$accountEntries = array();
 
 		foreach($entryList as $entry){
 			$entry = (array) $entry;
-			if ($entry['entryDebitAccount'] == $account['accountID'] || $entry['entryCreditAccount'] == $account['accountID']){
+			if (in_array($account['accountID'], json_decode($entry['entryDebitAccount'])) || in_array($account['accountID'], json_decode($entry['entryCreditAccount']))){
 				array_push($accountEntries, $entry);
 			}
 		}
@@ -48,12 +47,56 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			';
 			foreach ($accountEntries as $entry){
 				$entry = (array) $entry;
+
+				$entryDebitAccounts = array();
+				$entryDebitBalances = 0;
+
+				$entryCreditAccounts = array();
+				$entryCreditBalances = 0;
+
+				foreach (json_decode($entry['entryDebitAccount']) as $debitAccount){
+					array_push($entryDebitAccounts, array((string) $debitAccount => json_decode($entry['entryDebitBalance'])[$entryDebitBalances]));
+					$entryDebitBalances += 1;
+				}
+
+				foreach (json_decode($entry['entryCreditAccount']) as $creditAccount){
+					array_push($entryCreditAccounts, array((string) $creditAccount => json_decode($entry['entryCreditBalance'])[$entryCreditBalances]));
+					$entryCreditBalances += 1;
+				}
+
 				echo '
 							<tr>
-								<td>#'.$entry['entryID'].'</td>
-								<td>'.$entry['entryDescription'].'</td>
-								<td class="text-right"><a href="'.site_url().'/ledgers/index/'.$this->entry_model->getAccount($entry['entryDebitAccount'])['accountID'].'">'.$this->entry_model->getAccount($entry['entryDebitAccount'])['accountName'].'</a><br /><strong>$'.number_format($entry['entryDebitBalance'], 2).'</strong></td>
-								<td class="text-right"><a href="'.site_url().'/ledgers/index/'.$this->entry_model->getAccount($entry['entryCreditAccount'])['accountID'].'">'.$this->entry_model->getAccount($entry['entryCreditAccount'])['accountName'].'</a><br /><strong>$'.number_format($entry['entryCreditBalance'], 2).'</strong></td>
+								<td><a href="'.site_url().'entries/index/'.$entry['entryID'].'">#'.$entry['entryID'].'</a></td>
+								<td>';
+				echo $entry['entryDescription'];
+				$entryFiles = glob('assets/files/entries/'.$entry['entryID'].'/*.*');
+				if (!empty($entryFiles)){
+					echo '<br /><br />';
+					$fileCount = 1;
+					foreach ($entryFiles as $file){
+						echo '<a href="'.site_url().$file.'" target="_blank">File '.$fileCount.'</a><br />';
+						$fileCount++;
+					}
+				}
+				echo 			'</td>
+								<td class="text-right">';
+				foreach ($entryDebitAccounts as $account){
+					$balance = $account[key($account)];
+					$account = key($account);
+					$accountInfo = $this->entry_model->getAccount($account);
+
+					echo '<a href="'.current_url().'/index/'.$accountInfo['accountID'].'">'.$accountInfo['accountName'].'</a><br /><strong>$'.number_format($balance, 2).'</strong><br />';
+				}
+				echo '			</td>
+								<td class="text-right">';
+				foreach ($entryCreditAccounts as $account){
+					$balance = $account[key($account)];
+					$account = key($account);
+					$accountInfo = $this->entry_model->getAccount($account);
+
+					echo '<a href="'.current_url().'/index/'.$accountInfo['accountID'].'">'.$accountInfo['accountName'].'</a><br /><strong>$'.number_format($balance, 2).'</strong><br />';
+				}
+				echo '			</td>
 								<td>'.date('F d, Y | h:i A', strtotime($entry['entryCreateDate'])).'</td>
 							</tr>
 				';
