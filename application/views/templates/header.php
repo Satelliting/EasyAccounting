@@ -35,6 +35,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<a class="nav-item nav-link" href="'.site_url('ledgers/').'">Ledgers</a>
 		';
 	}
+	echo '
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="reportsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								Reports
+							</a>
+							<div class="dropdown-menu text-center" aria-labelledby="reportsDropdown">
+								<a class="dropdown-item" href="'.site_url().'reports/trialbalance">Trial Balance</a>
+								<a class="dropdown-item" href="'.site_url().'reports/balancestatement">Balance Statement</a>
+								<a class="dropdown-item" href="'.site_url().'reports/incomestatement">Income Statement</a>
+								<a class="dropdown-item" href="'.site_url().'reports/retainedearnings">Statement of Retained Earnings</a>
+							</div>
+						</li>
+	';
 
 	if ($userID){
 		echo '			<a class="nav-item nav-link" href="'.site_url('profile').'">Profile</a>';
