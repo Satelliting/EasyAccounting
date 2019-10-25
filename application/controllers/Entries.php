@@ -114,20 +114,52 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$data['userData'] = $this->session->userdata();
 			$data['accountsList'] = $this->entry_model->getAccounts();
 
+
 			if (!empty($this->input->post())){
 				$_POST['userID'] = $data['userData']['userID'];
 
-				$createCheck = $this->entry_model->createEntry($_POST);
-				if ($createCheck){
-					$fileDirectory = "assets/files/entries/".$createCheck."/";
-					mkdir($fileDirectory);
-					move_uploaded_file($_FILES["entryFile"]["tmp_name"], $fileDirectory.$_FILES["entryFile"]["name"]);
+				# Check Multiple Duplicate Debits
+				if ($_POST['entryDebitAccount'] == array_unique($_POST['entryDebitAccount'])){
+					# Check Multiple Duplicate Debits/Credits
+					if (empty(array_intersect($_POST['entryDebitAccount'], $_POST['entryCreditAccount']))){
+						$debitBalance  = 0.00;
+						$creditBalance = 0.00;
 
-					$this->session->set_flashdata('success', 'You have successfully created an entry.');
-					redirect('entries');
+						foreach($_POST['entryDebitBalance'] as $key => $balance){
+							$debitBalance +=$balance;
+						}
+						foreach($_POST['entryCreditBalance'] as $key => $balance){
+							$creditBalance +=$balance;
+						}
+
+						# Check Debit/Credit Balance Equals
+						if ($debitBalance == $creditBalance){
+							$createCheck = $this->entry_model->createEntry($_POST);
+							if ($createCheck){
+								$fileDirectory = "assets/files/entries/".$createCheck."/";
+								mkdir($fileDirectory);
+								move_uploaded_file($_FILES["entryFile"]["tmp_name"], $fileDirectory.$_FILES["entryFile"]["name"]);
+
+								$this->session->set_flashdata('success', 'You have successfully created an entry.');
+								redirect('entries');
+							}
+							else {
+								$this->session->set_flashdata('danger', 'Something internally happened. Please try again.');
+								$this->load->template('entries/create', $data);
+							}
+						}
+						else {
+							$this->session->set_flashdata('danger', 'The Debit and Credit account totals must equal. Please try again.');
+							$this->load->template('entries/create', $data);
+						}
+					}
+					else {
+						$this->session->set_flashdata('danger', 'You cannot have the same accounts for Debit and Credit. Please try again.');
+						$this->load->template('entries/create', $data);
+					}
 				}
 				else {
-					$this->session->set_flashdata('danger', 'Something internally happened. Please try again.');
+					$this->session->set_flashdata('danger', 'You cannot have multiple matching Debit accounts. Please try again.');
 					$this->load->template('entries/create', $data);
 				}
 			}
