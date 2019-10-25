@@ -13,9 +13,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 		<script type="text/javascript">
-		var debitCount  = 1;
-		var creditCount = 1;
 		$(document).ready(function() {
+			var debitCount  = 1;
 			$('button#addDebit').click(function(){
 				var divOption    = '<div class="row" id="debitRow'+debitCount+'">';
 				var selectOption = '<div class="col-5"><select class="form-control" name="entryDebitAccount[]" data-toggle="tooltip" data-placement="left" title="Debit Account">';
@@ -43,6 +42,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 			});
 
+			var creditCount = 1;
 			$('button#addCredit').click(function(){
 				var divOption    = '<div class="row" id="creditRow'+creditCount+'">';
 				var selectOption = '<div class="col-5"><select class="form-control" name="entryCreditAccount'+creditCount+'" data-toggle="tooltip" data-placement="left" title="Credit Account">';
@@ -63,9 +63,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				});
 
 				$('#creditAccounts').append(divOption);
-				$('#creditRow'+count).append(selectOption);
-				$('#creditRow'+count).append(inputOption);
-				$('#creditRow'+count).append(buttonOption);
+				$('#creditRow'+creditCount).append(selectOption);
+				$('#creditRow'+creditCount).append(inputOption);
+				$('#creditRow'+creditCount).append(buttonOption);
 				creditCount += 1;
 
 			});

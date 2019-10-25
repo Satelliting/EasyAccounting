@@ -31,7 +31,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										<input class="form-control" placeholder="Entry Debit Balance" name="entryDebitBalance[]" type="number" min="0" step="0.01" required />
 									</div>
 									<div class="col-2">
-										<button id="addDebit" class="btn btn-primary btn-block">Add Debit</button>
+										<button id="addDebit" class="btn btn-primary btn-block" type="button">Add Debit</button>
 									</div>
 								</div>
 							</div>
@@ -53,13 +53,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										<input class="form-control" placeholder="Entry Credit Balance" name="entryCreditBalance[]" type="number" min="0" step="0.01" required />
 									</div>
 									<div class="col-2">
-										<button id="addCredit" class="btn btn-primary btn-block">Add Credit</button>
+										<button id="addCredit" class="btn btn-primary btn-block" type="button">Add Credit</button>
 									</div>
 								</div>
-								<div class="form-group" style="padding-top: 10px;">
-									<input type="file" class="form-control-file" id="entryFile" name="entryFile">
-									<small class="form-text text-muted">You need give a pdf, docx, png, jpeg, etc. for the reason for the creation of this entry.</small>
-								</div>
+							</div>
+							<div class="form-group" style="padding-top: 10px;">
+								<input type="file" class="form-control-file" id="entryFile" name="entryFile">
+								<small class="form-text text-muted">You need give a pdf, docx, png, jpeg, etc. for the reason for the creation of this entry.</small>
 							</div>
 							<input class="btn btn-lg btn-success btn-block" type="submit" value="Create Entry" />
 						</fieldset>
