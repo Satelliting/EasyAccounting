@@ -28,7 +28,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										</select>
 									</div>
 									<div class="col-5">
-										<input class="form-control" placeholder="Entry Debit Balance" name="entryDebitBalance[]" type="number" step="0.01" required />
+										<input class="form-control" placeholder="Entry Debit Balance" name="entryDebitBalance[]" type="number" min="0" step="0.01" required />
 									</div>
 									<div class="col-2">
 										<button id="addDebit" class="btn btn-primary btn-block">Add Debit</button>
@@ -50,7 +50,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										</select>
 									</div>
 									<div class="col-5">
-										<input class="form-control" placeholder="Entry Credit Balance" name="entryCreditBalance[]" type="number" step="0.01" required />
+										<input class="form-control" placeholder="Entry Credit Balance" name="entryCreditBalance[]" type="number" min="0" step="0.01" required />
 									</div>
 									<div class="col-2">
 										<button id="addCredit" class="btn btn-primary btn-block">Add Credit</button>
