@@ -20,14 +20,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$logInfo = NULL;
 
 			switch ($logType) {
-				case 'users':
-					$getSQL = "SELECT * FROM logs WHERE logType='users' ORDER BY logID DESC";
-					break;
 				case 'accounts':
 					$getSQL = "SELECT * FROM logs WHERE logType='accounts' ORDER BY logID DESC";
 					break;
 				case 'admin':
 					$getSQL = "SELECT * FROM logs WHERE logType='admin' ORDER BY logID DESC";
+					break;
+				case 'entries':
+					$getSQL = "SELECT * FROM logs WHERE logType='entries' ORDER BY logID DESC";
+					break;
+				case 'users':
+					$getSQL = "SELECT * FROM logs WHERE logType='users' ORDER BY logID DESC";
 					break;
 			}
 

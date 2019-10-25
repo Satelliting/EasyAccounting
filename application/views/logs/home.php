@@ -8,7 +8,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<span class="float-right mx-5">
 						<a class="btn btn-primary mx-2" href="<?=site_url('logs/index/users');?>">User Logs</a>
 						<a class="btn btn-success mx-2" href="<?=site_url('logs/index/admin');?>">Admin Logs</a>
-						<a class="btn btn-warning mx-2" href="<?=site_url('logs/index/accounts');?>">Account Logs</a>
+						<a class="btn btn-info mx-2" href="<?=site_url('logs/index/accounts');?>">Account Logs</a>
+						<a class="btn btn-warning mx-2" href="<?=site_url('logs/index/entries');?>">Entry Logs</a>
 					</span>
 				</h1>
 				<div class="input-group" style="padding-bottom: 10px">
@@ -25,14 +26,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <?php
 
 	if ($logType == 'admin'){
-		echo "<th>Affected User ID</th>";
+		echo '<th>Affected User ID</th>';
+		echo '<th colspan="2">Log Information</th>';
 	}
 	elseif ($logType == 'accounts') {
-		echo "<th>Account ID</th>";
+		echo '<th>Account ID</th>';
+		echo '<th colspan="2">Log Information</th>';
+	}
+	elseif ($logType == 'entries') {
+		echo '<th>Affected Entry ID</th>';
+		echo '<th>Log Information</th>';
+	}
+	else{
+		echo '<th colspan="2">Log Information</th>';
 	}
 
 ?>
-							<th colspan="2">Log Information</th>
 							<th>Log Date</th>
 						</tr>
 					</thead>
@@ -48,6 +57,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		$logAfterInfo  = json_decode($logAfterInfo, true)[0];
 
 		switch ($logType) {
+			case 'entries':
+				echo '
+					<tr class="text-center">
+						<td>#'.$log["logID"].'</td>
+						<td>#'.$log["userID"].'</td>
+						<td>#'.$log["logBefore"].'</td>
+						<td>
+							'.$log["logAfter"].'
+				';
+				break;
+
 			# Users Display Table
 			case 'users':
 				echo '

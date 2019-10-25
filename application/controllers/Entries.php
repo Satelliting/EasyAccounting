@@ -68,6 +68,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 				$this->entry_model->approveEntry($entryID, $entryDebitAccounts, $entryCreditAccounts);
 
+				$logInfo = array(
+					'userID'    => $data['userData']['userID'],
+					'logType'   => 'entries',
+					'logBefore' => $entryID,
+					'logAfter'  => 'Approved',
+				);
+				$this->log_model->create($logInfo);
+
 				$this->session->set_flashdata('success', 'You have successfully approved Entry: #'.$entryID.'.');
 				redirect('entries');
 			}
@@ -94,6 +102,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 			if ($entryInfo['entryStatus'] == 0 && $entryInfo['entryStatusComment'] == NULL){
 				$this->entry_model->rejectEntry($entryID, $_POST['rejectReason']);
+
+				$logInfo = array(
+					'userID'    => $data['userData']['userID'],
+					'logType'   => 'entries',
+					'logBefore' => $entryID,
+					'logAfter'  => 'Rejected: '.$_POST['rejectReason'],
+				);
+				$this->log_model->create($logInfo);
 
 				$this->session->set_flashdata('success', 'You have successfully rejected Entry: #'.$entryID.'.');
 				redirect('entries');
@@ -139,6 +155,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								$fileDirectory = "assets/files/entries/".$createCheck."/";
 								mkdir($fileDirectory);
 								move_uploaded_file($_FILES["entryFile"]["tmp_name"], $fileDirectory.$_FILES["entryFile"]["name"]);
+
+								$logInfo = array(
+									'userID'    => $data['userData']['userID'],
+									'logType'   => 'entries',
+									'logBefore' => $createCheck,
+									'logAfter'  => 'Created',
+								);
+								$this->log_model->create($logInfo);
 
 								$this->session->set_flashdata('success', 'You have successfully created an entry.');
 								redirect('entries');

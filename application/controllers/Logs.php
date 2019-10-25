@@ -16,7 +16,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		}
 
 
-		# Admin Index Function
+		# Logs Index Function
 		public function index($logType = 'users'){
 			$data['userData'] = $this->session->userdata();
 			$data['title']    = 'Logs | Home';
