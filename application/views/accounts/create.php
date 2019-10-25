@@ -17,7 +17,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								<input class="form-control" placeholder="Account Name" name="accountName" type="text" required />
 							</div>
 							<div class="form-group">
-								<input class="form-control" placeholder="Account Starting Balance" name="accountBalance" type="number" min="0" step="1" required />
+								<input class="form-control" placeholder="Account Starting Balance" name="accountBalance" type="number" min="0" step="0.01" value="0.00" required />
 							</div>
 							<div class="form-group">
 								<select class="form-control" name="accountCategory">

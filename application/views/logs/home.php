@@ -82,6 +82,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				else {
 					echo '<strong>User Email:</strong> '.$logBeforeInfo['userEmail'].'<br />';
 				}
+				# User Password Change Check
+				if (array_key_exists('userPassword', $logAfterInfo)){
+					echo '<span class="text-danger"><strong>User Password was changed.</strong></span><br />';
+				}
 				break;
 
 			# Admin Display Table

@@ -47,9 +47,9 @@ class Profile extends CI_Controller {
 				$this->session->set_flashdata('danger', 'The passwords did not match.');
 				$this->load->template('profile/edit', $data);
 			}
-			else {
-				unset($_POST['userPasswordConfirm']);
 
+			$editValidation = $this->form_validation->run();
+			if ($editValidation){
 				$userChange = $this->user_model->userEdit($_POST);
 				if (!$userChange){
 					$this->session->set_flashdata('danger', 'Something strange happened. Please try again.');
@@ -74,6 +74,9 @@ class Profile extends CI_Controller {
 					$this->session->set_flashdata('success', 'You have successfully updated your information.');
 					redirect('profile');
 				}
+			}
+			else {
+				$this->load->template('profile/edit', $data);
 			}
 		}
 	}

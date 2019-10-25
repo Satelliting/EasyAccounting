@@ -77,7 +77,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							</tr>
 							<tr>
 								<td class="text-center"><strong>Net Income</strong></td>
-								<td class="text-right"><strong>$'.number_format(abs($revenueTotal - $expensesTotal), 2).'</strong></td>
+								<td class="text-right"><strong>$'.number_format(($revenueTotal - $expensesTotal), 2).'</strong></td>
 							</tr>
 	';
 ?>

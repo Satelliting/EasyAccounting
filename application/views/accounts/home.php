@@ -3,7 +3,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 		<div class="container">
 			<div class="row">
-				<h1>List of Accounts</h1>
+				<span class="float-left"><h1>List of Accounts</h1></span>
+				<span class="float-right mx-5">
+					<a class="btn btn-primary btn-block" href="<?=site_url("accounts/create");?>">Create Account</a>
+				</span>
 				<div class="input-group" style="padding-bottom: 10px">
 					<input id="filter" type="text" class="form-control" placeholder="Type here to filter...">
 				</div>
@@ -66,7 +69,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<td class="text-left">'.$accountStatement.'</td>';
 		if ($userData['userRole'] == 20){
 			echo '
-							<td><a class="btn btn-info" href="'.site_url("admin/edit/".$user["userID"]).'">Edit User</a></td>
+							<td><a class="btn btn-info" href="'.site_url("accounts/edit/".$account["accountID"]).'">Edit Account</a></td>
 			';
 		}
 		echo '			</tr>
@@ -75,7 +78,5 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 					</tbody>
 				</table>
-				<br /><br />
-				<a class="btn btn-success btn-block" href="<?=site_url("accounts/create");?>">Create Account</a>
 			</div>
 		</div>

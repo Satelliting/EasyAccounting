@@ -51,15 +51,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	echo '
 							<tr>
 								<td class="text-center">Add: Net Income</td>
-								<td class="text-right">$'.number_format(abs($netIncome), 2).'</td>
+								<td class="text-right">$'.number_format($netIncome, 2).'</td>
 							</tr>
 							<tr>
 								<td class="text-center">Less: Dividends</td>
-								<td class="text-right">$'.number_format(abs($dividends), 2).'</td>
+								<td class="text-right">$'.number_format($dividends, 2).'</td>
 							</tr>
 							<tr>
 								<td class="text-center"><strong>Retained Earnings as of '.date("F j, Y").'</strong></td>
-								<td class="text-right"><strong>$'.number_format(abs($retainedEarnings), 2).'</strong></td>
+								<td class="text-right"><strong>$'.number_format($retainedEarnings, 2).'</strong></td>
 							</tr>
 	';
 ?>

@@ -33,7 +33,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				'userPassword'  => md5($this->input->post('userPassword')),
 			);
 
-			$registerValidation = $this->form_validation->run('registration');
+			$registerValidation = $this->form_validation->run();
 
 			if ($registerValidation) {
 				$userRegistration = $this->user_model->userRegister($registerInfo);
@@ -83,7 +83,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					redirect();
 				}
 				else {
-					$this->session->set_flashdata('danger', 'Something has happened internally. Please try again.');
+					$this->session->set_flashdata('danger', 'Your email/password combination was not correct Please try again.');
 					$this->load->template('users/login', $data);
 				}
 			}

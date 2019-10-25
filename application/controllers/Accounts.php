@@ -30,13 +30,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$data['userData'] = $this->session->userdata();
 
 			if (!empty($this->input->post())){
-				$createCheck = $this->account_model->createAccount($_POST);
-				if ($createCheck){
-					$this->session->set_flashdata('success', 'You have successfully created an account.');
-					redirect('accounts');
+				$accountCreateValidation = $this->form_validation->run();
+
+				if($accountCreateValidation){
+					$createCheck = $this->account_model->createAccount($_POST);
+					if ($createCheck){
+						$this->session->set_flashdata('success', 'You have successfully created an account.');
+						redirect('accounts');
+					}
+					else {
+						$this->session->set_flashdata('danger', 'Something internally happened. Please try again.');
+						$this->load->template('accounts/create', $data);
+					}
 				}
 				else {
-					$this->session->set_flashdata('danger', 'Something internally happened. Please try again.');
 					$this->load->template('accounts/create', $data);
 				}
 			}
