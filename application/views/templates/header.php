@@ -42,7 +42,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							</a>
 							<div class="dropdown-menu text-center" aria-labelledby="reportsDropdown">
 								<a class="dropdown-item" href="'.site_url().'reports/trialbalance">Trial Balance</a>
-								<a class="dropdown-item" href="'.site_url().'reports/balancestatement">Balance Statement</a>
+								<a class="dropdown-item" href="'.site_url().'reports/balancesheet">Balance Sheet</a>
 								<a class="dropdown-item" href="'.site_url().'reports/incomestatement">Income Statement</a>
 								<a class="dropdown-item" href="'.site_url().'reports/retainedearnings">Statement of Retained Earnings</a>
 							</div>

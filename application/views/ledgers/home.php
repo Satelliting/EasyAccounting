@@ -30,7 +30,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		}
 
 		if (!empty($accountEntries)){
-			echo '<h3 class="pull-left"><a href="'.site_url().'/ledgers/index/'.$account['accountID'].'">'.$account['accountName'].'</a></h3>';
+			echo '<h3 class="pull-left"><a href="'.site_url().'ledgers/index/'.$account['accountID'].'">'.$account['accountName'].'</a></h3>';
 
 			echo '
 				<table class="table table-striped table-bordered table-hover">

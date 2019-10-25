@@ -55,8 +55,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		}
 		echo '
 						<tr class="text-center">
-							<td>#'.$account["accountID"].'</td>
-							<td>'.$account["accountName"].'</td>
+							<td><a href="'.site_url()."ledgers/index/".$account["accountID"].'">#'.$account["accountID"].'</a></td>
+							<td><a href="'.site_url()."ledgers/index/".$account["accountID"].'">'.$account["accountName"].'</a></td>
 							<td>'.$account["accountCategory"].'</td>
 							<td>'.$account["accountCategorySub"].'</td>
 							<td class="text-left">'.$accountSide.'</td>

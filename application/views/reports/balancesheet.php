@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 		<div class="container">
 			<div class="row">
-				<h1><?=$title;?></h1>
+				<h1><?= $title;?></h1>
 			</div>
 
 			<div class="row">
@@ -11,14 +11,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<thead class="thead-dark">
 						<tr class="text-center">
 							<th>Account Name</th>
-							<th>Debit</th>
-							<th>Credit</th>
+							<th>Account Amount</th>
 						</tr>
 					</thead>
 					<tbody class="searchable">
 <?php
-	$totalDebitAccount  = 0;
-	$totalCreditAccount = 0;
+	$assetsTotal      = 0;
+	$liabilitiesTotal = 0;
+	$equityTotal      = 0;
 
 	$accounts = array();
 
@@ -40,48 +40,43 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<tr>
 						<td><strong>'.$accountCategories[$accountOrder].'</strong></td>
 						<td></td>
-						<td></td>
 					</tr>
 		';
-		$accountOrder += 1;
 		foreach ($accountCategory as $account){
+			$accountBalance = $account['accountDebit'] - $account['accountCredit'];
+			if ($account['accountCategory'] == 'Assets'){
+				$assetsTotal += $accountBalance;
+			}
+			elseif ($account['accountCategory'] == 'Liabilities'){
+				$liabilitiesTotal += $accountBalance;
+			}
+			else {
+				$equityTotal += $accountBalance;
+			}
 			echo '
 						<tr>
 							<td>'.$account['accountName'].'</td>
-			';
-			$accountSide = $account["accountDebit"] - $account['accountCredit'];
-			if ($accountSide > 0){
-				$totalDebitAccount += abs($accountSide);
-				echo '
-								<td class="text-right">$'.number_format(abs($accountSide), 2).'</td>
-								<td></td>
-				';
-			}
-			elseif ($accountSide < 0){
-				$totalCreditAccount += abs($accountSide);
-				echo '
-								<td></td>
-								<td class="text-right">$'.number_format(abs($accountSide), 2).'</td>
-				';
-
-			}
-			else {
-				echo '			<td></td>
-								<td></td>
-				';
-			}
-			echo '
+							<td class="text-right">$'.number_format(abs($accountBalance), 2).'</td>
 							</tr>
 			';
 			}
+		if ($accountCategories[$accountOrder] == 'Assets'){
+			$accountAmount = number_format(abs($assetsTotal), 2);
 		}
-	echo '
+		elseif ($account['accountCategory'] == 'Liabilities'){
+			$accountAmount = number_format(abs($liabilitiesTotal), 2);
+		}
+		else {
+			$accountAmount = number_format(abs($equityTotal), 2);
+		}
+		echo '
 							<tr>
-								<td class="text-center"><strong>Total</strong></td>
-								<td class="text-right"><strong>$'.number_format(abs($totalDebitAccount), 2).'</strong></td>
-								<td class="text-right"><strong>$'.number_format(abs($totalCreditAccount), 2).'</strong></td>
+								<td class="text-center"><strong>Total '.$accountCategories[$accountOrder].'</strong></td>
+								<td class="text-right"><strong>$'.$accountAmount.'</strong></td>
 							</tr>
-	';
+		';
+		$accountOrder += 1;
+	}
 ?>
 					</tbody>
 				</table>

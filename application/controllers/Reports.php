@@ -25,4 +25,31 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		}
 
 
+		# Reports Income Statement Function
+		public function incomestatement(){
+			$data['userData'] = $this->session->userdata();
+			$data['title']    = 'Reports | Income Statement';
+			$data['accountList'] = $this->report_model->getAccounts("incomeStatement");
+			$this->load->template('reports/incomestatement', $data);
+		}
+
+
+		# Reports Balance Sheet Function
+		public function balanceSheet(){
+			$data['userData'] = $this->session->userdata();
+			$data['title']    = 'Reports | Balance Sheet';
+			$data['accountList'] = $this->report_model->getAccounts("balanceSheet");
+			$this->load->template('reports/balancesheet', $data);
+		}
+
+
+		# Reports Retained Earnings Function
+		public function retainedearnings(){
+			$data['userData'] = $this->session->userdata();
+			$data['title']    = 'Reports | Retained Earnings';
+			$data['accountList'] = $this->report_model->getAccounts("retainedEarnings");
+			$this->load->template('reports/retainedearnings', $data);
+		}
+
+
 	}

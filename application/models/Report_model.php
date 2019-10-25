@@ -12,7 +12,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				case 'trialBalance':
 					$getSQL = "SELECT * FROM accounts WHERE accountDebit > 0 OR accountCredit > 0 ORDER BY accountCategory";
 					break;
-
+				case 'balanceSheet':
+					$getSQL = "SELECT * FROM accounts WHERE accountStatement = 'BS' AND (accountDebit > 0 OR accountCredit > 0) ORDER BY accountCategory";
+					break;
+					case 'incomeStatement':
+						$getSQL = "SELECT * FROM accounts WHERE accountStatement = 'IS' AND (accountDebit > 0 OR accountCredit > 0) ORDER BY accountCategory DESC";
+						break;
+					case 'retainedEarnings':
+						$getSQL = "SELECT * FROM accounts WHERE accountStatement = 'IS' AND (accountDebit > 0 OR accountCredit > 0) ORDER BY accountCategory DESC";
+						break;
 				default:
 					$getSQL = "SELECT * FROM accounts";
 					break;
