@@ -61,6 +61,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			),
 		),
 
+		'users/forgotConfirm' => array(
+			array(
+				'field'  => 'userPassword',
+				'label'  => 'Password',
+				'rules'  => 'required|min_length[8]|callback_password_check',
+				'errors' => array(
+					'required'       => 'You must provide a %s for your account.',
+					'min_length'     => 'You have too few characters for your %s.',
+					'password_check' => 'You do not have the correct amount of letters, numbers, or special characters in your password.'
+				),
+			),
+
+			array(
+				'field'  => 'userPasswordConfirm',
+				'label'  => 'Password Confirmation',
+				'rules'  => 'required|matches[userPassword]',
+				'errors' => array(
+					'required'              => 'You must provide a %s for your account.',
+					'matches[userPassword]' => 'Your %s did not match.'
+				),
+			),
+		),
+
 
 		# Update Account Form Validation Rules
 		'profile/edit' => array(

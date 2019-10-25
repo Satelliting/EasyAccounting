@@ -25,7 +25,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					</form>
 				</div>
 				<div class="card-footer text-center">
-					<a href="<?=site_url('users/register');?>">User Registration</a> | <a href="<?=site_url('users/forgotPassword');?>">Forgot Password?</a>
+					<a href="<?=site_url('users/register');?>">User Registration</a> | <a href="<?=site_url('users/forgot');?>">Forgot Password?</a>
 				</div>
 			</div>
 		</div>

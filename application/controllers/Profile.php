@@ -50,6 +50,7 @@ class Profile extends CI_Controller {
 
 			$editValidation = $this->form_validation->run();
 			if ($editValidation){
+				unset($_POST['userPasswordConfirm']);
 				$userChange = $this->user_model->userEdit($_POST);
 				if (!$userChange){
 					$this->session->set_flashdata('danger', 'Something strange happened. Please try again.');

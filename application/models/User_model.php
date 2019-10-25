@@ -57,7 +57,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			if (empty($userInfo)){
 				return false;
 			}
-
 			return true;
 		}
 
@@ -73,6 +72,36 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			if (empty($userInfo)){
 				return false;
 			}
+			return true;
+		}
+
+
+		# Set Forgot Value for User Model
+		public function setForgot($userEmail, $forgotHash){
+			$this->db->where('userEmail', $userEmail);
+			$this->db->update('users', array("userForgot" => $forgotHash));
+
+			return true;
+		}
+
+
+		# Check Forgot Hash Model
+		public function checkForgotHash($forgotHash){
+			$getSQL    = "SELECT * FROM users WHERE userForgot='{$forgotHash}'";
+			$queryDB   = $this->db->query($getSQL);
+			$hashCheck = $queryDB->result();
+
+			if (empty($hashCheck)){
+				return false;
+			}
+			return true;
+		}
+
+
+		# Set Forgot Password Value for User Model
+		public function setForgotPassword($userInfo){
+			$this->db->where('userForgot', $userInfo['forgotID']);
+			$this->db->update('users', array("userPassword" => md5($userInfo['userPassword']), "userForgot" => NULL));
 
 			return true;
 		}
