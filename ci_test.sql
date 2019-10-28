@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 14, 2019 at 11:12 PM
+-- Generation Time: Oct 28, 2019 at 03:47 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.4
 
@@ -35,9 +35,9 @@ CREATE TABLE `accounts` (
   `accountCategory` varchar(50) NOT NULL,
   `accountCategorySub` varchar(50) NOT NULL,
   `accountSide` varchar(1) NOT NULL,
-  `accountBalance` decimal(10,0) NOT NULL,
-  `accountDebit` decimal(10,0) NOT NULL,
-  `accountCredit` decimal(10,0) NOT NULL,
+  `accountBalance` decimal(10,2) NOT NULL,
+  `accountDebit` decimal(10,2) NOT NULL,
+  `accountCredit` decimal(10,2) NOT NULL,
   `accountOrder` int(11) NOT NULL,
   `accountStatement` varchar(2) NOT NULL,
   `accountCreationDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
@@ -48,25 +48,24 @@ CREATE TABLE `accounts` (
 --
 
 INSERT INTO `accounts` (`accountID`, `userID`, `accountName`, `accountCategory`, `accountCategorySub`, `accountSide`, `accountBalance`, `accountDebit`, `accountCredit`, `accountOrder`, `accountStatement`, `accountCreationDate`) VALUES
-(101, 1000003, 'Cash', 'Assets', 'Cash Related Accounts', 'L', '0', '0', '0', 1, 'BS', '2019-09-30 16:43:37'),
-(121, 1000003, 'Notes Receivable', 'Assets', 'Recievables', 'L', '0', '0', '0', 1, 'BS', '2019-09-30 17:52:00'),
-(122, 1000003, 'Accounts Receivable', 'Assets', 'Recievables', 'L', '0', '0', '0', 0, 'BS', '2019-10-11 19:25:26'),
-(131, 1000003, 'Merchandise Inventory', 'Assets', 'Inventories', 'R', '0', '0', '0', 0, 'BS', '2019-10-11 19:26:00'),
-(142, 1000003, 'Office Supplies', 'Assets', 'Prepaid Items', 'R', '0', '0', '0', 0, 'BS', '2019-10-11 19:27:03'),
-(145, 1000003, 'Prepaid Insurance', 'Assets', 'Prepaid Items', 'R', '0', '0', '0', 0, 'BS', '2019-10-11 19:27:35'),
-(161, 1000003, 'Land', 'Assets', 'Land', 'R', '0', '0', '0', 0, 'BS', '2019-10-11 19:27:46'),
-(171, 1000003, 'Buildings', 'Assets', 'Cash Related Accounts', 'R', '0', '0', '0', 0, 'BS', '2019-10-11 19:28:11'),
-(181, 1000003, 'Office Equipment', 'Assets', 'Equipment', 'R', '0', '0', '0', 0, 'BS', '2019-10-11 19:27:59'),
-(201, 1000003, 'Notes Payable', 'Liabilities', 'Cash Related Accounts', 'R', '0', '0', '0', 0, 'BS', '2019-10-11 19:28:29'),
-(202, 1000003, 'Accounts Payable', 'Liabilities', 'Short-term Payables', 'R', '0', '0', '0', 0, 'BS', '2019-10-11 19:28:40'),
-(301, 1000003, 'Capital', 'Owner\'s Equity', 'Owner\'s Equity', 'L', '0', '0', '0', 0, 'BS', '2019-10-11 19:28:53'),
-(302, 1000003, 'Drawing', 'Owner\'s Equity', 'Owner\'s Equity', 'R', '0', '0', '0', 0, 'BS', '2019-10-11 19:29:06'),
-(401, 1000003, 'Sales', 'Revenues', 'Operating Revenues', 'L', '0', '0', '0', 0, 'IS', '2019-10-11 19:29:24'),
-(411, 1000003, 'Interest Revenue', 'Revenues', 'Other Revenues', 'L', '0', '0', '0', 0, 'IS', '2019-10-11 19:29:36'),
-(501, 1000003, 'Purchases', 'Operating Expenses', 'Cost of Goods Sold', 'R', '0', '0', '0', 0, 'IS', '2019-10-11 19:30:09'),
-(504, 1000003, 'Overhead', 'Assets', 'Cash Related Accounts', 'R', '0', '0', '0', 0, 'IS', '2019-10-11 19:30:16'),
-(511, 1000003, 'Wages Expense', 'Operating Expenses', 'Selling Expenses', 'R', '0', '0', '0', 0, 'IS', '2019-10-11 19:30:31'),
-(521, 1000003, 'Rent Expense', 'Operating Expenses', 'General and Administrative Expenses', 'R', '0', '0', '0', 0, 'IS', '2019-10-11 19:30:43');
+(10000001, 1000003, 'Cash', 'Assets', 'Cash Related Accounts', 'L', '0.00', '12400.00', '12750.00', 1, 'BS', '2019-09-30 16:43:37'),
+(10000021, 1000003, 'Notes Receivable', 'Assets', 'Recievables', 'L', '0.00', '0.00', '0.00', 1, 'BS', '2019-09-30 17:52:00'),
+(10000022, 1000003, 'Accounts Receivable', 'Assets', 'Recievables', 'L', '0.00', '1500.00', '2400.00', 0, 'BS', '2019-10-11 19:25:26'),
+(10000031, 1000003, 'Merchandise Inventory', 'Assets', 'Inventories', 'R', '0.00', '0.00', '0.00', 0, 'BS', '2019-10-11 19:26:00'),
+(10000042, 1000003, 'Office Supplies', 'Assets', 'Prepaid Items', 'R', '0.00', '3800.00', '0.00', 0, 'BS', '2019-10-11 19:27:03'),
+(10000045, 1000003, 'Prepaid Insurance', 'Assets', 'Prepaid Items', 'R', '0.00', '1800.00', '0.00', 0, 'BS', '2019-10-11 19:27:35'),
+(10000061, 1000003, 'Land', 'Assets', 'Land', 'R', '0.00', '0.00', '0.00', 0, 'BS', '2019-10-11 19:27:46'),
+(10000071, 1000003, 'Buildings', 'Assets', 'Cash Related Accounts', 'R', '0.00', '4500.00', '0.00', 0, 'BS', '2019-10-11 19:28:11'),
+(10000081, 1000003, 'Office Equipment', 'Assets', 'Equipment', 'R', '0.00', '7500.00', '0.00', 0, 'BS', '2019-10-11 19:27:59'),
+(20000001, 1000003, 'Notes Payable', 'Liabilities', 'Cash Related Accounts', 'R', '0.00', '0.00', '0.00', 0, 'BS', '2019-10-11 19:28:29'),
+(20000002, 1000003, 'Accounts Payable', 'Liabilities', 'Short-term Payables', 'R', '0.00', '800.00', '1800.00', 0, 'BS', '2019-10-11 19:28:40'),
+(30000001, 1000003, 'Capital', 'Owner\'s Equity', 'Owner\'s Equity', 'L', '0.00', '0.00', '20250.00', 0, 'BS', '2019-10-11 19:28:53'),
+(30000002, 1000003, 'Drawing', 'Owner\'s Equity', 'Owner\'s Equity', 'R', '0.00', '0.00', '0.00', 0, 'BS', '2019-10-11 19:29:06'),
+(40000001, 1000003, 'Sales', 'Revenues', 'Operating Revenues', 'L', '0.00', '0.00', '0.00', 0, 'IS', '2019-10-11 19:29:24'),
+(40000011, 1000003, 'Interest Revenue', 'Revenues', 'Other Revenues', 'L', '0.00', '0.00', '0.00', 0, 'IS', '2019-10-11 19:29:36'),
+(50000001, 1000003, 'Purchases', 'Operating Expenses', 'Cost of Goods Sold', 'R', '0.00', '0.00', '0.00', 0, 'IS', '2019-10-11 19:30:09'),
+(50000011, 1000003, 'Wages Expense', 'Operating Expenses', 'Selling Expenses', 'R', '0.00', '4900.00', '0.00', 0, 'IS', '2019-10-11 19:30:31'),
+(50000021, 1000003, 'Rent Expense', 'Operating Expenses', 'General and Administrative Expenses', 'R', '0.00', '0.00', '0.00', 0, 'IS', '2019-10-11 19:30:43');
 
 -- --------------------------------------------------------
 
@@ -101,14 +100,13 @@ CREATE TABLE `accounts_categories_sub` (
 
 CREATE TABLE `entries` (
   `entryID` bigint(20) NOT NULL,
-  `ledgerID` bigint(20) NOT NULL DEFAULT '0',
   `userID` bigint(20) NOT NULL,
   `entryDescription` text NOT NULL,
-  `entryDebitAccount` bigint(20) NOT NULL,
-  `entryDebitBalance` decimal(10,0) NOT NULL,
-  `entryCreditAccount` bigint(20) NOT NULL,
-  `entryCreditBalance` decimal(10,0) NOT NULL,
-  `entryStatus` int(11) NOT NULL DEFAULT '0',
+  `entryDebitAccount` text NOT NULL,
+  `entryDebitBalance` text NOT NULL,
+  `entryCreditAccount` text NOT NULL,
+  `entryCreditBalance` text NOT NULL,
+  `entryStatus` int(1) NOT NULL DEFAULT '0',
   `entryStatusComment` text,
   `entryCreateDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -117,29 +115,19 @@ CREATE TABLE `entries` (
 -- Dumping data for table `entries`
 --
 
-INSERT INTO `entries` (`entryID`, `ledgerID`, `userID`, `entryDescription`, `entryDebitAccount`, `entryDebitBalance`, `entryCreditAccount`, `entryCreditBalance`, `entryStatus`, `entryStatusComment`, `entryCreateDate`) VALUES
-(10000001, 2, 1000003, 'Purchased a new machine with cash.', 181, '100', 101, '100', 0, NULL, '2019-10-14 19:43:00'),
-(10000002, 2, 1000003, 'Purchased a new machine with cash.', 142, '100', 101, '100', 0, NULL, '2019-10-14 19:44:21');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `ledgers`
---
-
-CREATE TABLE `ledgers` (
-  `ledgerID` bigint(20) NOT NULL,
-  `userID` bigint(20) NOT NULL,
-  `ledgerCreateDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `ledgerCloseDate` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `ledgers`
---
-
-INSERT INTO `ledgers` (`ledgerID`, `userID`, `ledgerCreateDate`, `ledgerCloseDate`) VALUES
-(10001, 1000003, '2019-10-14 19:41:09', NULL);
+INSERT INTO `entries` (`entryID`, `userID`, `entryDescription`, `entryDebitAccount`, `entryDebitBalance`, `entryCreditAccount`, `entryCreditBalance`, `entryStatus`, `entryStatusComment`, `entryCreateDate`) VALUES
+(10000001, 1000001, 'John Addams recievables', '[\"10000001\",\"10000022\",\"10000042\",\"10000081\"]', '[\"10000\",\"1500\",\"1250\",\"7500\"]', '[\"30000001\"]', '[\"20250\"]', 1, NULL, '2019-10-24 20:00:25'),
+(10000002, 1000001, 'Rent Payment', '[\"10000071\"]', '[\"4500\"]', '[\"10000001\"]', '[\"4500\"]', 1, NULL, '2019-10-24 20:02:46'),
+(10000003, 1000001, 'Paid Insurance', '[\"10000045\"]', '[\"1800\"]', '[\"10000001\"]', '[\"1800\"]', 1, NULL, '2019-10-24 20:04:03'),
+(10000004, 1000001, 'Purchased additional office furniture', '[\"10000042\"]', '[\"1800\"]', '[\"20000002\"]', '[\"1800\"]', 1, NULL, '2019-10-24 20:10:16'),
+(10000005, 1000001, 'Received payment from client', '[\"10000001\"]', '[\"800\"]', '[\"10000022\"]', '[\"800\"]', 1, NULL, '2019-10-24 20:11:02'),
+(10000006, 1000001, 'Paid Morllton Company for debt', '[\"20000002\"]', '[\"800\"]', '[\"10000001\"]', '[\"800\"]', 1, NULL, '2019-10-24 20:12:00'),
+(10000007, 1000001, 'Paid salaries of employees', '[\"50000011\"]', '[\"400\"]', '[\"10000001\"]', '[\"400\"]', 1, NULL, '2019-10-24 20:13:04'),
+(10000008, 1000001, 'Purchased more supplies for the office', '[\"10000042\"]', '[\"750\"]', '[\"10000001\"]', '[\"750\"]', 1, NULL, '2019-10-24 20:13:44'),
+(10000009, 1000001, 'Received cash from clients on account', '[\"10000001\"]', '[\"1600\"]', '[\"10000022\"]', '[\"1600\"]', 1, NULL, '2019-10-24 20:14:54'),
+(10000010, 1000001, 'Had to payout full salaries for month', '[\"50000011\"]', '[\"4500\"]', '[\"10000001\"]', '[\"4500\"]', 1, NULL, '2019-10-24 20:15:42'),
+(10000011, 1000001, 'Testing form validation', '[\"10000001\"]', '[\"100\"]', '[\"10000021\"]', '[\"100\"]', 0, 'Purely done for testing purposes.', '2019-10-25 20:51:24'),
+(10000012, 1000002, 'Testing log creation', '[\"10000001\"]', '[\"100\"]', '[\"10000061\"]', '[\"100\"]', 0, 'Testing log creation, not needed.', '2019-10-25 21:01:18');
 
 -- --------------------------------------------------------
 
@@ -206,7 +194,14 @@ INSERT INTO `logs` (`logID`, `userID`, `logType`, `logBefore`, `logAfter`, `logD
 (10000043, 1000003, 'accounts', '{\"accountID\":\"121\",\"userID\":\"1000003\",\"accountName\":\"Notes Receivable\",\"accountCategory\":\"Assets\",\"accountCategorySub\":\"Receivables\",\"accountSide\":\"L\",\"accountBalance\":\"0\",\"accountDebit\":\"0\",\"accountCredit\":\"0\",\"accountOrder\":\"1\",\"accountStatement\":\"BS\",\"accountCreationDate\":\"2019-09-30 13:52:00\"}', '{\"accountName\":\"Notes Receivable\",\"accountCategorySub\":\"Recievables\",\"accountID\":\"121\"}', '2019-10-11 19:39:35'),
 (10000044, 1000003, 'accounts', '{\"accountID\":\"201\",\"userID\":\"0\",\"accountName\":\"Notes Payable\",\"accountCategory\":\"Liabilities\",\"accountCategorySub\":\"Short-term Payables\",\"accountSide\":\"L\",\"accountBalance\":\"0\",\"accountDebit\":\"0\",\"accountCredit\":\"0\",\"accountOrder\":\"0\",\"accountStatement\":\"BS\",\"accountCreationDate\":\"2019-10-11 15:28:29\"}', '{\"accountName\":\"Notes Payable\",\"accountCategorySub\":\"Cash Related Accounts\",\"accountSide\":\"R\",\"accountID\":\"201\"}', '2019-10-11 19:39:43'),
 (10000045, 1000003, 'accounts', '{\"accountID\":\"504\",\"userID\":\"0\",\"accountName\":\"Overhead\",\"accountCategory\":\"Operating Expenses\",\"accountCategorySub\":\"Cost of Goods Sold\",\"accountSide\":\"L\",\"accountBalance\":\"0\",\"accountDebit\":\"0\",\"accountCredit\":\"0\",\"accountOrder\":\"0\",\"accountStatement\":\"IS\",\"accountCreationDate\":\"2019-10-11 15:30:16\"}', '{\"accountName\":\"Overhead\",\"accountCategory\":\"Assets\",\"accountCategorySub\":\"Cash Related Accounts\",\"accountSide\":\"R\",\"accountID\":\"504\"}', '2019-10-11 19:42:43'),
-(10000046, 1000003, 'admin', '{\"userID\":\"1000001\",\"userEmail\":\"accountant@test.com\",\"userFirstName\":\"Accountant\",\"userLastName\":\"Person\",\"userPassword\":\"c2391dedefcd683e3c5e5c50f5ef9615\",\"userPasswordAttempts\":\"0\",\"userPrevPassword\":null,\"userPasswordDate\":\"2019-09-19 13:18:18\",\"userCreationDate\":\"2019-09-19 13:18:18\",\"userRole\":\"0\",\"userActive\":\"1\",\"userActiveDate\":null}', '{\"userFirstName\":\"Accountant\",\"userLastName\":\"Person\",\"userEmail\":\"accountant@test.com\",\"userRole\":\"0\",\"userActive\":\"1\",\"userPassword\":\"519524d3e2c7de2020f4cca2ae373b5b\",\"userID\":\"1000001\"}', '2019-10-13 22:09:23');
+(10000046, 1000003, 'admin', '{\"userID\":\"1000001\",\"userEmail\":\"accountant@test.com\",\"userFirstName\":\"Accountant\",\"userLastName\":\"Person\",\"userPassword\":\"c2391dedefcd683e3c5e5c50f5ef9615\",\"userPasswordAttempts\":\"0\",\"userPrevPassword\":null,\"userPasswordDate\":\"2019-09-19 13:18:18\",\"userCreationDate\":\"2019-09-19 13:18:18\",\"userRole\":\"0\",\"userActive\":\"1\",\"userActiveDate\":null}', '{\"userFirstName\":\"Accountant\",\"userLastName\":\"Person\",\"userEmail\":\"accountant@test.com\",\"userRole\":\"0\",\"userActive\":\"1\",\"userPassword\":\"519524d3e2c7de2020f4cca2ae373b5b\",\"userID\":\"1000001\"}', '2019-10-13 22:09:23'),
+(10000047, 1000003, 'users', '{\"userID\":\"1000003\",\"userName\":\"APerson0919\",\"userFirstName\":\"Admin\",\"userLastName\":\"Person\",\"userEmail\":\"administrator@test.com\",\"userRole\":\"20\"}', '{\"userFirstName\":\"Admin\",\"userLastName\":\"Person\",\"userEmail\":\"administrator@test.com\",\"userPassword\":\"6a0c60f307c789f24b3b65a88e04dbf4\",\"userID\":\"1000003\"}', '2019-10-25 20:18:37'),
+(10000048, 1000003, 'users', '{\"userID\":\"1000003\",\"userName\":\"APerson0919\",\"userFirstName\":\"Admin\",\"userLastName\":\"Person\",\"userEmail\":\"administrator@test.com\",\"userRole\":\"20\"}', '{\"userFirstName\":\"Admin\",\"userLastName\":\"Person\",\"userEmail\":\"administrator@test.com\",\"userPassword\":\"985de320ae9dc7cb28692edd5b3afa72\",\"userID\":\"1000003\"}', '2019-10-25 20:19:03'),
+(10000049, 1000003, 'users', '{\"userID\":\"1000003\",\"userName\":\"APerson0919\",\"userFirstName\":\"Admin\",\"userLastName\":\"Person\",\"userEmail\":\"administrator@test.com\",\"userRole\":\"20\"}', '{\"userFirstName\":\"Admins\",\"userLastName\":\"Person\",\"userEmail\":\"administrator@test.com\",\"userID\":\"1000003\"}', '2019-10-25 20:20:11'),
+(10000050, 1000002, 'entries', '10000012', 'Created', '2019-10-25 21:01:18'),
+(10000051, 1000002, 'entries', '10000012', 'Rejected: Testing log creation, not needed.', '2019-10-25 21:21:37'),
+(10000052, 1000002, 'users', '{\"userID\":\"1000002\",\"userName\":\"MPerson0919\",\"userFirstName\":\"Manager\",\"userLastName\":\"Person\",\"userEmail\":\"manager@test.com\",\"userRole\":\"10\"}', '{\"userFirstName\":\"Manager\",\"userLastName\":\"Person\",\"userEmail\":\"manager@test.com\",\"userPassword\":\"5980ba484aeddde546d5e79eb893dc58\",\"userID\":\"1000002\"}', '2019-10-25 22:30:31'),
+(10000053, 1000003, 'users', '{\"userID\":\"1000003\",\"userName\":\"APerson0919\",\"userFirstName\":\"Admins\",\"userLastName\":\"Person\",\"userEmail\":\"administrator@test.com\",\"userRole\":\"20\"}', '{\"userFirstName\":\"Admins\",\"userLastName\":\"Person\",\"userEmail\":\"administrator@test.com\",\"userPassword\":\"985de320ae9dc7cb28692edd5b3afa72\",\"userID\":\"1000003\"}', '2019-10-25 22:31:21');
 
 -- --------------------------------------------------------
 
@@ -226,17 +221,18 @@ CREATE TABLE `users` (
   `userCreationDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `userRole` int(2) NOT NULL DEFAULT '0',
   `userActive` int(1) NOT NULL DEFAULT '1',
-  `userActiveDate` text
+  `userActiveDate` text,
+  `userForgot` varchar(32) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`userID`, `userEmail`, `userFirstName`, `userLastName`, `userPassword`, `userPasswordAttempts`, `userPrevPassword`, `userPasswordDate`, `userCreationDate`, `userRole`, `userActive`, `userActiveDate`) VALUES
-(1000001, 'accountant@test.com', 'Accountant', 'Person', '519524d3e2c7de2020f4cca2ae373b5b', 0, NULL, '2019-09-19 17:18:18', '2019-09-19 17:18:18', 0, 1, NULL),
-(1000002, 'manager@test.com', 'Manager', 'Person', '5980ba484aeddde546d5e79eb893dc58', 0, NULL, '2019-09-19 18:15:02', '2019-09-19 18:15:02', 10, 1, NULL),
-(1000003, 'administrator@test.com', 'Admin', 'Person', '985de320ae9dc7cb28692edd5b3afa72', 0, NULL, '2019-09-19 20:27:39', '2019-09-19 20:27:39', 20, 1, NULL);
+INSERT INTO `users` (`userID`, `userEmail`, `userFirstName`, `userLastName`, `userPassword`, `userPasswordAttempts`, `userPrevPassword`, `userPasswordDate`, `userCreationDate`, `userRole`, `userActive`, `userActiveDate`, `userForgot`) VALUES
+(1000001, 'accountant@test.com', 'Accountant', 'Person', '519524d3e2c7de2020f4cca2ae373b5b', 0, NULL, '2019-09-19 17:18:18', '2019-09-19 17:18:18', 0, 1, NULL, NULL),
+(1000002, 'manager@test.com', 'Manager', 'Person', '5980ba484aeddde546d5e79eb893dc58', 0, NULL, '2019-09-19 18:15:02', '2019-09-19 18:15:02', 10, 1, NULL, NULL),
+(1000003, 'administrator@test.com', 'Admins', 'Person', '985de320ae9dc7cb28692edd5b3afa72', 0, NULL, '2019-09-19 20:27:39', '2019-09-19 20:27:39', 20, 1, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -265,12 +261,6 @@ ALTER TABLE `accounts_categories_sub`
 --
 ALTER TABLE `entries`
   ADD PRIMARY KEY (`entryID`);
-
---
--- Indexes for table `ledgers`
---
-ALTER TABLE `ledgers`
-  ADD PRIMARY KEY (`ledgerID`);
 
 --
 -- Indexes for table `logs`
@@ -305,19 +295,13 @@ ALTER TABLE `accounts_categories_sub`
 -- AUTO_INCREMENT for table `entries`
 --
 ALTER TABLE `entries`
-  MODIFY `entryID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10000003;
-
---
--- AUTO_INCREMENT for table `ledgers`
---
-ALTER TABLE `ledgers`
-  MODIFY `ledgerID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10002;
+  MODIFY `entryID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10000013;
 
 --
 -- AUTO_INCREMENT for table `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `logID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10000047;
+  MODIFY `logID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10000054;
 
 --
 -- AUTO_INCREMENT for table `users`
