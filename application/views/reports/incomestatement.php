@@ -2,8 +2,12 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 		<div class="container">
-			<div class="row">
-				<h1><?= $title;?></h1>
+			<div class="row"  class="text-center">
+				<p class="text-center col-md-12">
+					Easy Accounting<br />
+					Income Statement<br />
+					For the Year Ended October 31st, <?=date("Y");?>
+				</p>
 			</div>
 
 			<div class="row">
@@ -65,7 +69,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		echo '
 							<tr>
 								<td class="text-center"><strong>Total '.$accountCategories[$accountOrder].'</strong></td>
-								<td class="text-right"><strong>$'.$accountAmount.'</strong></td>
+								<td class="text-right" style="text-decoration: underline;"><strong>$'.$accountAmount.'</strong></td>
 							</tr>
 		';
 		$accountOrder += 1;
@@ -77,7 +81,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							</tr>
 							<tr>
 								<td class="text-center"><strong>Net Income</strong></td>
-								<td class="text-right"><strong>$'.number_format(($revenueTotal - $expensesTotal), 2).'</strong></td>
+								<td class="text-right" style="text-decoration: underline; text-decoration-style: double;"><strong>$'.number_format((abs($revenueTotal) - $expensesTotal), 2).'</strong></td>
 							</tr>
 	';
 ?>

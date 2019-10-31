@@ -2,8 +2,12 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 		<div class="container">
-			<div class="row">
-				<h1><?= $title;?></h1>
+			<div class="row"  class="text-center">
+				<p class="text-center col-md-12">
+					Easy Accounting<br />
+					Statement of Retained Earnings<br />
+					For the Year Ended October 30, 2019<br />
+				</p>
 			</div>
 
 			<div class="row">
@@ -15,6 +19,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						</tr>
 					</thead>
 					<tbody class="searchable">
+						<tr>
+							<td class="text-center">Beg Retained Earnings, 10/1/19</td>
+							<td class="text-right">$0.00</td>
+						</tr>
 <?php
 	$revenueTotal  = 0;
 	$expensesTotal = 0;
@@ -45,7 +53,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			}
 		}
 	}
-	$netIncome        = $revenueTotal - $expensesTotal;
+	$netIncome        = abs($revenueTotal) - $expensesTotal;
 	$dividends        = 0;
 	$retainedEarnings = $netIncome - $dividends;
 	echo '
@@ -55,11 +63,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							</tr>
 							<tr>
 								<td class="text-center">Less: Dividends</td>
-								<td class="text-right">$'.number_format($dividends, 2).'</td>
+								<td class="text-right" style="text-decoration: underline;">$'.number_format($dividends, 2).'</td>
 							</tr>
 							<tr>
 								<td class="text-center"><strong>Retained Earnings as of '.date("F j, Y").'</strong></td>
-								<td class="text-right"><strong>$'.number_format($retainedEarnings, 2).'</strong></td>
+								<td class="text-right" style="text-decoration: underline; text-decoration-style: double;"><strong>$'.number_format($retainedEarnings, 2).'</strong></td>
 							</tr>
 	';
 ?>

@@ -8,7 +8,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<span class="float-right mx-5">
 						<a class="btn btn-primary mx-2" href="<?=site_url('logs/index/users');?>">User Logs</a>
 						<a class="btn btn-success mx-2" href="<?=site_url('logs/index/admin');?>">Admin Logs</a>
-						<a class="btn btn-info mx-2" href="<?=site_url('logs/index/accounts');?>">Account Logs</a>
+						<!-- <a class="btn btn-info mx-2" href="<?=site_url('logs/index/accounts');?>">Account Logs</a> -->
 						<a class="btn btn-warning mx-2" href="<?=site_url('logs/index/entries');?>">Entry Logs</a>
 					</span>
 				</h1>
@@ -269,45 +269,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				}
 				# Account Side Change Check
 				if (array_key_exists('accountSide', $logAfterInfo) && $logBeforeInfo['accountSide'] != $logAfterInfo['accountSide']){
-					echo '<span class="text-danger"><strong>Account Side:</strong> ';
-					if ($logAfterInfo['accountSide'] == 'L'){
-						echo 'Left (Debit)';
-					}
-					else {
-						echo 'Right (Credit)';
-					}
-					echo '</span><br />';
+					echo '<span class="text-danger"><strong>Account Side:</strong> '.$logAfterInfo['accountSide'].'</span><br />';
 				}
 				else {
-					echo '<strong>Account Side:</strong> ';
-					if ($logBeforeInfo['accountSide'] = 'L'){
-						echo 'Left (Debit)';
-					}
-					else {
-						echo 'Right (Credit)';
-					}
-					echo '<br />';
+					echo '<strong>Account Side:</strong> '.$logAfterInfo['accountSide'].'<br />';
 				}
 				# Account Statement Change Check
 				if (array_key_exists('accountStatement', $logAfterInfo) && $logBeforeInfo['accountStatement'] != $logAfterInfo['accountStatement']){
-					echo '<span class="text-danger"><strong>Account Statement:</strong> ';
-					if ($logAfterInfo['accountStatement'] == 'BS'){
-						echo 'Balance Statement';
-					}
-					else {
-						echo 'Income Statement';
-					}
-					echo '</span><br />';
+					echo '<span class="text-danger"><strong>Account Statement:</strong> '.$logAfterInfo['accountStatement'].'</span><br />';
 				}
 				else {
-					echo '<strong>Account Statement:</strong> ';
-					if ($logBeforeInfo['accountStatement'] = 'BS'){
-						echo 'Balance Statement';
-					}
-					else {
-						echo 'Income Statement';
-					}
-					echo '<br />';
+					echo '<strong>Account Statement:</strong> '.$logAfterInfo['accountStatement'].'<br />';
 				}
 				break;
 		}

@@ -39,6 +39,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$data['userData'] = $this->session->userdata();
 			$data['title']    = 'Reports | Balance Sheet';
 			$data['accountList'] = $this->report_model->getAccounts("balanceSheet");
+			$data['retainedEarningsList'] = $this->report_model->getAccounts("retainedEarnings");
 			$this->load->template('reports/balancesheet', $data);
 		}
 

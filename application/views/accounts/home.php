@@ -38,35 +38,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <?php
 	foreach ($accountList as $account){
 		$account = (array) $account;
-
-		switch ($account['accountSide']) {
-			case 'L':
-				$accountSide = "Left (Debit)";
-				break;
-			default:
-				$accountSide = "Right (Credit)";
-				break;
-		}
-
-		switch ($account['accountStatement']) {
-			case 'BS':
-				$accountStatement = "Balance Statement";
-				break;
-			default:
-				$accountStatement = "Income Statement";
-				break;
-		}
 		echo '
 						<tr class="text-center">
 							<td><a href="'.site_url()."ledgers/index/".$account["accountID"].'">#'.$account["accountID"].'</a></td>
 							<td><a href="'.site_url()."ledgers/index/".$account["accountID"].'">'.$account["accountName"].'</a></td>
 							<td>'.$account["accountCategory"].'</td>
 							<td>'.$account["accountCategorySub"].'</td>
-							<td class="text-left">'.$accountSide.'</td>
+							<td class="text-left">'.$account["accountSide"].'</td>
 							<td class="text-right">$'.number_format($account["accountBalance"], 2).'</td>
 							<td class="text-right">$'.number_format($account["accountDebit"], 2).'</td>
 							<td class="text-right">$'.number_format($account["accountCredit"], 2).'</td>
-							<td class="text-left">'.$accountStatement.'</td>';
+							<td class="text-left">'.$account["accountStatement"].'</td>';
 		if ($userData['userRole'] == 20){
 			echo '
 							<td><a class="btn btn-info" href="'.site_url("accounts/edit/".$account["accountID"]).'">Edit Account</a></td>
