@@ -11,7 +11,7 @@ showcase certain programming abilities.
 Release Information
 *******************
 
-This repo contains in-development code for future releases.
+This repo contains in-development code for future releases. 
 
 **************************
 Changelog and New Features
@@ -35,8 +35,6 @@ License
 *******
 
 The MIT License
-
-Copyright (c) 2010-2019 Google, Inc. http://angularjs.org
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
