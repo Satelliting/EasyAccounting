@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 28, 2019 at 03:47 PM
+-- Generation Time: Nov 11, 2019 at 10:25 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.4
 
@@ -34,12 +34,12 @@ CREATE TABLE `accounts` (
   `accountName` text NOT NULL,
   `accountCategory` varchar(50) NOT NULL,
   `accountCategorySub` varchar(50) NOT NULL,
-  `accountSide` varchar(1) NOT NULL,
+  `accountSide` varchar(25) NOT NULL,
   `accountBalance` decimal(10,2) NOT NULL,
   `accountDebit` decimal(10,2) NOT NULL,
   `accountCredit` decimal(10,2) NOT NULL,
   `accountOrder` int(11) NOT NULL,
-  `accountStatement` varchar(2) NOT NULL,
+  `accountStatement` varchar(50) NOT NULL,
   `accountCreationDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -48,24 +48,27 @@ CREATE TABLE `accounts` (
 --
 
 INSERT INTO `accounts` (`accountID`, `userID`, `accountName`, `accountCategory`, `accountCategorySub`, `accountSide`, `accountBalance`, `accountDebit`, `accountCredit`, `accountOrder`, `accountStatement`, `accountCreationDate`) VALUES
-(10000001, 1000003, 'Cash', 'Assets', 'Cash Related Accounts', 'L', '0.00', '12400.00', '12750.00', 1, 'BS', '2019-09-30 16:43:37'),
-(10000021, 1000003, 'Notes Receivable', 'Assets', 'Recievables', 'L', '0.00', '0.00', '0.00', 1, 'BS', '2019-09-30 17:52:00'),
-(10000022, 1000003, 'Accounts Receivable', 'Assets', 'Recievables', 'L', '0.00', '1500.00', '2400.00', 0, 'BS', '2019-10-11 19:25:26'),
-(10000031, 1000003, 'Merchandise Inventory', 'Assets', 'Inventories', 'R', '0.00', '0.00', '0.00', 0, 'BS', '2019-10-11 19:26:00'),
-(10000042, 1000003, 'Office Supplies', 'Assets', 'Prepaid Items', 'R', '0.00', '3800.00', '0.00', 0, 'BS', '2019-10-11 19:27:03'),
-(10000045, 1000003, 'Prepaid Insurance', 'Assets', 'Prepaid Items', 'R', '0.00', '1800.00', '0.00', 0, 'BS', '2019-10-11 19:27:35'),
-(10000061, 1000003, 'Land', 'Assets', 'Land', 'R', '0.00', '0.00', '0.00', 0, 'BS', '2019-10-11 19:27:46'),
-(10000071, 1000003, 'Buildings', 'Assets', 'Cash Related Accounts', 'R', '0.00', '4500.00', '0.00', 0, 'BS', '2019-10-11 19:28:11'),
-(10000081, 1000003, 'Office Equipment', 'Assets', 'Equipment', 'R', '0.00', '7500.00', '0.00', 0, 'BS', '2019-10-11 19:27:59'),
-(20000001, 1000003, 'Notes Payable', 'Liabilities', 'Cash Related Accounts', 'R', '0.00', '0.00', '0.00', 0, 'BS', '2019-10-11 19:28:29'),
-(20000002, 1000003, 'Accounts Payable', 'Liabilities', 'Short-term Payables', 'R', '0.00', '800.00', '1800.00', 0, 'BS', '2019-10-11 19:28:40'),
-(30000001, 1000003, 'Capital', 'Owner\'s Equity', 'Owner\'s Equity', 'L', '0.00', '0.00', '20250.00', 0, 'BS', '2019-10-11 19:28:53'),
-(30000002, 1000003, 'Drawing', 'Owner\'s Equity', 'Owner\'s Equity', 'R', '0.00', '0.00', '0.00', 0, 'BS', '2019-10-11 19:29:06'),
-(40000001, 1000003, 'Sales', 'Revenues', 'Operating Revenues', 'L', '0.00', '0.00', '0.00', 0, 'IS', '2019-10-11 19:29:24'),
-(40000011, 1000003, 'Interest Revenue', 'Revenues', 'Other Revenues', 'L', '0.00', '0.00', '0.00', 0, 'IS', '2019-10-11 19:29:36'),
-(50000001, 1000003, 'Purchases', 'Operating Expenses', 'Cost of Goods Sold', 'R', '0.00', '0.00', '0.00', 0, 'IS', '2019-10-11 19:30:09'),
-(50000011, 1000003, 'Wages Expense', 'Operating Expenses', 'Selling Expenses', 'R', '0.00', '4900.00', '0.00', 0, 'IS', '2019-10-11 19:30:31'),
-(50000021, 1000003, 'Rent Expense', 'Operating Expenses', 'General and Administrative Expenses', 'R', '0.00', '0.00', '0.00', 0, 'IS', '2019-10-11 19:30:43');
+(10000010, 0, 'Cash', 'Assets', 'Current Assets', 'Left (Debit)', '0.00', '22475.00', '13600.00', 0, 'Balance Sheet', '2019-10-31 00:06:15'),
+(10000220, 0, 'Accounts Receivable', 'Assets', 'Current Assets', 'Left (Debit)', '0.00', '5850.00', '2400.00', 0, 'Balance Sheet', '2019-10-31 00:06:41'),
+(10000230, 0, 'Prepaid Rent', 'Assets', 'Current Assets', 'Right (Credit)', '0.00', '4500.00', '1500.00', 0, 'Balance Sheet', '2019-10-31 00:07:38'),
+(10000410, 0, 'Supplies', 'Assets', 'Current Assets', 'Right (Credit)', '0.00', '2000.00', '980.00', 0, 'Balance Sheet', '2019-10-31 00:08:20'),
+(10000450, 0, 'Prepaid Insurance', 'Assets', 'Current Assets', 'Right (Credit)', '0.00', '1800.00', '150.00', 0, 'Balance Sheet', '2019-10-31 00:08:45'),
+(10001810, 0, 'Office Equipment', 'Assets', 'Property Plant & Management', 'Right (Credit)', '0.00', '9300.00', '0.00', 0, 'Balance Sheet', '2019-10-31 00:09:11'),
+(10001811, 0, 'Office Equipment - A. D.', 'Assets', 'Property Plant & Management', 'Right (Credit)', '0.00', '0.00', '500.00', 0, 'Balance Sheet', '2019-10-31 00:11:04'),
+(20002020, 0, 'Accounts Payable', 'Liabilities', 'Current Liabilities', 'Right (Credit)', '0.00', '800.00', '1800.00', 0, 'Balance Sheet', '2019-10-31 00:12:51'),
+(20002190, 0, 'Salaries Payable', 'Liabilities', 'Current Liabilities', 'Right (Credit)', '0.00', '0.00', '20.00', 0, 'Balance Sheet', '2019-10-31 00:13:48'),
+(20002410, 0, 'Unearned Revenue', 'Liabilities', 'Current Liabilities', 'Right (Credit)', '0.00', '2000.00', '3000.00', 0, 'Balance Sheet', '2019-10-31 00:14:20'),
+(30003110, 0, 'Contributed Capital', 'Owners Equity', 'Stockholders Equity', 'Left (Debit)', '0.00', '0.00', '20250.00', 0, 'Balance Sheet', '2019-10-31 00:15:09'),
+(30003250, 0, 'Retained Earnings', 'Owners Equity', 'Stockholders Equity', 'Left (Debit)', '0.00', '0.00', '0.00', 0, 'Balance Sheet', '2019-10-31 00:15:40'),
+(40004010, 0, 'Service Revenue', 'Revenues', 'Revenues', 'Left (Debit)', '0.00', '0.00', '13425.00', 0, 'Income Statement', '2019-10-31 00:17:45'),
+(50005040, 0, 'Utilities Expense', 'Operating Expenses', 'Expenses', 'Right (Credit)', '0.00', '200.00', '0.00', 0, 'Income Statement', '2019-10-31 00:22:16'),
+(50005110, 0, 'Salaries Expense', 'Operating Expenses', 'Expenses', 'Right (Credit)', '0.00', '5320.00', '0.00', 0, 'Income Statement', '2019-10-31 00:21:06'),
+(50005120, 0, 'Advertising Expense', 'Operating Expenses', 'Expenses', 'Right (Credit)', '0.00', '120.00', '0.00', 0, 'Income Statement', '2019-10-31 00:22:42'),
+(50005210, 0, 'Rent Expense', 'Operating Expenses', 'Expenses', 'Right (Credit)', '0.00', '1500.00', '0.00', 0, 'Income Statement', '2019-10-31 00:19:48'),
+(50005230, 0, 'Supplies Expense', 'Operating Expenses', 'Expenses', 'Right (Credit)', '0.00', '980.00', '0.00', 0, 'Income Statement', '2019-10-31 00:20:32'),
+(50005250, 0, 'Telephone Expense', 'Operating Expenses', 'Expenses', 'Right (Credit)', '0.00', '130.00', '0.00', 0, 'Income Statement', '2019-10-31 00:21:33'),
+(50005350, 0, 'Insurance Expense', 'Operating Expenses', 'Expenses', 'Right (Credit)', '0.00', '150.00', '0.00', 0, 'Income Statement', '2019-10-31 00:18:34'),
+(50005420, 0, 'Depreciation Expense', 'Operating Expenses', 'Expenses', 'Right (Credit)', '0.00', '500.00', '0.00', 0, 'Income Statement', '2019-10-31 00:19:02');
 
 -- --------------------------------------------------------
 
@@ -116,18 +119,34 @@ CREATE TABLE `entries` (
 --
 
 INSERT INTO `entries` (`entryID`, `userID`, `entryDescription`, `entryDebitAccount`, `entryDebitBalance`, `entryCreditAccount`, `entryCreditBalance`, `entryStatus`, `entryStatusComment`, `entryCreateDate`) VALUES
-(10000001, 1000001, 'John Addams recievables', '[\"10000001\",\"10000022\",\"10000042\",\"10000081\"]', '[\"10000\",\"1500\",\"1250\",\"7500\"]', '[\"30000001\"]', '[\"20250\"]', 1, NULL, '2019-10-24 20:00:25'),
-(10000002, 1000001, 'Rent Payment', '[\"10000071\"]', '[\"4500\"]', '[\"10000001\"]', '[\"4500\"]', 1, NULL, '2019-10-24 20:02:46'),
-(10000003, 1000001, 'Paid Insurance', '[\"10000045\"]', '[\"1800\"]', '[\"10000001\"]', '[\"1800\"]', 1, NULL, '2019-10-24 20:04:03'),
-(10000004, 1000001, 'Purchased additional office furniture', '[\"10000042\"]', '[\"1800\"]', '[\"20000002\"]', '[\"1800\"]', 1, NULL, '2019-10-24 20:10:16'),
-(10000005, 1000001, 'Received payment from client', '[\"10000001\"]', '[\"800\"]', '[\"10000022\"]', '[\"800\"]', 1, NULL, '2019-10-24 20:11:02'),
-(10000006, 1000001, 'Paid Morllton Company for debt', '[\"20000002\"]', '[\"800\"]', '[\"10000001\"]', '[\"800\"]', 1, NULL, '2019-10-24 20:12:00'),
-(10000007, 1000001, 'Paid salaries of employees', '[\"50000011\"]', '[\"400\"]', '[\"10000001\"]', '[\"400\"]', 1, NULL, '2019-10-24 20:13:04'),
-(10000008, 1000001, 'Purchased more supplies for the office', '[\"10000042\"]', '[\"750\"]', '[\"10000001\"]', '[\"750\"]', 1, NULL, '2019-10-24 20:13:44'),
-(10000009, 1000001, 'Received cash from clients on account', '[\"10000001\"]', '[\"1600\"]', '[\"10000022\"]', '[\"1600\"]', 1, NULL, '2019-10-24 20:14:54'),
-(10000010, 1000001, 'Had to payout full salaries for month', '[\"50000011\"]', '[\"4500\"]', '[\"10000001\"]', '[\"4500\"]', 1, NULL, '2019-10-24 20:15:42'),
-(10000011, 1000001, 'Testing form validation', '[\"10000001\"]', '[\"100\"]', '[\"10000021\"]', '[\"100\"]', 0, 'Purely done for testing purposes.', '2019-10-25 20:51:24'),
-(10000012, 1000002, 'Testing log creation', '[\"10000001\"]', '[\"100\"]', '[\"10000061\"]', '[\"100\"]', 0, 'Testing log creation, not needed.', '2019-10-25 21:01:18');
+(10000013, 1000002, 'Transaction 4/4', '[\"10000010\",\"10000220\",\"10000410\",\"10001810\"]', '[\"10000\",\"1500\",\"1250\",\"7500\"]', '[\"30003110\"]', '[\"20250\"]', 1, NULL, '2019-10-31 00:30:56'),
+(10000014, 1000002, 'Transaction 4/4', '[\"10000230\"]', '[\"4500\"]', '[\"10000010\"]', '[\"4500\"]', 1, NULL, '2019-10-31 00:31:54'),
+(10000015, 1000002, 'Transaction 4/4', '[\"10000450\"]', '[\"1800\"]', '[\"10000010\"]', '[\"1800\"]', 1, NULL, '2019-10-31 00:32:19'),
+(10000016, 1000002, 'Transaction 4/6', '[\"10000010\"]', '[\"3000\"]', '[\"20002410\"]', '[\"3000\"]', 1, NULL, '2019-10-31 00:32:39'),
+(10000017, 1000002, 'Transaction 4/7', '[\"10001810\"]', '[\"1800\"]', '[\"20002020\"]', '[\"1800\"]', 1, NULL, '2019-10-31 00:32:59'),
+(10000018, 1000002, 'Transaction 4/8', '[\"10000010\"]', '[\"800\"]', '[\"10000220\"]', '[\"800\"]', 1, NULL, '2019-10-31 00:33:25'),
+(10000019, 1000002, 'Transaction 4/11', '[\"50005120\"]', '[\"120\"]', '[\"10000010\"]', '[\"120\"]', 1, NULL, '2019-10-31 00:33:58'),
+(10000020, 1000002, 'Transaction 4/12', '[\"20002020\"]', '[\"800\"]', '[\"10000010\"]', '[\"800\"]', 1, NULL, '2019-10-31 00:34:20'),
+(10000021, 1000002, 'Transaction 4/15', '[\"10000220\"]', '[\"2250\"]', '[\"40004010\"]', '[\"2250\"]', 1, NULL, '2019-10-31 00:34:46'),
+(10000022, 1000002, 'Transaction 4/15', '[\"50005110\"]', '[\"400\"]', '[\"10000010\"]', '[\"400\"]', 1, NULL, '2019-10-31 00:35:12'),
+(10000023, 1000002, 'Transaction 4/15', '[\"50005110\"]', '[\"400\"]', '[\"10000010\"]', '[\"400\"]', 0, 'Duplicate Entry', '2019-10-31 00:35:13'),
+(10000024, 1000002, 'Transaction 4/15', '[\"10000010\"]', '[\"3175\"]', '[\"40004010\"]', '[\"3175\"]', 1, NULL, '2019-10-31 00:35:43'),
+(10000025, 1000002, 'Transaction 4/18', '[\"10000410\"]', '[\"750\"]', '[\"10000010\"]', '[\"750\"]', 1, NULL, '2019-10-31 00:36:02'),
+(10000026, 1000002, 'Transaction 4/22', '[\"10000220\"]', '[\"1100\"]', '[\"40004010\"]', '[\"1100\"]', 1, NULL, '2019-10-31 00:36:26'),
+(10000027, 1000002, 'Transaction 4/22', '[\"10000010\"]', '[\"1850\"]', '[\"40004010\"]', '[\"1850\"]', 1, NULL, '2019-10-31 00:37:00'),
+(10000028, 1000002, 'Transaction 4/25', '[\"10000010\"]', '[\"1600\"]', '[\"10000220\"]', '[\"1600\"]', 1, NULL, '2019-10-31 00:37:17'),
+(10000029, 1000002, 'Transaction 4/28', '[\"50005250\"]', '[\"130\"]', '[\"10000010\"]', '[\"130\"]', 1, NULL, '2019-10-31 00:37:39'),
+(10000030, 1000002, 'Transaction 4/29', '[\"50005040\"]', '[\"200\"]', '[\"10000010\"]', '[\"200\"]', 1, NULL, '2019-10-31 00:38:06'),
+(10000031, 1000002, 'Transaction 4/29', '[\"10000010\"]', '[\"2050\"]', '[\"40004010\"]', '[\"2050\"]', 1, NULL, '2019-10-31 00:38:28'),
+(10000032, 1000002, 'Transaction 4/29', '[\"10000220\"]', '[\"1000\"]', '[\"40004010\"]', '[\"1000\"]', 1, NULL, '2019-10-31 00:38:51'),
+(10000033, 1000002, 'Transaction 4/29', '[\"50005110\"]', '[\"4500\"]', '[\"10000010\"]', '[\"4500\"]', 1, NULL, '2019-10-31 00:39:09'),
+(10000034, 1000002, 'Transaction 4/30', '[\"50005350\"]', '[\"150\"]', '[\"10000450\"]', '[\"150\"]', 1, NULL, '2019-10-31 00:39:37'),
+(10000035, 1000002, 'Transaction 4/30', '[\"50005230\"]', '[\"980\"]', '[\"10000410\"]', '[\"980\"]', 1, NULL, '2019-10-31 00:40:01'),
+(10000036, 1000002, 'Transaction 4/30', '[\"50005420\"]', '[\"500\"]', '[\"10001811\"]', '[\"500\"]', 1, NULL, '2019-10-31 00:40:27'),
+(10000037, 1000002, 'Transaction 4/30', '[\"50005110\"]', '[\"20\"]', '[\"20002190\"]', '[\"20\"]', 1, NULL, '2019-10-31 00:40:50'),
+(10000038, 1000002, 'Transaction 4/30', '[\"50005210\"]', '[\"1500\"]', '[\"10000230\"]', '[\"1500\"]', 1, NULL, '2019-10-31 00:41:14'),
+(10000039, 1000002, 'Transaction 4/30', '[\"20002410\"]', '[\"2000\"]', '[\"40004010\"]', '[\"2000\"]', 1, NULL, '2019-10-31 00:41:36'),
+(10000040, 1000002, 'Transaction 4/27', '[\"50005110\"]', '[\"400\"]', '[\"10000010\"]', '[\"400\"]', 1, NULL, '2019-10-31 00:44:32');
 
 -- --------------------------------------------------------
 
@@ -165,43 +184,68 @@ INSERT INTO `logs` (`logID`, `userID`, `logType`, `logBefore`, `logAfter`, `logD
 (10000014, 1000003, 'admin', '{\"userID\":\"1000001\",\"userEmail\":\"accountants@test.com\",\"userFirstName\":\"Accountant\",\"userLastName\":\"Person\",\"userPassword\":\"519524d3e2c7de2020f4cca2ae373b5b\",\"userPasswordAttempts\":\"0\",\"userPrevPassword\":null,\"userPasswordDate\":\"2019-09-19 13:18:18\",\"userCreationDate\":\"2019-09-19 13:18:18\",\"userRole\":\"0\",\"userActive\":\"1\",\"userActiveDate\":null}', '{\"userFirstName\":\"Accountant\",\"userLastName\":\"Person\",\"userEmail\":\"accountant@test.com\",\"userRole\":\"0\",\"userActive\":\"1\",\"userID\":\"1000001\"}', '2019-10-08 22:01:13'),
 (10000015, 1000003, 'admin', '{\"userID\":\"1000001\",\"userEmail\":\"accountant@test.com\",\"userFirstName\":\"Accountant\",\"userLastName\":\"Person\",\"userPassword\":\"519524d3e2c7de2020f4cca2ae373b5b\",\"userPasswordAttempts\":\"0\",\"userPrevPassword\":null,\"userPasswordDate\":\"2019-09-19 13:18:18\",\"userCreationDate\":\"2019-09-19 13:18:18\",\"userRole\":\"0\",\"userActive\":\"1\",\"userActiveDate\":null}', '{\"userFirstName\":\"Accountant\",\"userLastName\":\"Person\",\"userEmail\":\"accountant@test.com\",\"userRole\":\"0\",\"userActive\":\"1\",\"userPassword\":\"9839bdd0ed4842dab367036fa233d871\",\"userID\":\"1000001\"}', '2019-10-08 22:01:22'),
 (10000016, 1000003, 'admin', '{\"userID\":\"1000001\",\"userEmail\":\"accountant@test.com\",\"userFirstName\":\"Accountant\",\"userLastName\":\"Person\",\"userPassword\":\"9839bdd0ed4842dab367036fa233d871\",\"userPasswordAttempts\":\"0\",\"userPrevPassword\":null,\"userPasswordDate\":\"2019-09-19 13:18:18\",\"userCreationDate\":\"2019-09-19 13:18:18\",\"userRole\":\"0\",\"userActive\":\"1\",\"userActiveDate\":null}', '{\"userFirstName\":\"Accountant\",\"userLastName\":\"Person\",\"userEmail\":\"accountant@test.com\",\"userRole\":\"0\",\"userActive\":\"1\",\"userPassword\":\"c2391dedefcd683e3c5e5c50f5ef9615\",\"userID\":\"1000001\"}', '2019-10-08 22:01:33'),
-(10000017, 1000003, 'accounts', '{\"accountID\":\"101\",\"userID\":\"1000003\",\"accountName\":\"Cash\",\"accountDescription\":\"This is the cash account.\",\"accountCategory\":\"Assets\",\"accountCategorySub\":\"Cash Related Accounts\",\"accountSide\":\"L\",\"accountBalance\":\"0\",\"accountDebit\":\"0\",\"accountCredit\":\"0\",\"accountOrder\":\"1\",\"accountStatement\":\"BS\",\"accountCreationDate\":\"2019-09-30 12:43:37\"}', '{\"accountName\":\"Cashs\",\"accountDescription\":\"This is the cash account.s\",\"accountCategory\":\"Liabilities\",\"accountCategorySub\":\"Cash Related Accounts\",\"accountSide\":\"R\",\"accountStatement\":\"IS\",\"accountID\":\"101\"}', '2019-10-08 22:06:30'),
-(10000018, 1000003, 'accounts', '{\"accountID\":\"101\",\"userID\":\"1000003\",\"accountName\":\"Cashs\",\"accountDescription\":\"This is the cash account.s\",\"accountCategory\":\"Liabilities\",\"accountCategorySub\":\"Cash Related Accounts\",\"accountSide\":\"R\",\"accountBalance\":\"0\",\"accountDebit\":\"0\",\"accountCredit\":\"0\",\"accountOrder\":\"1\",\"accountStatement\":\"IS\",\"accountCreationDate\":\"2019-09-30 12:43:37\"}', '{\"accountName\":\"Cashs\",\"accountDescription\":\"This is the cash account.s\",\"accountCategory\":\"Assets\",\"accountSide\":\"L\",\"accountStatement\":\"BS\",\"accountID\":\"101\"}', '2019-10-08 22:06:45'),
-(10000019, 1000003, 'accounts', '{\"accountID\":\"101\",\"userID\":\"1000003\",\"accountName\":\"Cashs\",\"accountDescription\":\"This is the cash account.s\",\"accountCategory\":\"Assets\",\"accountCategorySub\":\"Cash Related Accounts\",\"accountSide\":\"L\",\"accountBalance\":\"0\",\"accountDebit\":\"0\",\"accountCredit\":\"0\",\"accountOrder\":\"1\",\"accountStatement\":\"BS\",\"accountCreationDate\":\"2019-09-30 12:43:37\"}', '{\"accountName\":\"Cash\",\"accountDescription\":\"This is the cash account.\",\"accountID\":\"101\"}', '2019-10-08 22:11:47'),
-(10000020, 1000003, 'accounts', '{\"accountID\":\"401\",\"userID\":\"0\",\"accountName\":\"Sales\",\"accountCategory\":\"Assets\",\"accountCategorySub\":\"Cash Related Accounts\",\"accountSide\":\"L\",\"accountBalance\":\"0\",\"accountDebit\":\"0\",\"accountCredit\":\"0\",\"accountOrder\":\"0\",\"accountStatement\":\"BS\",\"accountCreationDate\":\"2019-10-11 15:29:24\"}', '{\"accountName\":\"Sales\",\"accountStatement\":\"IS\",\"accountID\":\"401\"}', '2019-10-11 19:29:55'),
-(10000021, 1000003, 'accounts', '{\"accountID\":\"411\",\"userID\":\"0\",\"accountName\":\"Interest Revenue\",\"accountCategory\":\"Assets\",\"accountCategorySub\":\"Cash Related Accounts\",\"accountSide\":\"L\",\"accountBalance\":\"0\",\"accountDebit\":\"0\",\"accountCredit\":\"0\",\"accountOrder\":\"0\",\"accountStatement\":\"BS\",\"accountCreationDate\":\"2019-10-11 15:29:36\"}', '{\"accountName\":\"Interest Revenue\",\"accountStatement\":\"IS\",\"accountID\":\"411\"}', '2019-10-11 19:29:59'),
-(10000022, 1000003, 'accounts', '{\"accountID\":\"521\",\"userID\":\"0\",\"accountName\":\"Rent Expense\",\"accountCategory\":\"Assets\",\"accountCategorySub\":\"Cash Related Accounts\",\"accountSide\":\"L\",\"accountBalance\":\"0\",\"accountDebit\":\"0\",\"accountCredit\":\"0\",\"accountOrder\":\"0\",\"accountStatement\":\"IS\",\"accountCreationDate\":\"2019-10-11 15:30:43\"}', '{\"accountName\":\"Rent Expense\",\"accountCategory\":\"Operating Expenses\",\"accountCategorySub\":\"General and Administrative Expenses\",\"accountSide\":\"R\",\"accountStatement\":\"BS\",\"accountID\":\"521\"}', '2019-10-11 19:34:37'),
-(10000023, 1000003, 'accounts', '{\"accountID\":\"511\",\"userID\":\"0\",\"accountName\":\"Wages Expense\",\"accountCategory\":\"Assets\",\"accountCategorySub\":\"Cash Related Accounts\",\"accountSide\":\"L\",\"accountBalance\":\"0\",\"accountDebit\":\"0\",\"accountCredit\":\"0\",\"accountOrder\":\"0\",\"accountStatement\":\"IS\",\"accountCreationDate\":\"2019-10-11 15:30:31\"}', '{\"accountName\":\"Wages Expense\",\"accountCategory\":\"Operating Expenses\",\"accountCategorySub\":\"Selling Expenses\",\"accountSide\":\"R\",\"accountStatement\":\"IS\",\"accountID\":\"511\"}', '2019-10-11 19:34:49'),
-(10000024, 1000003, 'accounts', '{\"accountID\":\"521\",\"userID\":\"0\",\"accountName\":\"Rent Expense\",\"accountCategory\":\"Operating Expenses\",\"accountCategorySub\":\"General and Administrative Expenses\",\"accountSide\":\"R\",\"accountBalance\":\"0\",\"accountDebit\":\"0\",\"accountCredit\":\"0\",\"accountOrder\":\"0\",\"accountStatement\":\"BS\",\"accountCreationDate\":\"2019-10-11 15:30:43\"}', '{\"accountName\":\"Rent Expense\",\"accountCategory\":\"Operating Expenses\",\"accountCategorySub\":\"General and Administrative Expenses\",\"accountStatement\":\"IS\",\"accountID\":\"521\"}', '2019-10-11 19:34:59'),
-(10000025, 1000003, 'accounts', '{\"accountID\":\"504\",\"userID\":\"0\",\"accountName\":\"Overhead\",\"accountCategory\":\"Assets\",\"accountCategorySub\":\"Cash Related Accounts\",\"accountSide\":\"L\",\"accountBalance\":\"0\",\"accountDebit\":\"0\",\"accountCredit\":\"0\",\"accountOrder\":\"0\",\"accountStatement\":\"IS\",\"accountCreationDate\":\"2019-10-11 15:30:16\"}', '{\"accountName\":\"Overhead\",\"accountCategory\":\"Operating Expenses\",\"accountCategorySub\":\"Cost of Goods Sold\",\"accountSide\":\"R\",\"accountStatement\":\"IS\",\"accountID\":\"504\"}', '2019-10-11 19:35:21'),
-(10000026, 1000003, 'accounts', '{\"accountID\":\"504\",\"userID\":\"0\",\"accountName\":\"Overhead\",\"accountCategory\":\"Operating Expenses\",\"accountCategorySub\":\"Cost of Goods Sold\",\"accountSide\":\"R\",\"accountBalance\":\"0\",\"accountDebit\":\"0\",\"accountCredit\":\"0\",\"accountOrder\":\"0\",\"accountStatement\":\"IS\",\"accountCreationDate\":\"2019-10-11 15:30:16\"}', '{\"accountName\":\"Overhead\",\"accountCategory\":\"Operating Expenses\",\"accountCategorySub\":\"Cost of Goods Sold\",\"accountSide\":\"L\",\"accountStatement\":\"IS\",\"accountID\":\"504\"}', '2019-10-11 19:35:31'),
-(10000027, 1000003, 'accounts', '{\"accountID\":\"501\",\"userID\":\"0\",\"accountName\":\"Purchases\",\"accountCategory\":\"Assets\",\"accountCategorySub\":\"Cash Related Accounts\",\"accountSide\":\"L\",\"accountBalance\":\"0\",\"accountDebit\":\"0\",\"accountCredit\":\"0\",\"accountOrder\":\"0\",\"accountStatement\":\"IS\",\"accountCreationDate\":\"2019-10-11 15:30:09\"}', '{\"accountName\":\"Purchases\",\"accountCategory\":\"Operating Expenses\",\"accountCategorySub\":\"Cost of Goods Sold\",\"accountSide\":\"R\",\"accountID\":\"501\"}', '2019-10-11 19:36:22'),
-(10000028, 1000003, 'accounts', '{\"accountID\":\"411\",\"userID\":\"0\",\"accountName\":\"Interest Revenue\",\"accountCategory\":\"Assets\",\"accountCategorySub\":\"Cash Related Accounts\",\"accountSide\":\"L\",\"accountBalance\":\"0\",\"accountDebit\":\"0\",\"accountCredit\":\"0\",\"accountOrder\":\"0\",\"accountStatement\":\"IS\",\"accountCreationDate\":\"2019-10-11 15:29:36\"}', '{\"accountName\":\"Interest Revenue\",\"accountCategory\":\"Revenues\",\"accountCategorySub\":\"Other Revenues\",\"accountID\":\"411\"}', '2019-10-11 19:36:36'),
-(10000029, 1000003, 'accounts', '{\"accountID\":\"401\",\"userID\":\"0\",\"accountName\":\"Sales\",\"accountCategory\":\"Assets\",\"accountCategorySub\":\"Cash Related Accounts\",\"accountSide\":\"L\",\"accountBalance\":\"0\",\"accountDebit\":\"0\",\"accountCredit\":\"0\",\"accountOrder\":\"0\",\"accountStatement\":\"IS\",\"accountCreationDate\":\"2019-10-11 15:29:24\"}', '{\"accountName\":\"Sales\",\"accountCategory\":\"Revenues\",\"accountCategorySub\":\"Operative Revenues\",\"accountID\":\"401\"}', '2019-10-11 19:36:51'),
-(10000030, 1000003, 'accounts', '{\"accountID\":\"401\",\"userID\":\"0\",\"accountName\":\"Sales\",\"accountCategory\":\"Revenues\",\"accountCategorySub\":\"Operative Revenues\",\"accountSide\":\"L\",\"accountBalance\":\"0\",\"accountDebit\":\"0\",\"accountCredit\":\"0\",\"accountOrder\":\"0\",\"accountStatement\":\"IS\",\"accountCreationDate\":\"2019-10-11 15:29:24\"}', '{\"accountName\":\"Sales\",\"accountCategory\":\"Revenues\",\"accountCategorySub\":\"Operating Revenues\",\"accountID\":\"401\"}', '2019-10-11 19:37:23'),
-(10000031, 1000003, 'accounts', '{\"accountID\":\"302\",\"userID\":\"0\",\"accountName\":\"Drawing\",\"accountCategory\":\"Assets\",\"accountCategorySub\":\"Cash Related Accounts\",\"accountSide\":\"L\",\"accountBalance\":\"0\",\"accountDebit\":\"0\",\"accountCredit\":\"0\",\"accountOrder\":\"0\",\"accountStatement\":\"BS\",\"accountCreationDate\":\"2019-10-11 15:29:06\"}', '{\"accountName\":\"Drawing\",\"accountCategory\":\"Owner\'s Equity\",\"accountCategorySub\":\"Owner\'s Equity\",\"accountSide\":\"R\",\"accountID\":\"302\"}', '2019-10-11 19:37:50'),
-(10000032, 1000003, 'accounts', '{\"accountID\":\"301\",\"userID\":\"0\",\"accountName\":\"Capital\",\"accountCategory\":\"Assets\",\"accountCategorySub\":\"Cash Related Accounts\",\"accountSide\":\"L\",\"accountBalance\":\"0\",\"accountDebit\":\"0\",\"accountCredit\":\"0\",\"accountOrder\":\"0\",\"accountStatement\":\"BS\",\"accountCreationDate\":\"2019-10-11 15:28:53\"}', '{\"accountName\":\"Capital\",\"accountCategory\":\"Owner\'s Equity\",\"accountCategorySub\":\"Owner\'s Equity\",\"accountSide\":\"L\",\"accountID\":\"301\"}', '2019-10-11 19:37:59'),
-(10000033, 1000003, 'accounts', '{\"accountID\":\"202\",\"userID\":\"0\",\"accountName\":\"Accounts Payable\",\"accountCategory\":\"Liabilities\",\"accountCategorySub\":\"Cash Related Accounts\",\"accountSide\":\"L\",\"accountBalance\":\"0\",\"accountDebit\":\"0\",\"accountCredit\":\"0\",\"accountOrder\":\"0\",\"accountStatement\":\"BS\",\"accountCreationDate\":\"2019-10-11 15:28:40\"}', '{\"accountName\":\"Accounts Payable\",\"accountCategorySub\":\"Short-term Payables\",\"accountSide\":\"R\",\"accountID\":\"202\"}', '2019-10-11 19:38:14'),
-(10000034, 1000003, 'accounts', '{\"accountID\":\"201\",\"userID\":\"0\",\"accountName\":\"Notes Payable\",\"accountCategory\":\"Liabilities\",\"accountCategorySub\":\"Cash Related Accounts\",\"accountSide\":\"L\",\"accountBalance\":\"0\",\"accountDebit\":\"0\",\"accountCredit\":\"0\",\"accountOrder\":\"0\",\"accountStatement\":\"BS\",\"accountCreationDate\":\"2019-10-11 15:28:29\"}', '{\"accountName\":\"Notes Payable\",\"accountCategorySub\":\"Short-term Payables\",\"accountSide\":\"L\",\"accountID\":\"201\"}', '2019-10-11 19:38:27'),
-(10000035, 1000003, 'accounts', '{\"accountID\":\"181\",\"userID\":\"0\",\"accountName\":\"Office Equipment\",\"accountCategory\":\"Assets\",\"accountCategorySub\":\"Cash Related Accounts\",\"accountSide\":\"L\",\"accountBalance\":\"0\",\"accountDebit\":\"0\",\"accountCredit\":\"0\",\"accountOrder\":\"0\",\"accountStatement\":\"BS\",\"accountCreationDate\":\"2019-10-11 15:27:59\"}', '{\"accountName\":\"Office Equipment\",\"accountCategorySub\":\"Equipment\",\"accountSide\":\"R\",\"accountID\":\"181\"}', '2019-10-11 19:38:41'),
-(10000036, 1000003, 'accounts', '{\"accountID\":\"171\",\"userID\":\"0\",\"accountName\":\"Buildings\",\"accountCategory\":\"Assets\",\"accountCategorySub\":\"Cash Related Accounts\",\"accountSide\":\"L\",\"accountBalance\":\"0\",\"accountDebit\":\"0\",\"accountCredit\":\"0\",\"accountOrder\":\"0\",\"accountStatement\":\"BS\",\"accountCreationDate\":\"2019-10-11 15:28:11\"}', '{\"accountName\":\"Buildings\",\"accountCategorySub\":\"Buildings\",\"accountID\":\"171\"}', '2019-10-11 19:38:52'),
-(10000037, 1000003, 'accounts', '{\"accountID\":\"161\",\"userID\":\"0\",\"accountName\":\"Land\",\"accountCategory\":\"Assets\",\"accountCategorySub\":\"Cash Related Accounts\",\"accountSide\":\"L\",\"accountBalance\":\"0\",\"accountDebit\":\"0\",\"accountCredit\":\"0\",\"accountOrder\":\"0\",\"accountStatement\":\"BS\",\"accountCreationDate\":\"2019-10-11 15:27:46\"}', '{\"accountName\":\"Land\",\"accountCategorySub\":\"Land\",\"accountSide\":\"R\",\"accountID\":\"161\"}', '2019-10-11 19:38:57'),
-(10000038, 1000003, 'accounts', '{\"accountID\":\"171\",\"userID\":\"0\",\"accountName\":\"Buildings\",\"accountCategory\":\"Assets\",\"accountCategorySub\":\"Buildings\",\"accountSide\":\"L\",\"accountBalance\":\"0\",\"accountDebit\":\"0\",\"accountCredit\":\"0\",\"accountOrder\":\"0\",\"accountStatement\":\"BS\",\"accountCreationDate\":\"2019-10-11 15:28:11\"}', '{\"accountName\":\"Buildings\",\"accountCategorySub\":\"Cash Related Accounts\",\"accountSide\":\"R\",\"accountID\":\"171\"}', '2019-10-11 19:39:03'),
-(10000039, 1000003, 'accounts', '{\"accountID\":\"145\",\"userID\":\"0\",\"accountName\":\"Prepaid Insurance\",\"accountCategory\":\"Assets\",\"accountCategorySub\":\"Cash Related Accounts\",\"accountSide\":\"L\",\"accountBalance\":\"0\",\"accountDebit\":\"0\",\"accountCredit\":\"0\",\"accountOrder\":\"0\",\"accountStatement\":\"BS\",\"accountCreationDate\":\"2019-10-11 15:27:35\"}', '{\"accountName\":\"Prepaid Insurance\",\"accountCategorySub\":\"Prepaid Items\",\"accountSide\":\"R\",\"accountID\":\"145\"}', '2019-10-11 19:39:11'),
-(10000040, 1000003, 'accounts', '{\"accountID\":\"142\",\"userID\":\"0\",\"accountName\":\"Office Supplies\",\"accountCategory\":\"Assets\",\"accountCategorySub\":\"Cash Related Accounts\",\"accountSide\":\"L\",\"accountBalance\":\"0\",\"accountDebit\":\"0\",\"accountCredit\":\"0\",\"accountOrder\":\"0\",\"accountStatement\":\"BS\",\"accountCreationDate\":\"2019-10-11 15:27:03\"}', '{\"accountName\":\"Office Supplies\",\"accountCategorySub\":\"Prepaid Items\",\"accountSide\":\"R\",\"accountID\":\"142\"}', '2019-10-11 19:39:20'),
-(10000041, 1000003, 'accounts', '{\"accountID\":\"131\",\"userID\":\"0\",\"accountName\":\"Merchandise Inventory\",\"accountCategory\":\"Assets\",\"accountCategorySub\":\"Cash Related Accounts\",\"accountSide\":\"L\",\"accountBalance\":\"0\",\"accountDebit\":\"0\",\"accountCredit\":\"0\",\"accountOrder\":\"0\",\"accountStatement\":\"BS\",\"accountCreationDate\":\"2019-10-11 15:26:00\"}', '{\"accountName\":\"Merchandise Inventory\",\"accountCategorySub\":\"Inventories\",\"accountSide\":\"R\",\"accountID\":\"131\"}', '2019-10-11 19:39:26'),
-(10000042, 1000003, 'accounts', '{\"accountID\":\"122\",\"userID\":\"0\",\"accountName\":\"Accounts Receivable\",\"accountCategory\":\"Assets\",\"accountCategorySub\":\"Cash Related Accounts\",\"accountSide\":\"L\",\"accountBalance\":\"0\",\"accountDebit\":\"0\",\"accountCredit\":\"0\",\"accountOrder\":\"0\",\"accountStatement\":\"BS\",\"accountCreationDate\":\"2019-10-11 15:25:26\"}', '{\"accountName\":\"Accounts Receivable\",\"accountCategorySub\":\"Recievables\",\"accountID\":\"122\"}', '2019-10-11 19:39:31'),
-(10000043, 1000003, 'accounts', '{\"accountID\":\"121\",\"userID\":\"1000003\",\"accountName\":\"Notes Receivable\",\"accountCategory\":\"Assets\",\"accountCategorySub\":\"Receivables\",\"accountSide\":\"L\",\"accountBalance\":\"0\",\"accountDebit\":\"0\",\"accountCredit\":\"0\",\"accountOrder\":\"1\",\"accountStatement\":\"BS\",\"accountCreationDate\":\"2019-09-30 13:52:00\"}', '{\"accountName\":\"Notes Receivable\",\"accountCategorySub\":\"Recievables\",\"accountID\":\"121\"}', '2019-10-11 19:39:35'),
-(10000044, 1000003, 'accounts', '{\"accountID\":\"201\",\"userID\":\"0\",\"accountName\":\"Notes Payable\",\"accountCategory\":\"Liabilities\",\"accountCategorySub\":\"Short-term Payables\",\"accountSide\":\"L\",\"accountBalance\":\"0\",\"accountDebit\":\"0\",\"accountCredit\":\"0\",\"accountOrder\":\"0\",\"accountStatement\":\"BS\",\"accountCreationDate\":\"2019-10-11 15:28:29\"}', '{\"accountName\":\"Notes Payable\",\"accountCategorySub\":\"Cash Related Accounts\",\"accountSide\":\"R\",\"accountID\":\"201\"}', '2019-10-11 19:39:43'),
-(10000045, 1000003, 'accounts', '{\"accountID\":\"504\",\"userID\":\"0\",\"accountName\":\"Overhead\",\"accountCategory\":\"Operating Expenses\",\"accountCategorySub\":\"Cost of Goods Sold\",\"accountSide\":\"L\",\"accountBalance\":\"0\",\"accountDebit\":\"0\",\"accountCredit\":\"0\",\"accountOrder\":\"0\",\"accountStatement\":\"IS\",\"accountCreationDate\":\"2019-10-11 15:30:16\"}', '{\"accountName\":\"Overhead\",\"accountCategory\":\"Assets\",\"accountCategorySub\":\"Cash Related Accounts\",\"accountSide\":\"R\",\"accountID\":\"504\"}', '2019-10-11 19:42:43'),
 (10000046, 1000003, 'admin', '{\"userID\":\"1000001\",\"userEmail\":\"accountant@test.com\",\"userFirstName\":\"Accountant\",\"userLastName\":\"Person\",\"userPassword\":\"c2391dedefcd683e3c5e5c50f5ef9615\",\"userPasswordAttempts\":\"0\",\"userPrevPassword\":null,\"userPasswordDate\":\"2019-09-19 13:18:18\",\"userCreationDate\":\"2019-09-19 13:18:18\",\"userRole\":\"0\",\"userActive\":\"1\",\"userActiveDate\":null}', '{\"userFirstName\":\"Accountant\",\"userLastName\":\"Person\",\"userEmail\":\"accountant@test.com\",\"userRole\":\"0\",\"userActive\":\"1\",\"userPassword\":\"519524d3e2c7de2020f4cca2ae373b5b\",\"userID\":\"1000001\"}', '2019-10-13 22:09:23'),
 (10000047, 1000003, 'users', '{\"userID\":\"1000003\",\"userName\":\"APerson0919\",\"userFirstName\":\"Admin\",\"userLastName\":\"Person\",\"userEmail\":\"administrator@test.com\",\"userRole\":\"20\"}', '{\"userFirstName\":\"Admin\",\"userLastName\":\"Person\",\"userEmail\":\"administrator@test.com\",\"userPassword\":\"6a0c60f307c789f24b3b65a88e04dbf4\",\"userID\":\"1000003\"}', '2019-10-25 20:18:37'),
 (10000048, 1000003, 'users', '{\"userID\":\"1000003\",\"userName\":\"APerson0919\",\"userFirstName\":\"Admin\",\"userLastName\":\"Person\",\"userEmail\":\"administrator@test.com\",\"userRole\":\"20\"}', '{\"userFirstName\":\"Admin\",\"userLastName\":\"Person\",\"userEmail\":\"administrator@test.com\",\"userPassword\":\"985de320ae9dc7cb28692edd5b3afa72\",\"userID\":\"1000003\"}', '2019-10-25 20:19:03'),
 (10000049, 1000003, 'users', '{\"userID\":\"1000003\",\"userName\":\"APerson0919\",\"userFirstName\":\"Admin\",\"userLastName\":\"Person\",\"userEmail\":\"administrator@test.com\",\"userRole\":\"20\"}', '{\"userFirstName\":\"Admins\",\"userLastName\":\"Person\",\"userEmail\":\"administrator@test.com\",\"userID\":\"1000003\"}', '2019-10-25 20:20:11'),
-(10000050, 1000002, 'entries', '10000012', 'Created', '2019-10-25 21:01:18'),
-(10000051, 1000002, 'entries', '10000012', 'Rejected: Testing log creation, not needed.', '2019-10-25 21:21:37'),
 (10000052, 1000002, 'users', '{\"userID\":\"1000002\",\"userName\":\"MPerson0919\",\"userFirstName\":\"Manager\",\"userLastName\":\"Person\",\"userEmail\":\"manager@test.com\",\"userRole\":\"10\"}', '{\"userFirstName\":\"Manager\",\"userLastName\":\"Person\",\"userEmail\":\"manager@test.com\",\"userPassword\":\"5980ba484aeddde546d5e79eb893dc58\",\"userID\":\"1000002\"}', '2019-10-25 22:30:31'),
-(10000053, 1000003, 'users', '{\"userID\":\"1000003\",\"userName\":\"APerson0919\",\"userFirstName\":\"Admins\",\"userLastName\":\"Person\",\"userEmail\":\"administrator@test.com\",\"userRole\":\"20\"}', '{\"userFirstName\":\"Admins\",\"userLastName\":\"Person\",\"userEmail\":\"administrator@test.com\",\"userPassword\":\"985de320ae9dc7cb28692edd5b3afa72\",\"userID\":\"1000003\"}', '2019-10-25 22:31:21');
+(10000053, 1000003, 'users', '{\"userID\":\"1000003\",\"userName\":\"APerson0919\",\"userFirstName\":\"Admins\",\"userLastName\":\"Person\",\"userEmail\":\"administrator@test.com\",\"userRole\":\"20\"}', '{\"userFirstName\":\"Admins\",\"userLastName\":\"Person\",\"userEmail\":\"administrator@test.com\",\"userPassword\":\"985de320ae9dc7cb28692edd5b3afa72\",\"userID\":\"1000003\"}', '2019-10-25 22:31:21'),
+(10000054, 1000002, 'entries', '10000013', 'Created', '2019-10-31 00:30:56'),
+(10000055, 1000002, 'entries', '10000014', 'Created', '2019-10-31 00:31:54'),
+(10000056, 1000002, 'entries', '10000015', 'Created', '2019-10-31 00:32:19'),
+(10000057, 1000002, 'entries', '10000016', 'Created', '2019-10-31 00:32:39'),
+(10000058, 1000002, 'entries', '10000017', 'Created', '2019-10-31 00:32:59'),
+(10000059, 1000002, 'entries', '10000018', 'Created', '2019-10-31 00:33:25'),
+(10000060, 1000002, 'entries', '10000019', 'Created', '2019-10-31 00:33:58'),
+(10000061, 1000002, 'entries', '10000020', 'Created', '2019-10-31 00:34:20'),
+(10000062, 1000002, 'entries', '10000021', 'Created', '2019-10-31 00:34:46'),
+(10000063, 1000002, 'entries', '10000022', 'Created', '2019-10-31 00:35:13'),
+(10000064, 1000002, 'entries', '10000023', 'Created', '2019-10-31 00:35:13'),
+(10000065, 1000002, 'entries', '10000023', 'Rejected: Duplicate Entry', '2019-10-31 00:35:22'),
+(10000066, 1000002, 'entries', '10000024', 'Created', '2019-10-31 00:35:43'),
+(10000067, 1000002, 'entries', '10000025', 'Created', '2019-10-31 00:36:02'),
+(10000068, 1000002, 'entries', '10000026', 'Created', '2019-10-31 00:36:26'),
+(10000069, 1000002, 'entries', '10000027', 'Created', '2019-10-31 00:37:00'),
+(10000070, 1000002, 'entries', '10000028', 'Created', '2019-10-31 00:37:17'),
+(10000071, 1000002, 'entries', '10000029', 'Created', '2019-10-31 00:37:39'),
+(10000072, 1000002, 'entries', '10000030', 'Created', '2019-10-31 00:38:06'),
+(10000073, 1000002, 'entries', '10000031', 'Created', '2019-10-31 00:38:28'),
+(10000074, 1000002, 'entries', '10000032', 'Created', '2019-10-31 00:38:51'),
+(10000075, 1000002, 'entries', '10000033', 'Created', '2019-10-31 00:39:09'),
+(10000076, 1000002, 'entries', '10000034', 'Created', '2019-10-31 00:39:37'),
+(10000077, 1000002, 'entries', '10000035', 'Created', '2019-10-31 00:40:01'),
+(10000078, 1000002, 'entries', '10000036', 'Created', '2019-10-31 00:40:27'),
+(10000079, 1000002, 'entries', '10000037', 'Created', '2019-10-31 00:40:50'),
+(10000080, 1000002, 'entries', '10000038', 'Created', '2019-10-31 00:41:14'),
+(10000081, 1000002, 'entries', '10000039', 'Created', '2019-10-31 00:41:36'),
+(10000082, 1000002, 'entries', '10000013', 'Approved', '2019-10-31 00:41:38'),
+(10000083, 1000002, 'entries', '10000014', 'Approved', '2019-10-31 00:41:40'),
+(10000084, 1000002, 'entries', '10000015', 'Approved', '2019-10-31 00:41:42'),
+(10000085, 1000002, 'entries', '10000016', 'Approved', '2019-10-31 00:41:44'),
+(10000086, 1000002, 'entries', '10000017', 'Approved', '2019-10-31 00:41:45'),
+(10000087, 1000002, 'entries', '10000018', 'Approved', '2019-10-31 00:41:47'),
+(10000088, 1000002, 'entries', '10000019', 'Approved', '2019-10-31 00:41:49'),
+(10000089, 1000002, 'entries', '10000020', 'Approved', '2019-10-31 00:41:51'),
+(10000090, 1000002, 'entries', '10000021', 'Approved', '2019-10-31 00:41:52'),
+(10000091, 1000002, 'entries', '10000022', 'Approved', '2019-10-31 00:41:54'),
+(10000092, 1000002, 'entries', '10000024', 'Approved', '2019-10-31 00:41:55'),
+(10000093, 1000002, 'entries', '10000026', 'Approved', '2019-10-31 00:41:57'),
+(10000094, 1000002, 'entries', '10000025', 'Approved', '2019-10-31 00:41:59'),
+(10000095, 1000002, 'entries', '10000027', 'Approved', '2019-10-31 00:42:00'),
+(10000096, 1000002, 'entries', '10000028', 'Approved', '2019-10-31 00:42:02'),
+(10000097, 1000002, 'entries', '10000029', 'Approved', '2019-10-31 00:42:04'),
+(10000098, 1000002, 'entries', '10000030', 'Approved', '2019-10-31 00:42:05'),
+(10000099, 1000002, 'entries', '10000031', 'Approved', '2019-10-31 00:42:06'),
+(10000100, 1000002, 'entries', '10000032', 'Approved', '2019-10-31 00:42:07'),
+(10000101, 1000002, 'entries', '10000033', 'Approved', '2019-10-31 00:42:08'),
+(10000102, 1000002, 'entries', '10000034', 'Approved', '2019-10-31 00:42:09'),
+(10000103, 1000002, 'entries', '10000035', 'Approved', '2019-10-31 00:42:09'),
+(10000104, 1000002, 'entries', '10000036', 'Approved', '2019-10-31 00:42:10'),
+(10000105, 1000002, 'entries', '10000037', 'Approved', '2019-10-31 00:42:11'),
+(10000106, 1000002, 'entries', '10000038', 'Approved', '2019-10-31 00:42:12'),
+(10000107, 1000002, 'entries', '10000039', 'Approved', '2019-10-31 00:42:13'),
+(10000108, 1000002, 'entries', '10000040', 'Created', '2019-10-31 00:44:32'),
+(10000109, 1000002, 'entries', '10000040', 'Approved', '2019-10-31 00:44:34');
 
 -- --------------------------------------------------------
 
@@ -295,13 +339,13 @@ ALTER TABLE `accounts_categories_sub`
 -- AUTO_INCREMENT for table `entries`
 --
 ALTER TABLE `entries`
-  MODIFY `entryID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10000013;
+  MODIFY `entryID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10000041;
 
 --
 -- AUTO_INCREMENT for table `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `logID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10000054;
+  MODIFY `logID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10000110;
 
 --
 -- AUTO_INCREMENT for table `users`
