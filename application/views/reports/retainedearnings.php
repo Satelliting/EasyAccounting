@@ -6,7 +6,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<p class="text-center col-md-12">
 					Easy Accounting<br />
 					Statement of Retained Earnings<br />
-					For the Year Ended October 30, 2019<br />
+					For the Year Ended November 30, 2019<br />
 				</p>
 			</div>
 
@@ -20,7 +20,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					</thead>
 					<tbody class="searchable">
 						<tr>
-							<td class="text-center">Beg Retained Earnings, 10/1/19</td>
+							<td class="text-center">Beg Retained Earnings, 11/1/19</td>
 							<td class="text-right">$0.00</td>
 						</tr>
 <?php

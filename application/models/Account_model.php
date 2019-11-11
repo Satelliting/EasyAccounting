@@ -60,5 +60,109 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			return false;
 		}
 
+		# Get Total of Account Category
+		public function getAccountCategoryTotal($accountCategory){
+			$getSQL = "SELECT * FROM accounts WHERE accountCategory='{$accountCategory}'";
+			$queryDB = $this->db->query($getSQL);
+			$accountInfo = $queryDB->result();
+
+			$categoryTotal = 0;
+
+			foreach ($accountInfo as $account){
+				$account = (array) $account;
+				switch($accountCategory){
+					case 'Assets':
+						$categoryTotal += $account['accountDebit'] - $account['accountCredit'];
+					break;
+					case 'Liabilities':
+						$categoryTotal += $account['accountCredit'] - $account['accountDebit'];
+					break;
+				}
+			}
+			return $categoryTotal;
+		}
+
+
+		# Get Quick Ratio Model
+		public function getQuickRatio(){
+			$getSQL = "SELECT * FROM accounts WHERE accountName='Cash' OR accountName='Accounts Receivable'";
+			$queryDB = $this->db->query($getSQL);
+			$accountInfo = $queryDB->result();
+
+			$currentAssets = 0.00;
+
+			foreach ($accountInfo as $account){
+				$account = (array) $account;
+				$currentAssets += $account['accountDebit'] - $account['accountCredit'];
+			}
+
+			var_dump($currentAssets);
+
+			$getSQL = "SELECT * FROM accounts WHERE accountCategorySub='Current Liabilities'";
+			$queryDB = $this->db->query($getSQL);
+			$accountInfo = $queryDB->result();
+
+			$currentLiabilities = 0.00;
+
+			foreach ($accountInfo as $account){
+				$account = (array) $account;
+				$currentLiabilities += $account['accountCredit'] - $account['accountDebit'];
+			}
+
+			var_dump($currentLiabilities);
+			return $currentAssets / $currentLiabilities;
+
+		}
+
+
+		# Get Current Ratio Model
+		public function getCurrentRatio(){
+			$getSQL = "SELECT * FROM accounts WHERE accountCategorySub='Current Assets'";
+			$queryDB = $this->db->query($getSQL);
+			$accountInfo = $queryDB->result();
+
+			$currentAssets = 0.00;
+
+			foreach ($accountInfo as $account){
+				$account = (array) $account;
+				$currentAssets += $account['accountDebit'] - $account['accountCredit'];
+			}
+
+			$getSQL = "SELECT * FROM accounts WHERE accountCategorySub='Current Liabilities'";
+			$queryDB = $this->db->query($getSQL);
+			$accountInfo = $queryDB->result();
+
+			$currentLiabilities = 0.00;
+
+			foreach ($accountInfo as $account){
+				$account = (array) $account;
+				$currentLiabilities += $account['accountCredit'] - $account['accountDebit'];
+			}
+			return $currentAssets / $currentLiabilities;
+
+		}
+
+
+		# Get Entry Total
+		public function getEntryTotal($entryType = NULL){
+			switch($entryType){
+				case 'approved':
+					$getSQL = "SELECT * FROM entries WHERE entryStatus=1";
+				break;
+				case 'pending':
+					$getSQL = "SELECT * FROM entries WHERE entryStatus=0 AND entryStatusComment=NULL";
+				break;
+				case 'rejected':
+					$getSQL = "SELECT * FROM entries WHERE entryStatus=0 AND entryStatusComment!=NULL";
+				break;
+				default:
+					$getSQL = "SELECT * FROM entries";
+				break;
+			}
+			$queryDB = $this->db->query($getSQL);
+			$accountInfo = $queryDB->result();
+			return count($accountInfo);
+		}
+
 
 	}

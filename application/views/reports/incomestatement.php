@@ -6,7 +6,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<p class="text-center col-md-12">
 					Easy Accounting<br />
 					Income Statement<br />
-					For the Year Ended October 31st, <?=date("Y");?>
+					For the Year Ended November 30th, <?=date("Y");?>
 				</p>
 			</div>
 

@@ -20,6 +20,12 @@ class Home extends CI_Controller {
 		}
 
 		$data['userData'] = $this->session->userdata();
+		$data['assetsTotal']      = $this->account_model->getAccountCategoryTotal('Assets');
+		$data['liabilitiesTotal'] = $this->account_model->getAccountCategoryTotal('Liabilities');
+		$data['entriesTotal']        = $this->account_model->getEntryTotal('all');
+		$data['entriesPendingTotal'] = $this->account_model->getEntryTotal('pending');
+		$data['quickRatio']   = $this->account_model->getQuickRatio();
+		$data['currentRatio'] = $this->account_model->getCurrentRatio();
 		$this->load->template('home', $data);
 	}
 

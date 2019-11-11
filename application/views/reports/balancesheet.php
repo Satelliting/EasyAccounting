@@ -6,7 +6,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<p class="text-center col-md-12">
 					Easy Accounting<br />
 					Balance Sheet<br />
-					At October 31st, <?=date("Y");?>
+					At November 30th, <?=date("Y");?>
 				</p>
 			</div>
 
@@ -64,7 +64,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	$retainedEarningArray = array(
 		"accountID" => "30009990",
 		"accountName" => "Retained Earnings",
-		"accountCategory" => "Owner's Equity",
+		"accountCategory" => "Owners Equity",
 		"accountCategorySub" => "Stockholders' Equity",
 		"accountDebit" => 0,
 		"accountCredit" => $retainedEarnings,
@@ -91,7 +91,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		}
 	}
 
-	array_push($accounts["Owner's Equity"], $retainedEarningArray);
+	array_push($accounts["Owners Equity"], $retainedEarningArray);
 
 	$accountCategories = array_keys($accounts);
 	$accountOrder = 0;

@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								<select class="form-control" name="accountCategory">
 									<option>Assets</option>
 									<option>Liabilities</option>
-									<option>Owner's Equity</option>
+									<option>Owners Equity</option>
 									<option>Revenues</option>
 									<option>Operating Expenses</option>
 								</select>
@@ -33,7 +33,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									<option>Current Assets</option>
 									<option>Property Plant & Management</option>
 									<option>Current Liabilities</option>
-									<option>Stockholders' Equity</option>
+									<option>Stockholders Equity</option>
 									<option>Revenues</option>
 									<option>Expenses</option>
 								</select>

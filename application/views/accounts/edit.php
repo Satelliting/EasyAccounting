@@ -29,7 +29,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 									<option>Assets</option>
 									<option>Liabilities</option>
-									<option>Owner's Equity</option>
+									<option>Owners Equity</option>
 									<option>Revenues</option>
 									<option>Operating Expenses</option>
 								</select>
@@ -54,7 +54,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									<option>Buildings</option>
 									<option>Equipment</option>
 									<option>Short-term Payables</option>
-									<option>Owner's Equity</option>
+									<option>Stockholders Equity</option>
 									<option>Operating Revenues</option>
 									<option>Other Revenues</option>
 									<option>Cost of Goods Sold</option>
