@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 11, 2019 at 10:25 PM
+-- Generation Time: Nov 11, 2019 at 11:16 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.4
 
@@ -57,7 +57,7 @@ INSERT INTO `accounts` (`accountID`, `userID`, `accountName`, `accountCategory`,
 (10001811, 0, 'Office Equipment - A. D.', 'Assets', 'Property Plant & Management', 'Right (Credit)', '0.00', '0.00', '500.00', 0, 'Balance Sheet', '2019-10-31 00:11:04'),
 (20002020, 0, 'Accounts Payable', 'Liabilities', 'Current Liabilities', 'Right (Credit)', '0.00', '800.00', '1800.00', 0, 'Balance Sheet', '2019-10-31 00:12:51'),
 (20002190, 0, 'Salaries Payable', 'Liabilities', 'Current Liabilities', 'Right (Credit)', '0.00', '0.00', '20.00', 0, 'Balance Sheet', '2019-10-31 00:13:48'),
-(20002410, 0, 'Unearned Revenue', 'Liabilities', 'Current Liabilities', 'Right (Credit)', '0.00', '2000.00', '3000.00', 0, 'Balance Sheet', '2019-10-31 00:14:20'),
+(20002410, 0, 'Unearned Revenue', 'Liabilities', 'Unearned Revenue', 'Right (Credit)', '0.00', '2000.00', '3000.00', 0, 'Balance Sheet', '2019-10-31 00:14:20'),
 (30003110, 0, 'Contributed Capital', 'Owners Equity', 'Stockholders Equity', 'Left (Debit)', '0.00', '0.00', '20250.00', 0, 'Balance Sheet', '2019-10-31 00:15:09'),
 (30003250, 0, 'Retained Earnings', 'Owners Equity', 'Stockholders Equity', 'Left (Debit)', '0.00', '0.00', '0.00', 0, 'Balance Sheet', '2019-10-31 00:15:40'),
 (40004010, 0, 'Service Revenue', 'Revenues', 'Revenues', 'Left (Debit)', '0.00', '0.00', '13425.00', 0, 'Income Statement', '2019-10-31 00:17:45'),
