@@ -56,6 +56,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<!-- Custom scripts for all pages-->
 		<script src="<?=site_url();?>assets/js/sb-admin-2.min.js"></script>
 
+		<!-- Data Tables Plugins-->
+		<script src="<?=site_url();?>assets/vendor/datatables/jquery.dataTables.min.js"></script>
+		<script src="<?=site_url();?>assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+		<script src="<?=site_url();?>assets/js/demo/datatables-demo.js"></script>
+		
+
 		<!-- Page level plugins -->
 		<script src="<?=site_url();?>assets/vendor/chart.js/Chart.min.js"></script>
 

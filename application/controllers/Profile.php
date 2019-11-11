@@ -22,6 +22,13 @@ class Profile extends CI_Controller {
 		$this->load->template('profile/home', $data);
 	}
 
+	# Profile Tables Function
+	public function tables(){
+		$data['title']    = 'Profile | Tables';
+		$data['userData'] = $this->session->userdata();
+		$this->load->template('profile/tables', $data);
+	}
+
 
 	# Edit Profile Function
 	public function edit(){
