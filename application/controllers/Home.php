@@ -28,7 +28,6 @@ class Home extends CI_Controller {
 		$data['quickRatio']        = $this->ratio_model->quickRatio();
 		$data['currentRatio']      = $this->ratio_model->currentRatio();
 		$data['debtRatio']         = $this->ratio_model->debtRatio();
-		$data['debtToEquityRatio'] = $this->ratio_model->debtToEquityRatio();
 		$this->load->template('home', $data);
 	}
 

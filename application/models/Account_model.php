@@ -90,10 +90,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					$getSQL = "SELECT * FROM entries WHERE entryStatus=1";
 				break;
 				case 'pending':
-					$getSQL = "SELECT * FROM entries WHERE entryStatus=0 AND entryStatusComment=NULL";
+					$getSQL = "SELECT * FROM entries WHERE entryStatus=0 AND entryStatusComment IS NULL";
 				break;
 				case 'rejected':
-					$getSQL = "SELECT * FROM entries WHERE entryStatus=0 AND entryStatusComment!=NULL";
+					$getSQL = "SELECT * FROM entries WHERE entryStatus=0 AND entryStatusComment IS NOT NULL";
 				break;
 				default:
 					$getSQL = "SELECT * FROM entries";

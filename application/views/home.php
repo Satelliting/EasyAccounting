@@ -8,7 +8,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 						<!-- Content Row -->
 						<div class="row">
-							<!-- Earnings (Monthly) Card Example -->
+							<!-- Total Assets Card -->
 							<div class="col-xl-3 col-md-6 mb-4">
 								<div class="card border-left-primary shadow h-100 py-2">
 									<div class="card-body">
@@ -29,7 +29,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								</div>
 							</div>
 
-							<!-- Earnings (Monthly) Card Example -->
+							<!-- Total Liabilities Card -->
 							<div class="col-xl-3 col-md-6 mb-4">
 								<div class="card border-left-success shadow h-100 py-2">
 									<div class="card-body">
@@ -50,7 +50,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								</div>
 							</div>
 
-							<!-- Earnings (Monthly) Card Example -->
+							<!-- Total Entries Card -->
 							<div class="col-xl-3 col-md-6 mb-4">
 								<div class="card border-left-warning shadow h-100 py-2">
 									<div class="card-body">
@@ -71,7 +71,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								</div>
 							</div>
 
-							<!-- Earnings (Monthly) Card Example -->
+							<!-- Total Pending Entries Card -->
 							<div class="col-xl-3 col-md-6 mb-4">
 								<div class="card border-left-danger shadow h-100 py-2">
 									<div class="card-body">
@@ -127,18 +127,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									</div>
 									<div class="card-body text-center">
 										<h2><?=number_format($debtRatio, 2);?></h2>
-									</div>
-								</div>
-							</div>
-
-							<!-- Debt Ratio -->
-							<div class="col-xl-4 col-lg-3">
-								<div class="card bg-success text-white shadow">
-									<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-										<h6 class="m-0 font-weight-bold text-primary">Debt to Equity Ratio</h6>
-									</div>
-									<div class="card-body text-center">
-										<h2><?=number_format($debtToEquityRatio, 2);?></h2>
 									</div>
 								</div>
 							</div>
