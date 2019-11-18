@@ -24,6 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<th>Balance</th>
 							<th>Debit</th>
 							<th>Credit</th>
+							<th>Order</th>
 							<th>Statement</th>
 <?php
 	if ($userData['userRole'] == 20){
@@ -48,6 +49,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<td class="text-right">$'.number_format($account["accountBalance"], 2).'</td>
 							<td class="text-right">$'.number_format($account["accountDebit"], 2).'</td>
 							<td class="text-right">$'.number_format($account["accountCredit"], 2).'</td>
+							<td class="text-center">'.$account["accountOrder"].'</td>
 							<td class="text-left">'.$account["accountStatement"].'</td>';
 		if ($userData['userRole'] == 20){
 			echo '

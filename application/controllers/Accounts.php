@@ -33,6 +33,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				$accountCreateValidation = $this->form_validation->run();
 
 				if($accountCreateValidation){
+					$_POST['userID'] = $data['userData']['userID'];
 					$createCheck = $this->account_model->createAccount($_POST);
 					if ($createCheck){
 						$this->session->set_flashdata('success', 'You have successfully created an account.');
