@@ -25,9 +25,12 @@ class Home extends CI_Controller {
 		$data['liabilitiesTotal'] = $this->account_model->getAccountCategoryTotal('Liabilities');
 		$data['entriesTotal']        = $this->account_model->getEntryTotal('all');
 		$data['entriesPendingTotal'] = $this->account_model->getEntryTotal('pending');
-		$data['quickRatio']        = $this->ratio_model->quickRatio();
-		$data['currentRatio']      = $this->ratio_model->currentRatio();
-		$data['debtRatio']         = $this->ratio_model->debtRatio();
+		$data['quickRatio']         = $this->ratio_model->quickRatio();
+		$data['currentRatio']       = $this->ratio_model->currentRatio();
+		$data['debtRatio']          = $this->ratio_model->debtRatio();
+		$data['returnOnEquityRatio'] = $this->ratio_model->returnOnEquityRatio();
+		$data['returnOnAssetsRatio'] = $this->ratio_model->returnOnAssetsRatio();
+		$data['assetTurnoverRatio']  = $this->ratio_model->assetTurnoverRatio();
 		$this->load->template('home', $data);
 	}
 

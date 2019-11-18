@@ -81,7 +81,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													Pending Entries
 												</div>
 												<div class="h5 mb-0 font-weight-bold text-gray-800">
-												<?=$entriesPendingTotal;?> Total Pending Entries
+												<a style="text-decoration: none;" href="<?=site_url('entries');?>"><?=$entriesPendingTotal;?> Total Pending Entries</a>
 												</div>
 											</div>
 											<div class="col-auto">
@@ -127,6 +127,42 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									</div>
 									<div class="card-body text-center">
 										<h2><?=number_format($debtRatio, 2);?></h2>
+									</div>
+								</div>
+							</div>
+
+							<!-- Return On Equity Ratio -->
+							<div class="col-xl-4 col-lg-3">
+								<div class="card bg-success text-white shadow">
+									<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+										<h6 class="m-0 font-weight-bold text-primary">Return On Equity Ratio</h6>
+									</div>
+									<div class="card-body text-center">
+										<h2><?=number_format($returnOnEquityRatio, 2);?></h2>
+									</div>
+								</div>
+							</div>
+
+							<!-- Return On Assets Ratio -->
+							<div class="col-xl-4 col-lg-3">
+								<div class="card bg-success text-white shadow">
+									<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+										<h6 class="m-0 font-weight-bold text-primary">Return On Assets Ratio</h6>
+									</div>
+									<div class="card-body text-center">
+										<h2><?=number_format($returnOnAssetsRatio, 2);?></h2>
+									</div>
+								</div>
+							</div>
+
+							<!-- Asset Turnover Ratio -->
+							<div class="col-xl-4 col-lg-3">
+								<div class="card bg-success text-white shadow">
+									<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+										<h6 class="m-0 font-weight-bold text-primary">Asset Turnover Ratio</h6>
+									</div>
+									<div class="card-body text-center">
+										<h2><?=number_format($assetTurnoverRatio, 2);?></h2>
 									</div>
 								</div>
 							</div>
