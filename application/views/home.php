@@ -119,6 +119,30 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								</div>
 							</div>
 
+							<!-- Debt Ratio -->
+							<div class="col-xl-4 col-lg-3">
+								<div class="card bg-success text-white shadow">
+									<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+										<h6 class="m-0 font-weight-bold text-primary">Debt Ratio</h6>
+									</div>
+									<div class="card-body text-center">
+										<h2><?=number_format($debtRatio, 2);?></h2>
+									</div>
+								</div>
+							</div>
+
+							<!-- Debt Ratio -->
+							<div class="col-xl-4 col-lg-3">
+								<div class="card bg-success text-white shadow">
+									<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+										<h6 class="m-0 font-weight-bold text-primary">Debt to Equity Ratio</h6>
+									</div>
+									<div class="card-body text-center">
+										<h2><?=number_format($debtToEquityRatio, 2);?></h2>
+									</div>
+								</div>
+							</div>
+
 							<!-- Pie Chart -->
 							<div class="col-xl-4 col-lg-6">
 								<div class="card shadow mb-4">

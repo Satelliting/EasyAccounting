@@ -13,6 +13,7 @@ class Home extends CI_Controller {
 	# Home Index Function
 	public function index(){
 		$data['title'] = 'Easy Accounting | Home';
+		$this->load->model('ratio_model');
 
 		$userID = $this->session->userdata('userID');
 		if (!$userID){
@@ -24,8 +25,10 @@ class Home extends CI_Controller {
 		$data['liabilitiesTotal'] = $this->account_model->getAccountCategoryTotal('Liabilities');
 		$data['entriesTotal']        = $this->account_model->getEntryTotal('all');
 		$data['entriesPendingTotal'] = $this->account_model->getEntryTotal('pending');
-		$data['quickRatio']   = $this->account_model->getQuickRatio();
-		$data['currentRatio'] = $this->account_model->getCurrentRatio();
+		$data['quickRatio']        = $this->ratio_model->quickRatio();
+		$data['currentRatio']      = $this->ratio_model->currentRatio();
+		$data['debtRatio']         = $this->ratio_model->debtRatio();
+		$data['debtToEquityRatio'] = $this->ratio_model->debtToEquityRatio();
 		$this->load->template('home', $data);
 	}
 
