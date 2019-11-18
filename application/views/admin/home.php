@@ -1,33 +1,47 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
-		<div class="container">
-			<div class="row">
-				<h1>List of Users</h1>
-				<div class="input-group" style="padding-bottom: 10px">
-					<input id="filter" type="text" class="form-control" placeholder="Type here to filter...">
+		<div class="container-float text-center">
+			<div class="card shadow mb-4">
+				<div class="card-header py-3">
+					<h6 class="m-0 font-weight-bold text-primary">List of Users</h6>
 				</div>
-			</div>
-
-			<div class="row">
-				<table class="table table-striped table-bordered table-hover">
-					<thead class="thead-dark">
-						<tr class="text-center">
-							<th>User ID</th>
-							<th>User Email</th>
-							<th>User Full Name</th>
-							<th>User Role</th>
-							<th>User Status</th>
+				<div class="card-body">
+					<div class="table-responsive">
+						<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+						<thead>
+								<tr class="text-center">
+									<th>User ID</th>
+									<th>User Email</th>
+									<th>User Full Name</th>
+									<th>User Role</th>
+									<th>User Status</th>
 <?php
 	if ($userData['userRole'] == 20){
 		echo '
-							<th></th>
+									<th></th>
 		';
 	}
 ?>
-						</tr>
-					</thead>
-					<tbody class="searchable">
+								</tr>
+							</thead>
+							<tfoot>
+								<tr class="text-center">
+									<th>User ID</th>
+									<th>User Email</th>
+									<th>User Full Name</th>
+									<th>User Role</th>
+									<th>User Status</th>
+<?php
+	if ($userData['userRole'] == 20){
+		echo '
+									<th></th>
+		';
+	}
+?>
+								</tr>
+							</tfoot>
+							<tbody>
 <?php
 	foreach ($userList as $user){
 		$user = (array) $user;
@@ -54,31 +68,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		}
 
 		echo '
-						<tr class="text-center">
-							<td>#'.$user["userID"].'</td>
-							<td><a href="'.site_url("admin/email/".$user["userID"]).'">'.$user["userEmail"].'</a></td>
-							<td>'.$user["userFirstName"]." ".$user["userLastName"].'</td>
-							<td>'.$userRole.'</td>
-							<td>'.$userStatus.'</td>';
+								<tr class="text-center">
+									<td>#'.$user["userID"].'</td>
+									<td><a href="'.site_url("admin/email/".$user["userID"]).'">'.$user["userEmail"].'</a></td>
+									<td>'.$user["userFirstName"]." ".$user["userLastName"].'</td>
+									<td>'.$userRole.'</td>
+									<td>'.$userStatus.'</td>';
 
 		if ($userData['userRole'] == 20){
 			echo '
-							<td><a class="btn btn-info" href="'.site_url("admin/edit/".$user["userID"]).'">Edit User</a></td>
+									<td><a class="btn btn-info" href="'.site_url("admin/edit/".$user["userID"]).'">Edit User</a></td>
 			';
 		}
-		echo '			</tr>
+		echo '					</tr>
 		';
 	}
 ?>
-					</tbody>
-				</table>
-				<br /><br />
-<?php
-	if ($userRole == 20){
-		echo '
-				<a class="btn btn-success btn-block" href="'.site_url("admin/create").'">Create User</a>
-		';
-	}
-?>
+							</tbody>
+						</table>
+					</div>
+				</div>
 			</div>
 		</div>

@@ -1,27 +1,35 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
-		<div class="container">
-			<div class="row">
-				<h1>List of Entries</h1>
-				<div class="input-group" style="padding-bottom: 10px">
-					<input id="filter" type="text" class="form-control" placeholder="Type here to filter...">
+		<div class="container-float text-center">
+			<div class="card shadow mb-4">
+				<div class="card-header py-3">
+					<h6 class="m-0 font-weight-bold text-primary">List of Entries</h6>
 				</div>
-			</div>
-
-			<div class="row">
-				<table class="table table-striped table-bordered table-hover">
-					<thead class="thead-dark">
-						<tr class="text-center">
-							<th>Entry ID</th>
-							<th>Entry Description</th>
-							<th>Entry Debit</th>
-							<th>Entry Credit</th>
-							<th>Entry Status</th>
-							<th>Entry Date</th>
-						</tr>
-					</thead>
-					<tbody class="searchable text-center">
+				<div class="card-body">
+					<div class="table-responsive">
+						<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+						<thead>
+								<tr class="text-center">
+									<th>Entry ID</th>
+									<th>Entry Description</th>
+									<th>Entry Debit</th>
+									<th>Entry Credit</th>
+									<th>Entry Status</th>
+									<th>Entry Date</th>
+								</tr>
+							</thead>
+							<tfoot>
+								<tr class="text-center">
+									<th>Entry ID</th>
+									<th>Entry Description</th>
+									<th>Entry Debit</th>
+									<th>Entry Credit</th>
+									<th>Entry Status</th>
+									<th>Entry Date</th>
+								</tr>
+							</tfoot>
+							<tbody>
 <?php
 	foreach ($entryList as $entry){
 		$entry = (array) $entry;
@@ -30,9 +38,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		$entry['entryCreditAccount'] = json_decode($entry['entryCreditAccount']);
 		$entry['entryCreditBalance'] = json_decode($entry['entryCreditBalance']);
 		echo '
-					<tr>
-						<td><a href="'.site_url().'entries/index/'.$entry['entryID'].'">#'.$entry['entryID'].'</a></td>
-						<td>';
+								<tr>
+									<td><a href="'.site_url().'entries/index/'.$entry['entryID'].'">#'.$entry['entryID'].'</a></td>
+									<td>';
 		echo $entry['entryDescription'];
 		$entryFiles = glob('assets/files/entries/'.$entry['entryID'].'/*.*');
 		if (!empty($entryFiles)){
@@ -43,8 +51,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				$fileCount++;
 			}
 		}
-		echo 			'</td>
-						<td class="text-right">';
+		echo '						</td>
+									<td class="text-right">';
 
 		foreach ($entry['entryDebitAccount'] as $debitAccount){
 			$entryNumber = array_search($debitAccount, $entry['entryDebitAccount']);
@@ -55,7 +63,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$entryNumber = array_search($creditAccount, $entry['entryCreditAccount']);
 			echo '<a href="'.site_url().'ledgers/index/'.$this->entry_model->getAccount($creditAccount)['accountID'].'">'.$this->entry_model->getAccount($creditAccount)['accountName'].'</a><br /><strong>$'.number_format($entry['entryCreditBalance'][$entryNumber], 2).'</strong><br />';
 		}
-						echo '</td><td>';
+		echo '						</td><td>';
 		if ($entry['entryStatus'] == 0 && $entry['entryStatusComment'] == NULL){
 			echo '<span class="text-warning">Pending</span>';
 
@@ -103,37 +111,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		else {
 			echo '<span class="text-success">Approved</span>';
 		}
-						echo '</td>
-						<td>'.date('F d, Y | h:i A', strtotime($entry['entryCreateDate'])).'</td>
-					</tr>
+		echo '						</td>
+									<td>'.date('F d, Y | h:i A', strtotime($entry['entryCreateDate'])).'</td>
+								</tr>
 		';
 	}
 ?>
-					</tbody>
-				</table>
-			</div>
-
-<div class="modal fade" id="reject10000004" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-<div class="modal-dialog modal-dialog-centered">
-<div class="modal-content">
-<div class="modal-header">
-<h5 class="modal-title" id="reject10000004Title">Reject Entry: #ENTRYNO</h5>
-<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-<span aria-hidden="true">&times;</span>
-</button>
-</div>
-<div class="modal-body">
-Are you sure you wish to reject the entry? If so, please give a reason why below.
-</div>
-<div class="modal-footer">
-<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-<button type="button" class="btn btn-danger">Reject Entry</button>
-</div>
-</div>
-</div>
-</div>
-
-			<div class="row">
-				<a class="btn btn-success btn-block" href="<?=site_url("entries/create");?>">Create Entry</a>
+							</tbody>
+						</table>
+					</div>
+				</div>
 			</div>
 		</div>

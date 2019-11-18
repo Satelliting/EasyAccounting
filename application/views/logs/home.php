@@ -1,28 +1,25 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
-		<div class="container">
-			<div class="row">
-				<h1>
-					<span class="float-left"><?=strtoupper($logType);?> LOGS</span>
-					<span class="float-right mx-5">
-						<a class="btn btn-primary mx-2" href="<?=site_url('logs/index/users');?>">User Logs</a>
-						<a class="btn btn-success mx-2" href="<?=site_url('logs/index/admin');?>">Admin Logs</a>
-						<!-- <a class="btn btn-info mx-2" href="<?=site_url('logs/index/accounts');?>">Account Logs</a> -->
-						<a class="btn btn-warning mx-2" href="<?=site_url('logs/index/entries');?>">Entry Logs</a>
-					</span>
-				</h1>
-				<div class="input-group" style="padding-bottom: 10px">
-					<input id="filter" type="text" class="form-control" placeholder="Type here to filter...">
-				</div>
-			</div>
 
-			<div class="row">
-				<table class="table table-striped table-bordered table-hover">
-					<thead class="thead-dark">
-						<tr class="text-center">
-							<th>Log ID</th>
-							<th>User ID</th>
+
+
+<div class="container-float text-center">
+			<div class="card shadow mb-4">
+				<div class="card-header py-3">
+					<h6 class="m-0 font-weight-bold text-primary">List of <?=strtoupper($logType);?> Entries</h6>
+					<a class="btn btn-primary mx-2" href="<?=site_url('logs/index/users');?>">User Logs</a>
+					<a class="btn btn-success mx-2" href="<?=site_url('logs/index/admin');?>">Admin Logs</a>
+					<!-- <a class="btn btn-info mx-2" href="<?=site_url('logs/index/accounts');?>">Account Logs</a> -->
+					<a class="btn btn-warning mx-2" href="<?=site_url('logs/index/entries');?>">Entry Logs</a>
+				</div>
+				<div class="card-body">
+					<div class="table-responsive">
+						<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+						<thead>
+								<tr class="text-center">
+									<th>Log ID</th>
+									<th>User ID</th>
 <?php
 
 	if ($logType == 'admin'){
@@ -42,10 +39,36 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	}
 
 ?>
-							<th>Log Date</th>
-						</tr>
-					</thead>
-					<tbody class="searchable">
+									<th>Log Date</th>
+								</tr>
+							</thead>
+							<tfoot>
+								<tr class="text-center">
+									<th>Log ID</th>
+									<th>User ID</th>
+<?php
+
+	if ($logType == 'admin'){
+		echo '<th>Affected User ID</th>';
+		echo '<th colspan="2">Log Information</th>';
+	}
+	elseif ($logType == 'accounts') {
+		echo '<th>Account ID</th>';
+		echo '<th colspan="2">Log Information</th>';
+	}
+	elseif ($logType == 'entries') {
+		echo '<th>Affected Entry ID</th>';
+		echo '<th>Log Information</th>';
+	}
+	else{
+		echo '<th colspan="2">Log Information</th>';
+	}
+
+?>
+									<th>Log Date</th>
+								</tr>
+							</tfoot>
+							<tbody>
 <?php
 	foreach ($logList as $log){
 		$log = (array) $log;
@@ -291,7 +314,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		';
 	}
 ?>
-					</tbody>
-				</table>
+							</tbody>
+						</table>
+					</div>
+				</div>
 			</div>
 		</div>
