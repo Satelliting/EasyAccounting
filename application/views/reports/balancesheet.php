@@ -12,13 +12,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 			<div class="row">
 				<table class="table table-striped table-bordered table-hover">
-					<thead class="thead-dark">
-						<tr class="text-center">
-							<th>Account Name</th>
-							<th>Account Amount</th>
-						</tr>
-					</thead>
-					<tbody class="searchable">
+					<tbody>
 <?php
 
 	function getRetainedEarnings($accountList){

@@ -11,6 +11,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<button class="btn btn-primary" onClick="window.print()">Save</button>
 					<button class="btn btn-primary" onClick="window.print()">Email</button>
 				</p>
+				<div class="mx-auto">
+					<?=form_open(current_url(), 'class="form-inline"');?>
+						<div class="form-group mb-2">
+							<input class="form-control" placeholder="Start Date" name="startDate" type="date" required />
+						</div>
+						<div class="form-group mx-sm-3 mb-2">
+							<input class="form-control" placeholder="End Date" name="endDate" type="date" required />
+						</div>
+						<div class="form-group mb-2">
+						<input class="btn btn-info btn-block" type="submit" value="Filter Range" />
+						</div>
+					</form>
+				</div>
 			</div>
 
 			<div class="row">
@@ -22,7 +35,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<th>Credit</th>
 						</tr>
 					</thead>
-					<tbody class="searchable">
+					<tbody>
 <?php
 	$totalDebitAccount  = 0;
 	$totalCreditAccount = 0;
@@ -44,7 +57,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	$accountCategories = array_keys($accounts);
 	$accountOrder = 0;
 	foreach ($accounts as $accountCategory){
-		$moneySign = '$&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp';
+		$moneySign = '$&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
 		echo '
 						<tr>
 							<td><strong>'.$accountCategories[$accountOrder].':</strong></td>
@@ -65,7 +78,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				$textDecor = 'underline';
 			}
 
+			if (!empty($_POST)){
+				$accountTotal = $this->account_model->getAccountTotal($account['accountID'], $_POST['startDate'], $_POST['endDate']);
+			}
+			else {
 			$accountTotal = $this->account_model->getAccountTotal($account['accountID']);
+			}
+			if ($accountTotal == 0){
+				break;
+			}
 			if ($account['accountSide'] == 'Left (Debit)'){
 				$totalDebitAccount += $accountTotal;
 				echo '
@@ -100,14 +121,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						</tr>
 				';
 			}
-			$moneySign = '';
+			$moneySign = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
 		}
 	}
 	echo '
 						<tr>
 							<td class="text-center"><strong>Total</strong></td>
-							<td class="text-right" style="text-decoration: underline; text-decoration-style: double;"><strong>$'.number_format(abs($totalDebitAccount), 2).'</strong></td>
-							<td class="text-right" style="text-decoration: underline; text-decoration-style: double;"><strong>$'.number_format(abs($totalCreditAccount), 2).'</strong></td>
+							<td class="text-right" style="text-decoration: underline; text-decoration-style: double;"><strong>$&nbsp;&nbsp;&nbsp;&nbsp;'.number_format(abs($totalDebitAccount), 2).'</strong></td>
+							<td class="text-right" style="text-decoration: underline; text-decoration-style: double;"><strong>$&nbsp;&nbsp;&nbsp;&nbsp;'.number_format(abs($totalCreditAccount), 2).'</strong></td>
 						</tr>
 	';
 ?>
