@@ -31,6 +31,7 @@ class Home extends CI_Controller {
 		$data['returnOnEquityRatio'] = $this->ratio_model->returnOnEquityRatio();
 		$data['returnOnAssetsRatio'] = $this->ratio_model->returnOnAssetsRatio();
 		$data['assetTurnoverRatio']  = $this->ratio_model->assetTurnoverRatio();
+		var_dump($this->account_model->getAccountTotal(50005250));
 		$this->load->template('home', $data);
 	}
 

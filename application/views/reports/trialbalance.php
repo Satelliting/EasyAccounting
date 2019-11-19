@@ -6,7 +6,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<p class="text-center col-md-12">
 					Easy Accounting<br />
 					Trial Balance<br />
-					For the Year Ended December 31st, <?=date("Y");?>
+					For the Year Ended December 31st, <?=date("Y");?><br />
+					<button class="btn btn-primary" onClick="window.print()">Print</button>
+					<button class="btn btn-primary" onClick="window.print()">Save</button>
+					<button class="btn btn-primary" onClick="window.print()">Email</button>
 				</p>
 			</div>
 
@@ -26,6 +29,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 	$accounts = array();
 
+	asort($accountList);
 	foreach ($accountList as $account){
 		$account = (array) $account;
 
@@ -40,51 +44,71 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	$accountCategories = array_keys($accounts);
 	$accountOrder = 0;
 	foreach ($accounts as $accountCategory){
+		$moneySign = '$&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp';
 		echo '
-					<tr>
-						<td><strong>'.$accountCategories[$accountOrder].'</strong></td>
-						<td></td>
-						<td></td>
-					</tr>
+						<tr>
+							<td><strong>'.$accountCategories[$accountOrder].':</strong></td>
+							<td></td>
+							<td></td>
+						</tr>
 		';
 		$accountOrder += 1;
+
+		asort($accountCategory);
+
+		$categoryCount = 0;
+		$textDecor = 'none';
+
 		foreach ($accountCategory as $account){
-			echo '
+			$categoryCount++;
+			if ($categoryCount == count($accountCategory)){
+				$textDecor = 'underline';
+			}
+
+			$accountTotal = $this->account_model->getAccountTotal($account['accountID']);
+			if ($account['accountSide'] == 'Left (Debit)'){
+				$totalDebitAccount += $accountTotal;
+				echo '
 						<tr>
 							<td>'.$account['accountName'].'</td>
-			';
-			$accountSide = $account["accountDebit"] - $account['accountCredit'];
-			if ($accountSide > 0){
-				$totalDebitAccount += abs($accountSide);
-				echo '
-								<td class="text-right">$'.number_format(abs($accountSide), 2).'</td>
-								<td></td>
+							<td style="text-decoration: '.$textDecor.';" class="text-right">'.$moneySign;
+				if ($accountTotal != abs($accountTotal)){
+					echo '('.number_format(abs($accountTotal), 2).')';
+				}
+				else {
+					echo number_format($accountTotal, 2);
+				}
+				echo '</td>
+							<td></td>
+						</tr>
 				';
-			}
-			elseif ($accountSide < 0){
-				$totalCreditAccount += abs($accountSide);
-				echo '
-								<td></td>
-								<td class="text-right">$'.number_format(abs($accountSide), 2).'</td>
-				';
-
 			}
 			else {
-				echo '			<td></td>
-								<td></td>
+				$totalCreditAccount += $accountTotal;
+				echo '
+						<tr>
+							<td>'.$account['accountName'].'</td>
+							<td></td>
+							<td style="text-decoration: '.$textDecor.';" class="text-right">'.$moneySign;
+				if ($accountTotal != abs($accountTotal)){
+					echo '('.number_format($accountTotal, 2).')';
+				}
+				else {
+					echo number_format($accountTotal, 2);
+				}
+				echo '</td>
+						</tr>
 				';
 			}
-			echo '
-							</tr>
-			';
-			}
+			$moneySign = '';
 		}
+	}
 	echo '
-							<tr>
-								<td class="text-center"><strong>Total</strong></td>
-								<td class="text-right" style="text-decoration: underline; text-decoration-style: double;"><strong>$'.number_format(abs($totalDebitAccount), 2).'</strong></td>
-								<td class="text-right" style="text-decoration: underline; text-decoration-style: double;"><strong>$'.number_format(abs($totalCreditAccount), 2).'</strong></td>
-							</tr>
+						<tr>
+							<td class="text-center"><strong>Total</strong></td>
+							<td class="text-right" style="text-decoration: underline; text-decoration-style: double;"><strong>$'.number_format(abs($totalDebitAccount), 2).'</strong></td>
+							<td class="text-right" style="text-decoration: underline; text-decoration-style: double;"><strong>$'.number_format(abs($totalCreditAccount), 2).'</strong></td>
+						</tr>
 	';
 ?>
 					</tbody>

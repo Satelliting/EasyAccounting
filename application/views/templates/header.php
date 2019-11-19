@@ -28,7 +28,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<div id="wrapper">
 
 			<!-- Sidebar -->
-			<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+			<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion d-print-none" id="accordionSidebar">
 				<!-- Sidebar - Brand -->
 				<a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?=site_url();?>">
 					<div class="sidebar-brand-icon rotate-n-15">

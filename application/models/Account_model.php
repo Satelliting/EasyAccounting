@@ -60,7 +60,63 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			return false;
 		}
 
-		# Get Total of Account Category
+
+		# Get Account Total Model
+		public function getAccountTotal($accountID, $startDate='2019-01-01', $endDate=NULL){
+			if ($endDate == NULL){
+				$endDate = date("Y-m-d");
+			}
+			
+			$getSQL = "SELECT * FROM entries WHERE( DATE(entryCreateDate) BETWEEN '{$startDate}' AND '{$endDate}') AND entryStatus=1";
+			$queryDB = $this->db->query($getSQL);
+			$accountEntries = $queryDB->result();
+
+			$total = 0.00;
+			$debitTotal  = 0.00;
+			$creditTotal = 0.00;
+			foreach($accountEntries as $entry){
+				$debitAccounts = json_decode($entry->entryDebitAccount);
+				if (in_array($accountID, $debitAccounts)){
+					$debitLocation = array_search($accountID, $debitAccounts);
+					$debitTotal += json_decode($entry->entryDebitBalance)[$debitLocation];
+				}
+
+				$creditAccounts = json_decode($entry->entryCreditAccount);
+				if (in_array($accountID, $creditAccounts)){
+					$creditLocation = array_search($accountID, $creditAccounts);
+					$creditTotal += json_decode($entry->entryCreditBalance)[$creditLocation];
+				}
+			} 
+
+			switch($accountID){
+				# Assets
+				case $this->startsWith($accountID, '100'):
+					$total = $debitTotal - $creditTotal;
+				break;
+				# Liabilities
+				case $this->startsWith($accountID, '200'):
+					$total = $creditTotal - $debitTotal;
+				break;
+				# Owners Equity
+				case $this->startsWith($accountID, '300'):
+					$total = $creditTotal - $debitTotal;
+				break;
+				# Revenues
+				case $this->startsWith($accountID, '400'):
+					$total = $creditTotal - $debitTotal;
+				break;
+				# Operating Expenses
+				case $this->startsWith($accountID, '500'):
+					$total = $debitTotal - $creditTotal;
+				break;
+			}
+
+			
+			return $total;
+		}
+
+
+		# Get Account Category Total Model
 		public function getAccountCategoryTotal($accountCategory){
 			$getSQL = "SELECT * FROM accounts WHERE accountCategory='{$accountCategory}'";
 			$queryDB = $this->db->query($getSQL);
@@ -102,6 +158,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$queryDB = $this->db->query($getSQL);
 			$accountInfo = $queryDB->result();
 			return count($accountInfo);
+		}
+
+
+		public function startsWith ($string, $startString){ 
+			$len = strlen($startString); 
+			return (substr($string, 0, $len) === $startString); 
 		}
 
 
