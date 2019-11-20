@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 11, 2019 at 11:16 PM
+-- Generation Time: Nov 20, 2019 at 09:53 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.4
 
@@ -39,6 +39,7 @@ CREATE TABLE `accounts` (
   `accountDebit` decimal(10,2) NOT NULL,
   `accountCredit` decimal(10,2) NOT NULL,
   `accountOrder` int(11) NOT NULL,
+  `accountStatus` int(1) NOT NULL DEFAULT '1',
   `accountStatement` varchar(50) NOT NULL,
   `accountCreationDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -47,28 +48,28 @@ CREATE TABLE `accounts` (
 -- Dumping data for table `accounts`
 --
 
-INSERT INTO `accounts` (`accountID`, `userID`, `accountName`, `accountCategory`, `accountCategorySub`, `accountSide`, `accountBalance`, `accountDebit`, `accountCredit`, `accountOrder`, `accountStatement`, `accountCreationDate`) VALUES
-(10000010, 0, 'Cash', 'Assets', 'Current Assets', 'Left (Debit)', '0.00', '22475.00', '13600.00', 0, 'Balance Sheet', '2019-10-31 00:06:15'),
-(10000220, 0, 'Accounts Receivable', 'Assets', 'Current Assets', 'Left (Debit)', '0.00', '5850.00', '2400.00', 0, 'Balance Sheet', '2019-10-31 00:06:41'),
-(10000230, 0, 'Prepaid Rent', 'Assets', 'Current Assets', 'Right (Credit)', '0.00', '4500.00', '1500.00', 0, 'Balance Sheet', '2019-10-31 00:07:38'),
-(10000410, 0, 'Supplies', 'Assets', 'Current Assets', 'Right (Credit)', '0.00', '2000.00', '980.00', 0, 'Balance Sheet', '2019-10-31 00:08:20'),
-(10000450, 0, 'Prepaid Insurance', 'Assets', 'Current Assets', 'Right (Credit)', '0.00', '1800.00', '150.00', 0, 'Balance Sheet', '2019-10-31 00:08:45'),
-(10001810, 0, 'Office Equipment', 'Assets', 'Property Plant & Management', 'Right (Credit)', '0.00', '9300.00', '0.00', 0, 'Balance Sheet', '2019-10-31 00:09:11'),
-(10001811, 0, 'Office Equipment - A. D.', 'Assets', 'Property Plant & Management', 'Right (Credit)', '0.00', '0.00', '500.00', 0, 'Balance Sheet', '2019-10-31 00:11:04'),
-(20002020, 0, 'Accounts Payable', 'Liabilities', 'Current Liabilities', 'Right (Credit)', '0.00', '800.00', '1800.00', 0, 'Balance Sheet', '2019-10-31 00:12:51'),
-(20002190, 0, 'Salaries Payable', 'Liabilities', 'Current Liabilities', 'Right (Credit)', '0.00', '0.00', '20.00', 0, 'Balance Sheet', '2019-10-31 00:13:48'),
-(20002410, 0, 'Unearned Revenue', 'Liabilities', 'Unearned Revenue', 'Right (Credit)', '0.00', '2000.00', '3000.00', 0, 'Balance Sheet', '2019-10-31 00:14:20'),
-(30003110, 0, 'Contributed Capital', 'Owners Equity', 'Stockholders Equity', 'Left (Debit)', '0.00', '0.00', '20250.00', 0, 'Balance Sheet', '2019-10-31 00:15:09'),
-(30003250, 0, 'Retained Earnings', 'Owners Equity', 'Stockholders Equity', 'Left (Debit)', '0.00', '0.00', '0.00', 0, 'Balance Sheet', '2019-10-31 00:15:40'),
-(40004010, 0, 'Service Revenue', 'Revenues', 'Revenues', 'Left (Debit)', '0.00', '0.00', '13425.00', 0, 'Income Statement', '2019-10-31 00:17:45'),
-(50005040, 0, 'Utilities Expense', 'Operating Expenses', 'Expenses', 'Right (Credit)', '0.00', '200.00', '0.00', 0, 'Income Statement', '2019-10-31 00:22:16'),
-(50005110, 0, 'Salaries Expense', 'Operating Expenses', 'Expenses', 'Right (Credit)', '0.00', '5320.00', '0.00', 0, 'Income Statement', '2019-10-31 00:21:06'),
-(50005120, 0, 'Advertising Expense', 'Operating Expenses', 'Expenses', 'Right (Credit)', '0.00', '120.00', '0.00', 0, 'Income Statement', '2019-10-31 00:22:42'),
-(50005210, 0, 'Rent Expense', 'Operating Expenses', 'Expenses', 'Right (Credit)', '0.00', '1500.00', '0.00', 0, 'Income Statement', '2019-10-31 00:19:48'),
-(50005230, 0, 'Supplies Expense', 'Operating Expenses', 'Expenses', 'Right (Credit)', '0.00', '980.00', '0.00', 0, 'Income Statement', '2019-10-31 00:20:32'),
-(50005250, 0, 'Telephone Expense', 'Operating Expenses', 'Expenses', 'Right (Credit)', '0.00', '130.00', '0.00', 0, 'Income Statement', '2019-10-31 00:21:33'),
-(50005350, 0, 'Insurance Expense', 'Operating Expenses', 'Expenses', 'Right (Credit)', '0.00', '150.00', '0.00', 0, 'Income Statement', '2019-10-31 00:18:34'),
-(50005420, 0, 'Depreciation Expense', 'Operating Expenses', 'Expenses', 'Right (Credit)', '0.00', '500.00', '0.00', 0, 'Income Statement', '2019-10-31 00:19:02');
+INSERT INTO `accounts` (`accountID`, `userID`, `accountName`, `accountCategory`, `accountCategorySub`, `accountSide`, `accountBalance`, `accountDebit`, `accountCredit`, `accountOrder`, `accountStatus`, `accountStatement`, `accountCreationDate`) VALUES
+(10000010, 1000002, 'Cash', 'Assets', 'Current Assets', 'Left (Debit)', '0.00', '22575.00', '13700.00', 1, 1, 'Balance Sheet', '2019-10-31 00:06:15'),
+(10000220, 1000002, 'Accounts Receivable', 'Assets', 'Current Assets', 'Left (Debit)', '0.00', '5950.00', '2500.00', 20, 1, 'Balance Sheet', '2019-10-31 00:06:41'),
+(10000230, 1000002, 'Prepaid Rent', 'Assets', 'Current Assets', 'Left (Debit)', '0.00', '4500.00', '1500.00', 30, 1, 'Balance Sheet', '2019-10-31 00:07:38'),
+(10000410, 1000002, 'Supplies', 'Assets', 'Current Assets', 'Left (Debit)', '0.00', '2000.00', '980.00', 40, 1, 'Balance Sheet', '2019-10-31 00:08:20'),
+(10000450, 1000002, 'Prepaid Insurance', 'Assets', 'Current Assets', 'Left (Debit)', '0.00', '1800.00', '150.00', 50, 1, 'Balance Sheet', '2019-10-31 00:08:45'),
+(10001810, 1000002, 'Office Equipment', 'Assets', 'Property Plant & Management', 'Left (Debit)', '0.00', '9300.00', '0.00', 60, 1, 'Balance Sheet', '2019-10-31 00:09:11'),
+(10001811, 1000002, 'Office Equipment - A. D.', 'Assets', 'Property Plant & Management', 'Left (Debit)', '0.00', '0.00', '500.00', 70, 1, 'Balance Sheet', '2019-10-31 00:11:04'),
+(20002020, 1000002, 'Accounts Payable', 'Liabilities', 'Current Liabilities', 'Right (Credit)', '0.00', '800.00', '1800.00', 80, 1, 'Balance Sheet', '2019-10-31 00:12:51'),
+(20002190, 1000002, 'Salaries Payable', 'Liabilities', 'Current Liabilities', 'Right (Credit)', '0.00', '0.00', '20.00', 90, 1, 'Balance Sheet', '2019-10-31 00:13:48'),
+(20002410, 1000002, 'Unearned Revenue', 'Liabilities', 'Unearned Revenue', 'Right (Credit)', '0.00', '2000.00', '3000.00', 100, 1, 'Balance Sheet', '2019-10-31 00:14:20'),
+(30003110, 1000002, 'Contributed Capital', 'Owners Equity', 'Stockholders Equity', 'Right (Credit)', '0.00', '0.00', '20250.00', 110, 1, 'Balance Sheet', '2019-10-31 00:15:09'),
+(30003250, 1000002, 'Retained Earnings', 'Owners Equity', 'Stockholders Equity', 'Right (Credit)', '0.00', '0.00', '0.00', 120, 1, 'Balance Sheet', '2019-10-31 00:15:40'),
+(40004010, 1000002, 'Service Revenue', 'Revenues', 'Revenues', 'Right (Credit)', '0.00', '0.00', '13425.00', 130, 1, 'Income Statement', '2019-10-31 00:17:45'),
+(50005040, 1000002, 'Utilities Expense', 'Operating Expenses', 'Expenses', 'Left (Debit)', '0.00', '200.00', '0.00', 140, 1, 'Income Statement', '2019-10-31 00:22:16'),
+(50005110, 1000002, 'Salaries Expense', 'Operating Expenses', 'Expenses', 'Left (Debit)', '0.00', '5320.00', '0.00', 150, 1, 'Income Statement', '2019-10-31 00:21:06'),
+(50005120, 1000002, 'Advertising Expense', 'Operating Expenses', 'Expenses', 'Left (Debit)', '0.00', '120.00', '0.00', 160, 1, 'Income Statement', '2019-10-31 00:22:42'),
+(50005210, 1000002, 'Rent Expense', 'Operating Expenses', 'Expenses', 'Left (Debit)', '0.00', '1500.00', '0.00', 170, 1, 'Income Statement', '2019-10-31 00:19:48'),
+(50005230, 1000002, 'Supplies Expense', 'Operating Expenses', 'Expenses', 'Left (Debit)', '0.00', '980.00', '0.00', 180, 1, 'Income Statement', '2019-10-31 00:20:32'),
+(50005250, 1000002, 'Telephone Expense', 'Operating Expenses', 'Expenses', 'Left (Debit)', '0.00', '130.00', '0.00', 190, 1, 'Income Statement', '2019-10-31 00:21:33'),
+(50005350, 1000002, 'Insurance Expense', 'Operating Expenses', 'Expenses', 'Left (Debit)', '0.00', '150.00', '0.00', 200, 1, 'Income Statement', '2019-10-31 00:18:34'),
+(50005420, 1000002, 'Depreciation Expense', 'Operating Expenses', 'Expenses', 'Left (Debit)', '0.00', '500.00', '0.00', 210, 1, 'Income Statement', '2019-10-31 00:19:02');
 
 -- --------------------------------------------------------
 
@@ -146,7 +147,9 @@ INSERT INTO `entries` (`entryID`, `userID`, `entryDescription`, `entryDebitAccou
 (10000037, 1000002, 'Transaction 4/30', '[\"50005110\"]', '[\"20\"]', '[\"20002190\"]', '[\"20\"]', 1, NULL, '2019-10-31 00:40:50'),
 (10000038, 1000002, 'Transaction 4/30', '[\"50005210\"]', '[\"1500\"]', '[\"10000230\"]', '[\"1500\"]', 1, NULL, '2019-10-31 00:41:14'),
 (10000039, 1000002, 'Transaction 4/30', '[\"20002410\"]', '[\"2000\"]', '[\"40004010\"]', '[\"2000\"]', 1, NULL, '2019-10-31 00:41:36'),
-(10000040, 1000002, 'Transaction 4/27', '[\"50005110\"]', '[\"400\"]', '[\"10000010\"]', '[\"400\"]', 1, NULL, '2019-10-31 00:44:32');
+(10000040, 1000002, 'Transaction 4/27', '[\"50005110\"]', '[\"400\"]', '[\"10000010\"]', '[\"400\"]', 1, NULL, '2019-10-31 00:44:32'),
+(10000041, 1000002, 'Test', '[\"10000010\"]', '[\"100\"]', '[\"10000220\"]', '[\"100\"]', 1, NULL, '2019-11-18 21:59:17'),
+(10000042, 1000002, 'Fix Test Entry', '[\"10000220\"]', '[\"100\"]', '[\"10000010\"]', '[\"100\"]', 1, NULL, '2019-11-18 22:41:44');
 
 -- --------------------------------------------------------
 
@@ -245,7 +248,11 @@ INSERT INTO `logs` (`logID`, `userID`, `logType`, `logBefore`, `logAfter`, `logD
 (10000106, 1000002, 'entries', '10000038', 'Approved', '2019-10-31 00:42:12'),
 (10000107, 1000002, 'entries', '10000039', 'Approved', '2019-10-31 00:42:13'),
 (10000108, 1000002, 'entries', '10000040', 'Created', '2019-10-31 00:44:32'),
-(10000109, 1000002, 'entries', '10000040', 'Approved', '2019-10-31 00:44:34');
+(10000109, 1000002, 'entries', '10000040', 'Approved', '2019-10-31 00:44:34'),
+(10000110, 1000002, 'entries', '10000041', 'Created', '2019-11-18 21:59:17'),
+(10000111, 1000002, 'entries', '10000041', 'Approved', '2019-11-18 22:41:06'),
+(10000112, 1000002, 'entries', '10000042', 'Created', '2019-11-18 22:41:44'),
+(10000113, 1000002, 'entries', '10000042', 'Approved', '2019-11-18 22:41:49');
 
 -- --------------------------------------------------------
 
@@ -339,13 +346,13 @@ ALTER TABLE `accounts_categories_sub`
 -- AUTO_INCREMENT for table `entries`
 --
 ALTER TABLE `entries`
-  MODIFY `entryID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10000041;
+  MODIFY `entryID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10000043;
 
 --
 -- AUTO_INCREMENT for table `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `logID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10000110;
+  MODIFY `logID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10000114;
 
 --
 -- AUTO_INCREMENT for table `users`
