@@ -22,6 +22,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		$account = (array) $account;
 		$accountEntries = array();
 
+		$accountID      = $account['accountID'];
+		$accountBalance = $account['accountDebit'] - $account['accountCredit'];
+
 		foreach($entryList as $entry){
 			$entry = (array) $entry;
 			if (in_array($account['accountID'], json_decode($entry['entryDebitAccount'])) || in_array($account['accountID'], json_decode($entry['entryCreditAccount']))){
@@ -36,11 +39,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<table class="table table-striped table-bordered table-hover">
 					<thead class="thead-dark">
 						<tr class="text-center">
-							<th>Entry ID</th>
-							<th>Entry Description</th>
-							<th>Entry Debit</th>
-							<th>Entry Credit</th>
-							<th>Entry Date</th>
+							<th>Date</th>
+							<th>Description</th>
+							<th>Debit</th>
+							<th>Credit</th>
+							<th>Post Reference</th>
 						</tr>
 					</thead>
 					<tbody class="searchable text-center">
@@ -66,7 +69,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 				echo '
 							<tr>
-								<td><a href="'.site_url().'entries/index/'.$entry['entryID'].'">#'.$entry['entryID'].'</a></td>
+								<td>'.date('F d, Y | h:i A', strtotime($entry['entryCreateDate'])).'</td>
 								<td>';
 				echo $entry['entryDescription'];
 				$entryFiles = glob('assets/files/entries/'.$entry['entryID'].'/*.*');
@@ -85,7 +88,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					$account = key($account);
 					$accountInfo = $this->entry_model->getAccount($account);
 
-					echo '<a href="'.current_url().'/index/'.$accountInfo['accountID'].'">'.$accountInfo['accountName'].'</a><br /><strong>$'.number_format($balance, 2).'</strong><br />';
+					$x = 0;
+					if ($accountInfo['accountID'] == $accountID){
+						echo '<strong>$'.number_format($balance, 2).'</strong><br />';
+						$x++;
+					}
 				}
 				echo '			</td>
 								<td class="text-right">';
@@ -94,10 +101,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					$account = key($account);
 					$accountInfo = $this->entry_model->getAccount($account);
 
-					echo '<a href="'.current_url().'/index/'.$accountInfo['accountID'].'">'.$accountInfo['accountName'].'</a><br /><strong>$'.number_format($balance, 2).'</strong><br />';
+					$y = 0;
+					if ($accountInfo['accountID'] == $accountID){
+						echo '<strong>$'.number_format($balance, 2).'</strong><br />';
+						$y++;
+					}
 				}
 				echo '			</td>
-								<td>'.date('F d, Y | h:i A', strtotime($entry['entryCreateDate'])).'</td>
+								<td><a href="'.site_url().'entries/index/'.$entry['entryID'].'">#'.$entry['entryID'].'</a></td>
 							</tr>
 				';
 			}
