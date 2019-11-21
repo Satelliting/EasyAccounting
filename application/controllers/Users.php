@@ -66,23 +66,36 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				if ($loginUser){
 					$userInfo = (array) $loginUser[0];
 
-					$username = $userInfo['userFirstName'][0].$userInfo['userLastName'].date('m',strtotime($userInfo['userCreationDate'])).date('y',strtotime($userInfo['userCreationDate']));
+					if ($userInfo['userActive'] != 0){
+						$username = $userInfo['userFirstName'][0].$userInfo['userLastName'].date('m',strtotime($userInfo['userCreationDate'])).date('y',strtotime($userInfo['userCreationDate']));
 
-					$this->session->set_userdata(array(
-						'userID'        => $userInfo['userID'],
-						'userName'      => $username,
-						'userFirstName' => $userInfo['userFirstName'],
-						'userLastName'  => $userInfo['userLastName'],
-						'userEmail'     => $userInfo['userEmail'],
-						'userRole'      => $userInfo['userRole']
-					));
+						$this->session->set_userdata(array(
+							'userID'        => $userInfo['userID'],
+							'userName'      => $username,
+							'userFirstName' => $userInfo['userFirstName'],
+							'userLastName'  => $userInfo['userLastName'],
+							'userEmail'     => $userInfo['userEmail'],
+							'userRole'      => $userInfo['userRole']
+						));
 
-					$this->session->set_flashdata('success', 'You have successfully logged in.');
-					redirect();
+						$this->session->set_flashdata('success', 'You have successfully logged in.');
+						redirect();
+					}
+					else {
+						$this->session->set_flashdata('danger', 'Your account is currently deactivated. Please wait for an Administrator to reactivate your account.');
+						$this->load->template('users/login', $data);
+					}
 				}
 				else {
-					$this->session->set_flashdata('danger', 'Your email/password combination was not correct Please try again.');
-					$this->load->template('users/login', $data);
+					$userAttemptedLogin = $this->user_model->userLoginAttempt($email);
+					if ($userAttemptedLogin){
+						$this->session->set_flashdata('danger', 'Your email/password combination was not correct Please try again.');
+						$this->load->template('users/login', $data);
+					}
+					else {
+						$this->session->set_flashdata('danger', 'You have tried logging in unsuccesfully 3 times. Please wait for an Administrator to reactivate your account.');
+						$this->load->template('users/login', $data);
+					}
 				}
 			}
 			else {

@@ -133,6 +133,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					#	$this->load->template('admin/edit', $data);
 					#}
 
+					if ($_POST['userActive'] == 1){
+						$_POST['userPasswordAttempts'] = 0;
+					}
+
 					$userChange = $this->admin_model->changeUserInfo($_POST);
 
 					if (!$userChange){

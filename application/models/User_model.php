@@ -6,8 +6,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 		# User Login Model
 		public function userLogin($email, $password){
-			$loginSQL = "SELECT * FROM users WHERE userEmail = ? AND userPassword = ?";
-			$queryDB  = $this->db->query($loginSQL, array($email, $password));
+			$loginSQL = "SELECT * FROM users WHERE userEmail = '{$email}' AND userPassword = '{$password}'";
+			$queryDB  = $this->db->query($loginSQL);
 			$query    = $queryDB->result();
 
 			if (!empty($query)){
@@ -15,6 +15,34 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			}
 			else {
 				return false;
+			}
+		}
+
+
+		# User Unsuccessful Login Attempt Model
+		public function userLoginAttempt($email){
+			$loginSQL = "SELECT * FROM users WHERE userEmail = '{$email}'";
+			$queryDB  = $this->db->query($loginSQL);
+			$userInfo = $queryDB->result();
+
+			if (!empty($userInfo)){
+				$userInfo = (array) $userInfo[0];
+
+				if ($userInfo['userPasswordAttempts'] > 2){
+					$this->db->where('userEmail', $email);
+					$this->db->update('users', array('userActive' => 0));
+
+					return false;
+				}
+				else {
+					$this->db->where('userEmail', $email);
+					$this->db->update('users', array('userPasswordAttempts' => ($userInfo['userPasswordAttempts'] + 1)));
+
+					return true;
+				}
+			}
+			else {
+				return true;
 			}
 		}
 
