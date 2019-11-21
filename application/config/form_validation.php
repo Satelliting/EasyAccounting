@@ -124,9 +124,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			array(
 				'field'  => 'userPassword',
 				'label'  => 'Password',
-				'rules'  => 'min_length[8]',
+				'rules'  => 'min_length[20]|callback_password_check|callback_password_unique',
 				'errors' => array(
-					'min_length'     => 'You have too few characters for your %s.'
+					'min_length'      => 'You have too few characters for your %s.',
+					'password_check' => 'You do not have the correct amount of letters, numbers, or special characters in your password.',
+					'password_unique' => 'The %s entered has been used before. Please use a password that has not been used before with this account.'
 				),
 			),
 

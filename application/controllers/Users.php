@@ -27,10 +27,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$data['title'] = "User Registration";
 
 			$registerInfo = array(
-				'userFirstName' => $this->input->post('userFirstName'),
-				'userLastName'  => $this->input->post('userLastName'),
-				'userEmail'     => $this->input->post('userEmail'),
-				'userPassword'  => md5($this->input->post('userPassword')),
+				'userFirstName'     => $this->input->post('userFirstName'),
+				'userLastName'      => $this->input->post('userLastName'),
+				'userEmail'         => $this->input->post('userEmail'),
+				'userPassword'      => md5($this->input->post('userPassword')),
+				'userPrevPassword'  => json_encode(array(md5($this->input->post('userPassword')))),
 			);
 
 			$registerValidation = $this->form_validation->run();
@@ -120,6 +121,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			}
 		}
 
+
 		# User Forgot Confirm function
 		public function forgotConfirm($forgotHash = NULL){
 			$data['title']      = "User Forgot | Confirm";
@@ -148,7 +150,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			}
 		}
 
-		# Password Requirement Checker Function
+
+		# Password Requirement Callback Function
 		public function password_check($password){
 			if (preg_match('~[0-9]~', $password)){
 				if (preg_match('~[.!@#$?]~', $password)){
@@ -166,6 +169,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			else {
 				return false;
 			}
+		}
+
+
+		# Password Unique Callback Function
+		public function password_unique($password){
+			$userData = $this->session->userdata();
+
+			$getSQL   = "SELECT * FROM users WHERE userid='{$userData['userID']}'";
+			$queryDB  = $this->db->query($getSQL);
+			$userInfo = $queryDB->result();
+
+			$userInfo = (array) $userInfo[0];
+
+			if (!in_array($password, json_decode($userInfo['userPrevPassword']))){
+				return true;
+			}
+			return false;
 		}
 
 

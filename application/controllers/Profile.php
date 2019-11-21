@@ -22,13 +22,6 @@ class Profile extends CI_Controller {
 		$this->load->template('profile/home', $data);
 	}
 
-	# Profile Tables Function
-	public function tables(){
-		$data['title']    = 'Profile | Tables';
-		$data['userData'] = $this->session->userdata();
-		$this->load->template('profile/tables', $data);
-	}
-
 
 	# Edit Profile Function
 	public function edit(){
@@ -89,5 +82,42 @@ class Profile extends CI_Controller {
 		}
 	}
 
+
+	# Password Requirement Callback Function
+	public function password_check($password){
+		if (preg_match('~[0-9]~', $password)){
+			if (preg_match('~[.!@#$?]~', $password)){
+				if (ctype_alpha($password[0])){
+					return true;
+				}
+				else {
+					return false;
+				}
+			}
+			else {
+				return false;
+			}
+		}
+		else {
+			return false;
+		}
+	}
+
+
+	# Password Unique Callback Function
+	public function password_unique($password){
+		$userData = $this->session->userdata();
+
+		$getSQL   = "SELECT * FROM users WHERE userid='{$userData['userID']}'";
+		$queryDB  = $this->db->query($getSQL);
+		$userInfo = $queryDB->result();
+
+		$userInfo = (array) $userInfo[0];
+
+		if (!in_array($password, json_decode($userInfo['userPrevPassword']))){
+			return true;
+		}
+		return false;
+	}
 
 }

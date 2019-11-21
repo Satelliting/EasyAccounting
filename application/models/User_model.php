@@ -32,14 +32,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 		# Edit User Info Model
-		public function userEdit($userInfo, $admin = false){
-			if ($admin == true){
-				$this->db->where('userID', $userInfo['userID']);
-				$this->db->update('users', $userInfo);
+		public function userEdit($userInfo){
+			$getSQL   = "SELECT * FROM users WHERE userid='{$userInfo['userID']}'";
+			$queryDB  = $this->db->query($getSQL);
+			$userData = $queryDB->result();
 
-				return true;
-			}
-			# Need to add form validation
+			$userData = (array) $userData[0];
+
+			$prevPasswords = json_decode($userData['userPrevPassword']);
+			array_push($prevPasswords, $userInfo['userPassword']);
+			$userInfo['userPrevPassword'] = json_encode($prevPasswords);
+
 			$this->db->where('userID', $userInfo['userID']);
 			$this->db->update('users', $userInfo);
 
@@ -100,6 +103,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 		# Set Forgot Password Value for User Model
 		public function setForgotPassword($userInfo){
+
 			$this->db->where('userForgot', $userInfo['forgotID']);
 			$this->db->update('users', array("userPassword" => md5($userInfo['userPassword']), "userForgot" => NULL));
 
