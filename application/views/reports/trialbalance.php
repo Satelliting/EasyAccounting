@@ -6,7 +6,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<p class="text-center col-md-12">
 					Easy Accounting<br />
 					Trial Balance<br />
-					For the Year Ended December 31st, <?=date("Y");?><br />
+<?php
+	if (!isset($_POST['endDate'])){
+		echo "For the Year Ended December 31st, ".date('Y');
+	}
+	else {
+		echo "For the Year Ended ".date('F jS, Y', strtotime($_POST['endDate']));
+	}
+?>
+					<br />
 					<button class="btn btn-primary" onClick="window.print()">Print</button>
 					<button class="btn btn-primary" onClick="window.print()">Save</button>
 					<button class="btn btn-primary" onClick="window.print()">Email</button>

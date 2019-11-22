@@ -69,8 +69,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 				echo '
 							<tr>
-								<td>'.date('F d, Y | h:i A', strtotime($entry['entryCreateDate'])).'</td>
-								<td>';
+								<td class="text-left align-middle">'.date('F d, Y', strtotime($entry['entryCreateDate'])).'<br />'.date('h:i A', strtotime($entry['entryCreateDate'])).'</td>
+								<td class="align-middle">';
 				echo $entry['entryDescription'];
 				$entryFiles = glob('assets/files/entries/'.$entry['entryID'].'/*.*');
 				if (!empty($entryFiles)){
@@ -82,7 +82,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					}
 				}
 				echo 			'</td>
-								<td class="text-right">';
+								<td class="align-middle">';
 				foreach ($entryDebitAccounts as $account){
 					$balance = $account[key($account)];
 					$account = key($account);
@@ -95,7 +95,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					}
 				}
 				echo '			</td>
-								<td class="text-right">';
+								<td class="align-middle">';
 				foreach ($entryCreditAccounts as $account){
 					$balance = $account[key($account)];
 					$account = key($account);
@@ -108,7 +108,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					}
 				}
 				echo '			</td>
-								<td><a href="'.site_url().'entries/index/'.$entry['entryID'].'">#'.$entry['entryID'].'</a></td>
+								<td class="align-middle"><a href="'.site_url().'entries/index/'.$entry['entryID'].'">#'.$entry['entryID'].'</a></td>
 							</tr>
 				';
 			}
