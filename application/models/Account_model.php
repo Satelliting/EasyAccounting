@@ -62,11 +62,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 		# Get Account Total Model
-		public function getAccountTotal($accountID, $startDate='2019-01-01', $endDate=NULL){
+		public function getAccountTotal($accountID, $startDate='1970-01-01', $endDate=NULL){
 			if ($endDate == NULL){
 				$endDate = date("Y-m-d");
 			}
-			
+
 			$getSQL = "SELECT * FROM entries WHERE( DATE(entryCreateDate) BETWEEN '{$startDate}' AND '{$endDate}') AND entryStatus=1";
 			$queryDB = $this->db->query($getSQL);
 			$accountEntries = $queryDB->result();
@@ -86,7 +86,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					$creditLocation = array_search($accountID, $creditAccounts);
 					$creditTotal += json_decode($entry->entryCreditBalance)[$creditLocation];
 				}
-			} 
+			}
 
 			switch($accountID){
 				# Assets
@@ -111,7 +111,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				break;
 			}
 
-			
+
 			return $total;
 		}
 
@@ -161,9 +161,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		}
 
 
-		public function startsWith ($string, $startString){ 
-			$len = strlen($startString); 
-			return (substr($string, 0, $len) === $startString); 
+		public function startsWith ($string, $startString){
+			$len = strlen($startString);
+			return (substr($string, 0, $len) === $startString);
 		}
 
 

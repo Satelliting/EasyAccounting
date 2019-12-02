@@ -6,8 +6,50 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<p class="text-center col-md-12">
 					Easy Accounting<br />
 					Statement of Retained Earnings<br />
-					For the Year Ended <?=date('F 31\s\t, Y');?><br />
+<?php
+	if (!isset($_POST['reportYear'])){
+		$reportYear = date('Y');
+	}
+	else {
+		$reportYear = $_POST['reportYear'];
+	}
+?>
+					For the Year Ended <?=date('F 31\s\t, ').$reportYear;?><br />
+					<br />
+					<button class="btn btn-primary" onClick="window.print()">Print</button>
+					<button class="btn btn-primary" onClick="window.print()">Save</button>
+					<button class="btn btn-primary" onClick="window.print()">Email</button>
 				</p>
+				<div class="mx-auto">
+					<?=form_open(current_url(), 'class="form-inline"');?>
+						<div class="form-group mx-sm-3 mb-2">
+							<select class="form-control" name="reportYear" required />
+<?php
+	if (!isset($_POST['reportYear'])){
+		$reportYear = date('Y');
+		echo '<option>'.$reportYear.'</option>';
+	}
+	else {
+		$reportYear = $_POST['reportYear'];
+		echo '<option>'.$reportYear.'</option>';
+	}
+?>
+								<option>2017</option>
+								<option>2018</option>
+								<option>2019</option>
+								<option>2020</option>
+								<option>2021</option>
+								<option>2022</option>
+								<option>2023</option>
+								<option>2024</option>
+								<option>2025</option>
+							</select>
+						</div>
+						<div class="form-group mb-2">
+						<input class="btn btn-info btn-block" type="submit" value="Filter Year" />
+						</div>
+					</form>
+				</div>
 			</div>
 
 			<div class="row">
@@ -20,7 +62,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					</thead>
 					<tbody class="searchable">
 						<tr>
-							<td class="text-center">Beg Retained Earnings, <?=date('m');?>/1/19</td>
+							<td class="text-center">Beg Retained Earnings, 01/01/<?=$reportYear;?></td>
 							<td class="text-right">$&nbsp;&nbsp;&nbsp;&nbsp;0.00</td>
 						</tr>
 <?php
@@ -44,7 +86,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	$accountOrder = 0;
 	foreach ($accounts as $accountCategory){
 		foreach ($accountCategory as $account){
-			$accountBalance = $account['accountDebit'] - $account['accountCredit'];
+			$_POST['startDate'] = $reportYear.'-01-01';
+			$_POST['endDate']   = $reportYear.'-12-31';
+			$accountBalance = $this->account_model->getAccountTotal($account['accountID'], $_POST['startDate'], $_POST['endDate']);
+
 			if ($account['accountCategory'] == 'Revenues'){
 				$revenueTotal += $accountBalance;
 			}
@@ -70,7 +115,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								<td class="text-right" style="text-decoration: underline;">$&nbsp;&nbsp;&nbsp;&nbsp;'.number_format($dividends, 2).'</td>
 							</tr>
 							<tr>
-								<td class="text-center"><strong>Retained Earnings as of '.date("F j, Y").'</strong></td>
+								<td class="text-center"><strong>Retained Earnings as of '.date("F j, ").$reportYear.'</strong></td>
 								<td class="text-right" style="text-decoration: underline; text-decoration-style: double; border-top: 2px solid #000000;"><strong>$'.number_format($retainedEarnings, 2).'</strong></td>
 	';
 ?>

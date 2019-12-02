@@ -21,9 +21,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				</p>
 				<div class="mx-auto">
 					<?=form_open(current_url(), 'class="form-inline"');?>
-						<div class="form-group mb-2">
-							<input class="form-control" placeholder="Start Date" name="startDate" type="date" required />
-						</div>
 						<div class="form-group mx-sm-3 mb-2">
 							<input class="form-control" placeholder="End Date" name="endDate" type="date" required />
 						</div>
@@ -78,7 +75,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 	$retainedEarnings = getRetainedEarnings($retainedEarningsList);
 
-
 	$retainedEarningArray = array(
 		"accountID" => "30009990",
 		"accountName" => "Retained Earnings",
@@ -123,6 +119,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		$moneySign = '$&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
 		foreach ($accountCategory as $account){
 			if (!empty($_POST)){
+				$_POST['startDate'] = '1970-01-01';
 				$accountBalance = $this->account_model->getAccountTotal($account['accountID'], $_POST['startDate'], $_POST['endDate']);
 			}
 			else {
