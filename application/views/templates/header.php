@@ -65,13 +65,37 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				</li>
 
 
+<?php
+		if ($userID && $userRole != 20){
+			echo '
 				<!-- Nav Item - Users -->
 				<li class="nav-item">
-					<a class="nav-link" href="<?=site_url('admin');?>">
+					<a class="nav-link" href="'.site_url('admin').'">
 						<i class="fas fa-fw fa-address-book"></i>
 						<span>Users</span>
 					</a>
 				</li>
+			';
+		}
+		else{
+			echo '
+				<!-- Nav Item - Users -->
+				<li class="nav-item">
+					<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUsers" aria-expanded="true" aria-controls="collapseUsers">
+						<i class="fas fa-fw fa-address-book"></i>
+						<span>Users</span>
+					</a>
+					<div id="collapseUsers" class="collapse" aria-labelledby="collapseUsers" data-parent="#accordionSidebar">
+						<div class="bg-white py-2 collapse-inner rounded">
+							<h6 class="collapse-header">Users</h6>
+							<a class="collapse-item" href="'.site_url('admin').'">Home</a>
+							<a class="collapse-item" href="'.site_url('admin/create').'">Create</a>
+						</div>
+					</div>
+				</li>
+			';
+		}
+?>
 
 				<!-- Nav Item - Logs -->
 				<li class="nav-item">
@@ -90,16 +114,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					</div>
 				</li>
 <?php
-	}
-
-	if ($userID && $userRole != 20){
-		echo '
+		if ($userID && $userRole != 20){
+			echo '
 				<!-- Nav Item - Entries -->
 				<li class="nav-item">
-					<a class="nav-link" href="'.site_url('entries').'">
+					<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEntries" aria-expanded="true" aria-controls="collapseEntries">
 						<i class="fas fa-fw fa-edit"></i>
 						<span>Entries</span>
 					</a>
+					<div id="collapseEntries" class="collapse" aria-labelledby="collapseEntries" data-parent="#accordionSidebar">
+						<div class="bg-white py-2 collapse-inner rounded">
+							<h6 class="collapse-header">Entries</h6>
+							<a class="collapse-item" href="'.site_url('entries').'">Home</a>
+							<a class="collapse-item" href="'.site_url('entries/create').'">Create</a>
+						</div>
+					</div>
 				</li>
 
 				<!-- Nav Item - Ledgers -->
@@ -109,9 +138,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<span>Ledgers</span>
 					</a>
 				</li>
-		';
-	}
-	if ($userID){
+			';
+		}
 ?>
 
 				<!-- Nav Item - Reports -->

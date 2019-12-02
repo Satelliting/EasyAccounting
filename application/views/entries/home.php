@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<div class="container-float text-center">
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
-					<h6 class="m-0 font-weight-bold text-primary">List of Entries | <a href="<?=site_url('entries/create');?>"><small>Create New</small></a></h6>
+					<h6 class="m-0 font-weight-bold text-primary">List of Entries</h6>
 				</div>
 				<div class="card-body">
 					<div class="table-responsive">
