@@ -62,7 +62,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								<td class="text-right">$&nbsp;&nbsp;&nbsp;&nbsp;'.number_format($netIncome, 2).'</td>
 							</tr>
 							<tr>
-								<td class="text-center"><strong>Total of Beg Retained Earnings & Net Income</strong></td>
+								<td class="text-center"><strong>Total</strong></td>
 								<td class="text-right" style="text-decoration: underline;"><strong>$&nbsp;&nbsp;&nbsp;&nbsp;'.number_format(($netIncome + 0), 2).'</strong></td>
 							</tr>
 							<tr>

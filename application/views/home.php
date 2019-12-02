@@ -96,8 +96,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<!-- Content Row -->
 						<div class="row">
 							<!-- Quick Ratio -->
+<?php
+	$status = 'success';
+	if ($quickRatio < 1){
+		$status = 'warning';
+		if ($quickRatio < 0.5){
+			$status = 'danger';
+		}
+	}
+?>
 							<div class="col-xl-4 col-lg-3">
-								<div class="card bg-success text-white shadow">
+								<div class="card bg-<?=$status;?> text-white shadow">
 									<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 										<h6 class="m-0 font-weight-bold text-primary">Quick Ratio</h6>
 									</div>
@@ -108,8 +117,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							</div>
 
 							<!-- Current Ratio -->
+<?php
+	$status = 'success';
+	if ($currentRatio < 2){
+		$status = 'warning';
+		if ($currentRatio < 1.5){
+			$status = 'danger';
+		}
+	}
+?>
 							<div class="col-xl-4 col-lg-3">
-								<div class="card bg-success text-white shadow">
+								<div class="card bg-<?=$status;?> text-white shadow">
 									<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 										<h6 class="m-0 font-weight-bold text-primary">Current Ratio</h6>
 									</div>
@@ -120,8 +138,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							</div>
 
 							<!-- Debt Ratio -->
+<?php
+	$status = 'danger';
+	if ($debtRatio < 0.8){
+		$status = 'warning';
+		if ($debtRatio < 0.6){
+			$status = 'success';
+		}
+	}
+?>
 							<div class="col-xl-4 col-lg-3">
-								<div class="card bg-success text-white shadow">
+								<div class="card bg-<?=$status;?> text-white shadow">
 									<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 										<h6 class="m-0 font-weight-bold text-primary">Debt Ratio</h6>
 									</div>
@@ -132,8 +159,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							</div>
 
 							<!-- Return On Equity Ratio -->
+<?php
+	$status = 'success';
+	if ($returnOnEquityRatio < 0.25){
+		$status = 'warning';
+		if ($returnOnEquityRatio < 0.10){
+			$status = 'danger';
+		}
+	}
+?>
 							<div class="col-xl-4 col-lg-3">
-								<div class="card bg-success text-white shadow">
+								<div class="card bg-<?=$status;?> text-white shadow">
 									<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 										<h6 class="m-0 font-weight-bold text-primary">Return On Equity Ratio</h6>
 									</div>
@@ -144,8 +180,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							</div>
 
 							<!-- Return On Assets Ratio -->
+<?php
+	$status = 'success';
+	if ($returnOnAssetsRatio < 0.25){
+		$status = 'warning';
+		if ($returnOnAssetsRatio < 0.05){
+			$status = 'danger';
+		}
+	}
+?>
 							<div class="col-xl-4 col-lg-3">
-								<div class="card bg-success text-white shadow">
+								<div class="card bg-<?=$status;?> text-white shadow">
 									<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 										<h6 class="m-0 font-weight-bold text-primary">Return On Assets Ratio</h6>
 									</div>
@@ -156,8 +201,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							</div>
 
 							<!-- Asset Turnover Ratio -->
+<?php
+	$status = 'success';
+	if ($assetTurnoverRatio < 2){
+		$status = 'warning';
+		if ($assetTurnoverRatio < 1){
+			$status = 'danger';
+		}
+	}
+?>
 							<div class="col-xl-4 col-lg-3">
-								<div class="card bg-success text-white shadow">
+								<div class="card bg-<?=$status;?> text-white shadow">
 									<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 										<h6 class="m-0 font-weight-bold text-primary">Asset Turnover Ratio</h6>
 									</div>
