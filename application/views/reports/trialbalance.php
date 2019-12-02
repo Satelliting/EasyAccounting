@@ -65,7 +65,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	$accountCategories = array_keys($accounts);
 	$accountOrder = 0;
 	foreach ($accounts as $accountCategory){
-		$moneySign = '$&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
 		echo '
 						<tr>
 							<td><strong>'.$accountCategories[$accountOrder].':</strong></td>
@@ -75,11 +74,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		';
 		$accountOrder += 1;
 
-		asort($accountCategory);
-
 		$categoryCount = 0;
 		$textDecor = 'none';
 
+		$moneySign = '$&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
 		foreach ($accountCategory as $account){
 			$categoryCount++;
 			if ($categoryCount == count($accountCategory)){
@@ -92,9 +90,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			else {
 			$accountTotal = $this->account_model->getAccountTotal($account['accountID']);
 			}
+
 			if ($accountTotal == 0){
-				break;
+				continue;
 			}
+
 			if ($account['accountSide'] == 'Left (Debit)'){
 				$totalDebitAccount += $accountTotal;
 				echo '
@@ -135,8 +135,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	echo '
 						<tr>
 							<td class="text-center"><strong>Total</strong></td>
-							<td class="text-right" style="text-decoration: underline; text-decoration-style: double;"><strong>$&nbsp;&nbsp;&nbsp;&nbsp;'.number_format(abs($totalDebitAccount), 2).'</strong></td>
-							<td class="text-right" style="text-decoration: underline; text-decoration-style: double;"><strong>$&nbsp;&nbsp;&nbsp;&nbsp;'.number_format(abs($totalCreditAccount), 2).'</strong></td>
+							<td class="text-right" style="text-decoration: underline; text-decoration-style: double; border-top: 2px solid #000000;"><strong>$&nbsp;&nbsp;&nbsp;&nbsp;'.number_format($totalDebitAccount, 2).'</strong></td>
+							<td class="text-right" style="text-decoration: underline; text-decoration-style: double; border-top: 2px solid #000000;"><strong>$&nbsp;&nbsp;&nbsp;&nbsp;'.number_format($totalCreditAccount, 2).'</strong></td>
 						</tr>
 	';
 ?>

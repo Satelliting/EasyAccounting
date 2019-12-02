@@ -6,8 +6,32 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<p class="text-center col-md-12">
 					Easy Accounting<br />
 					Income Statement<br />
-					For the Year Ended November 30th, <?=date("Y");?>
+<?php
+	if (!isset($_POST['endDate'])){
+		echo "For the Year Ended December 31st, ".date('Y');
+	}
+	else {
+		echo "For the Year Ended ".date('F jS, Y', strtotime($_POST['endDate']));
+	}
+?>
+					<br />
+					<button class="btn btn-primary" onClick="window.print()">Print</button>
+					<button class="btn btn-primary" onClick="window.print()">Save</button>
+					<button class="btn btn-primary" onClick="window.print()">Email</button>
 				</p>
+				<div class="mx-auto">
+					<?=form_open(current_url(), 'class="form-inline"');?>
+						<div class="form-group mb-2">
+							<input class="form-control" placeholder="Start Date" name="startDate" type="date" required />
+						</div>
+						<div class="form-group mx-sm-3 mb-2">
+							<input class="form-control" placeholder="End Date" name="endDate" type="date" required />
+						</div>
+						<div class="form-group mb-2">
+						<input class="btn btn-info btn-block" type="submit" value="Filter Range" />
+						</div>
+					</form>
+				</div>
 			</div>
 
 			<div class="row">
@@ -18,7 +42,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<th>Account Amount</th>
 						</tr>
 					</thead>
-					<tbody class="searchable">
+					<tbody>
 <?php
 	$revenueTotal  = 0;
 	$expensesTotal = 0;
@@ -38,15 +62,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 	$accountCategories = array_keys($accounts);
 	$accountOrder = 0;
+
+	$moneySign = '$&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
 	foreach ($accounts as $accountCategory){
 		echo '
 					<tr>
-						<td><strong>'.$accountCategories[$accountOrder].'</strong></td>
+						<td><strong>'.$accountCategories[$accountOrder].':</strong></td>
 						<td></td>
 					</tr>
 		';
 		foreach ($accountCategory as $account){
-			$accountBalance = $account['accountDebit'] - $account['accountCredit'];
+			if (!empty($_POST)){
+				$accountBalance = $this->account_model->getAccountTotal($account['accountID'], $_POST['startDate'], $_POST['endDate']);
+			}
+			else {
+			$accountBalance = $this->account_model->getAccountTotal($account['accountID']);
+			}
+
+			if ($accountBalance == 0){
+				continue;
+			}
+
 			if ($account['accountCategory'] == 'Revenues'){
 				$revenueTotal += $accountBalance;
 			}
@@ -56,9 +92,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			echo '
 						<tr>
 							<td>'.$account['accountName'].'</td>
-							<td class="text-right">$'.number_format(abs($accountBalance), 2).'</td>
+							<td class="text-right">'.$moneySign.number_format(abs($accountBalance), 2).'</td>
 							</tr>
 			';
+
+			$moneySign = '';
 			}
 		if ($accountCategories[$accountOrder] == 'Revenues'){
 			$accountAmount = number_format(abs($revenueTotal), 2);
@@ -69,7 +107,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		echo '
 							<tr>
 								<td class="text-center"><strong>Total '.$accountCategories[$accountOrder].'</strong></td>
-								<td class="text-right" style="text-decoration: underline;"><strong>$'.$accountAmount.'</strong></td>
+								<td class="text-right" style="text-decoration: underline;"><strong>$&nbsp;&nbsp;&nbsp;&nbsp;'.$accountAmount.'</strong></td>
 							</tr>
 		';
 		$accountOrder += 1;
@@ -81,7 +119,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							</tr>
 							<tr>
 								<td class="text-center"><strong>Net Income</strong></td>
-								<td class="text-right" style="text-decoration: underline; text-decoration-style: double;"><strong>$'.number_format((abs($revenueTotal) - $expensesTotal), 2).'</strong></td>
+								<td class="text-right" style="text-decoration: underline; text-decoration-style: double; border-top: 2px solid #000000;"><strong>$&nbsp;&nbsp;&nbsp;&nbsp;'.number_format((abs($revenueTotal) - $expensesTotal), 2).'</strong></td>
 							</tr>
 	';
 ?>
