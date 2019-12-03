@@ -10,8 +10,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<div class="card-body">
 					<?=form_open(current_url(), 'enctype="multipart/form-data"');?>
 						<fieldset>
-							<div class="form-group">
+						<div class="form-group">
 								<input class="form-control" placeholder="Entry Description" name="entryDescription" type="text" required />
+							</div>
+							<div class="form-group">
+								<select class="form-control" name="entryType" data-toggle="tooltip" data-placement="left" title="Entry Type">
+								<option>Initial</option>
+								<option>Adjusting</option>
+								<option>Closing</option>
+								</select>
 							</div>
 							<div class="form-group" id="debitAccounts">
 								<div class="row">

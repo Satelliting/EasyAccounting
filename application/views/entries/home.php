@@ -13,6 +13,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								<tr class="text-center">
 									<th>Entry ID</th>
 									<th>Entry Description</th>
+									<th>Entry Type</th>
 									<th>Entry Debit</th>
 									<th>Entry Credit</th>
 									<th>Entry Status</th>
@@ -23,6 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								<tr class="text-center">
 									<th>Entry ID</th>
 									<th>Entry Description</th>
+									<th>Entry Type</th>
 									<th>Entry Debit</th>
 									<th>Entry Credit</th>
 									<th>Entry Status</th>
@@ -52,6 +54,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			}
 		}
 		echo '						</td>
+									<td>'.$entry['entryType'].'</td>
 									<td class="text-right">';
 
 		foreach ($entry['entryDebitAccount'] as $debitAccount){

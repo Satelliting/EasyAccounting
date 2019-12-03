@@ -62,8 +62,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					</thead>
 					<tbody class="searchable">
 						<tr>
-							<td class="text-center">Beg Retained Earnings, 01/01/<?=$reportYear;?></td>
-							<td class="text-right">$&nbsp;&nbsp;&nbsp;&nbsp;0.00</td>
+							<td>Beg Retained Earnings, 01/01/<?=$reportYear;?></td>
+							<td class="text-right">$&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0.00</td>
 						</tr>
 <?php
 	$revenueTotal  = 0;
@@ -103,20 +103,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	$retainedEarnings = $netIncome - $dividends;
 	echo '
 							<tr>
-								<td class="text-center">Add: Net Income</td>
-								<td class="text-right">$&nbsp;&nbsp;&nbsp;&nbsp;'.number_format($netIncome, 2).'</td>
+								<td>Add: Net Income</td>
+								<td class="text-right">'.number_format($netIncome, 2).'</td>
 							</tr>
 							<tr>
-								<td class="text-center"><strong>Total</strong></td>
-								<td class="text-right" style="text-decoration: underline;"><strong>$&nbsp;&nbsp;&nbsp;&nbsp;'.number_format(($netIncome + 0), 2).'</strong></td>
+								<td><strong>Total</strong></td>
+								<td class="text-right" style="text-decoration: underline; border-top: 2px solid #000000;"><strong>$&nbsp;&nbsp;&nbsp;&nbsp;'.number_format(($netIncome + 0), 2).'</strong></td>
 							</tr>
 							<tr>
-								<td class="text-center">Less: Dividends</td>
-								<td class="text-right" style="text-decoration: underline;">$&nbsp;&nbsp;&nbsp;&nbsp;'.number_format($dividends, 2).'</td>
+								<td>Less: Dividends</td>
+								<td class="text-right" style="text-decoration: underline;">'.number_format($dividends, 2).'</td>
 							</tr>
 							<tr>
-								<td class="text-center"><strong>Retained Earnings as of '.date("F j, ").$reportYear.'</strong></td>
-								<td class="text-right" style="text-decoration: underline; text-decoration-style: double; border-top: 2px solid #000000;"><strong>$'.number_format($retainedEarnings, 2).'</strong></td>
+								<td><strong>Retained Earnings as of '.date("F jS, ").$reportYear.'</strong></td>
+								<td class="text-right" style="text-decoration: underline; text-decoration-style: double; border-top: 2px solid #000000;"><strong>$&nbsp;&nbsp;&nbsp;&nbsp;'.number_format($retainedEarnings, 2).'</strong></td>
 	';
 ?>
 					</tbody>
