@@ -2,10 +2,11 @@
 Easy Accounting
 ###################
 
-Easy Accounting is made to be a Double Entry Accounting Software written in PHP with the CodeIgniter Framework using MySQL.
-The software is a simple software that is very limited, but used more as a presentation to showcase how simple double entry
-accounting can be implemented. There are various pieces of code that are not industry quality, but this is again used to merely
-showcase certain programming abilities.
+Easy Accounting is made to be a Double Entry Accounting Software written in PHP with the CodeIgniter Framework using MySQL. The software is a simple software that is very limited, but used more as a presentation to showcase how simple double entry accounting can be implemented. There are various pieces of code that are not industry quality, but this is again used to merely showcase certain programming abilities.
+
+Achievements with this code:
++ Launched the development of this project alongside collaboration of my professor to create a quality application that received a 100 as a final project.
++ Facilitated weekly sprint plannings with the team to create an Agile workflow and to ensure maximum quality and quantity of code was produced.
 
 *******************
 Release Information
